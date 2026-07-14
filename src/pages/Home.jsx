@@ -98,13 +98,13 @@ export default function Home() {
             <h2 className="font-display mt-4 text-3xl font-bold text-navy">
               Welcome to <span className="text-teal-dark">Jimkey Ecopower</span>
             </h2>
-            <p className="mt-4 text-steel">
+            <p className="mt-4 text-justify text-steel">
               We are a global engineering firm specialising in industrial filtration, diffused aeration
               and robotic sludge management across sectors. Leveraging expertise and innovation, we
               deliver customised solutions for water, wastewater and sludge challenges — advancing
               technology for safety, efficiency and environmental responsibility.
             </p>
-            <p className="mt-4 text-steel">
+            <p className="mt-4 text-justify text-steel">
               At Jimkey, we trade alternative fuel resources such as UCO, carbon black, pyrolytic oil,
               tallow oil and waste tyres. We've also partnered with Korean and Thailand manufacturers for
               branding and sale of cosmetics and food products in India.
@@ -130,7 +130,7 @@ export default function Home() {
                     <Icon size={20} />
                   </span>
                   <h3 className="font-display mt-4 text-base font-bold text-navy">{v.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-steel">{v.desc}</p>
+                  <p className="mt-2 text-justify text-sm leading-relaxed text-steel">{v.desc}</p>
                 </Reveal>
               )
             })}
@@ -147,7 +147,7 @@ export default function Home() {
                 <span className="font-mono mt-0.5 shrink-0 text-xs font-semibold text-teal">{String(i + 1).padStart(2, '0')}</span>
                 <div className="border-l-2 border-teal/30 pl-4">
                   <h3 className="font-display text-lg font-bold text-navy">{v.title}</h3>
-                  <p className="mt-1.5 text-sm text-steel">{v.desc}</p>
+                  <p className="mt-1.5 text-justify text-sm text-steel">{v.desc}</p>
                 </div>
               </div>
             ))}
@@ -244,7 +244,7 @@ export default function Home() {
                   {f.q}
                   <span className="ml-4 shrink-0 rounded-full border border-line px-2 py-0.5 font-mono text-xs text-steel transition-transform group-open:rotate-45 group-open:border-teal group-open:text-teal">+</span>
                 </summary>
-                <p className="mt-3 text-sm leading-relaxed text-steel">{f.a}</p>
+                <p className="mt-3 text-justify text-sm leading-relaxed text-steel">{f.a}</p>
               </Reveal>
             ))}
           </div>

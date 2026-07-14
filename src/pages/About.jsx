@@ -37,7 +37,7 @@ export default function About() {
               <span className="text-teal-dark">Jimkey Ecopower</span>
             </h2>
 
-            <p className="mt-4 leading-7 text-steel">
+            <p className="mt-4 text-justify leading-7 text-steel">
               We are a global engineering firm specialising in industrial
               filtration, diffused aeration and robotic sludge management
               services for various sectors. Leveraging expertise and
@@ -47,7 +47,7 @@ export default function About() {
               responsibility.
             </p>
 
-            <p className="mt-4 leading-7 text-steel">
+            <p className="mt-4 text-justify leading-7 text-steel">
               At Jimkey, we trade in alternative fuel resources such as UCO,
               carbon black, pyrolytic oil, tallow oil and waste tyres.
              
