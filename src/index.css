@@ -1,18 +1,29 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --color-navy: #0c2846;
-  --color-navy-deep: #071a2e;
-  --color-teal: #159ed4;
-  --color-teal-dark: #0c7aa8;
-  --color-teal-light: #6fc6e8;
-  --color-paper: #f6f8fa;
-  --color-ink: #16232f;
-  --color-steel: #566779;
-  --color-line: #e2e8ee;
+  /* Ink & paper */
+  --color-ink: #191c19;
+  --color-paper: #f6f2e8;
+  --color-paper-soft: #eee7d5;
 
-  --font-display: "Plus Jakarta Sans", sans-serif;
+  /* Primary — deep pine, stands in for the old "navy" surfaces */
+  --color-navy: #14332a;
+  --color-navy-deep: #0c2119;
+
+  /* Accent — reclaimed steel-wire oxide, stands in for the old "teal" accent */
+  --color-teal: #b8552e;
+  --color-teal-dark: #8f3f21;
+  --color-teal-light: #e2a377;
+
+  /* Secondary accent — pyrolysis/tallow oil amber */
+  --color-amber: #c3922e;
+  --color-amber-dark: #93691c;
+
+  --color-steel: #6b6355;
+  --color-line: #e2d9c2;
+
+  --font-display: "Space Grotesk", sans-serif;
   --font-body: "Inter", sans-serif;
   --font-mono: "IBM Plex Mono", monospace;
 }
@@ -40,6 +51,103 @@ body {
   font-family: var(--font-mono);
 }
 
+:focus-visible {
+  outline: 2px solid var(--color-teal);
+  outline-offset: 3px;
+}
+
+/* ---------- Texture ---------- */
+.grain-bg {
+  background-image: radial-gradient(rgba(20, 51, 42, 0.07) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+
+.dotted-rule {
+  background-image: linear-gradient(to right, var(--color-line) 45%, transparent 0%);
+  background-position: bottom;
+  background-size: 8px 1px;
+  background-repeat: repeat-x;
+}
+
+/* ---------- Scroll reveal ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------- Signature: circularity seal ---------- */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes spin-slow-reverse {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+.seal-ring {
+  animation: spin-slow 42s linear infinite;
+  transform-origin: 50% 50%;
+}
+.seal-ring-reverse {
+  animation: spin-slow-reverse 60s linear infinite;
+  transform-origin: 50% 50%;
+}
+.seal-group:hover .seal-ring {
+  animation-play-state: paused;
+}
+
+/* ---------- Marquee ---------- */
+@keyframes marquee-x {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track {
+  animation: marquee-x 32s linear infinite;
+}
+.marquee-row:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* ---------- Float / pulse ---------- */
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.float-y {
+  animation: float-y 5s ease-in-out infinite;
+}
+
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(184, 85, 46, 0.45); }
+  100% { box-shadow: 0 0 0 14px rgba(184, 85, 46, 0); }
+}
+.pulse-ring {
+  animation: pulse-ring 2.2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.fade-in {
+  animation: fade-in 0.9s ease both;
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.rise {
+  animation: rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
+  .reveal { opacity: 1; transform: none; }
 }

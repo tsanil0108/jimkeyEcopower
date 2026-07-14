@@ -1,15 +1,19 @@
 const stages = ['Collect', 'Process', 'Recover', 'Reuse']
 const materials = ['UCO', 'Carbon Black', 'Pyrolysis Oil', 'Tallow Oil', 'Steel Wire']
 
+/**
+ * Compact linear version of the circular-trade loop — used in tighter
+ * spots (footer, forms) where the full CircularSeal doesn't fit.
+ */
 export default function MaterialStream({ variant = 'light' }) {
   const dark = variant === 'dark'
   return (
-    <div className={`rounded-2xl border ${dark ? 'border-white/10 bg-white/5' : 'border-line bg-white'} p-5 sm:p-6`}>
+    <div className={`rounded-2xl border p-5 sm:p-6 ${dark ? 'border-white/10 bg-white/5' : 'border-line bg-white'}`}>
       <div className="flex flex-wrap items-center justify-between gap-3">
         {stages.map((s, i) => (
           <div key={s} className="flex items-center gap-3">
             <div className="flex items-center gap-2">
-              <span className={`flex h-8 w-8 items-center justify-center rounded-full font-mono text-xs font-semibold ${dark ? 'bg-teal/20 text-teal-light' : 'bg-teal/10 text-teal-dark'}`}>
+              <span className={`font-mono flex h-8 w-8 items-center justify-center rounded-full text-xs font-semibold ${dark ? 'bg-teal/20 text-teal-light' : 'bg-teal/10 text-teal-dark'}`}>
                 {i + 1}
               </span>
               <span className={`font-display text-sm font-bold ${dark ? 'text-white' : 'text-navy'}`}>{s}</span>
