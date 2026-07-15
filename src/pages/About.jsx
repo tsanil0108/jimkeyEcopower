@@ -14,7 +14,7 @@ export default function About() {
     <div>
       <PageBanner
         title="About Us"
-        eyebrow="Since 2021 · Mumbai, India"
+        eyebrow="Mumbai, India"
         video={video1}
       />
 

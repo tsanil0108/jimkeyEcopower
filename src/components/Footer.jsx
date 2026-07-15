@@ -18,7 +18,7 @@ export default function Footer() {
         <div>
           <img src={logo} alt="Jimkey Ecopower" className="h-14 w-auto brightness-0 invert" />
           <p className="mt-4 text-sm leading-relaxed text-white/55">
-            Trading alternative fuel resources and championing circular-economy solutions since 2021.
+            Trading alternative fuel resources and championing circular-economy solutions.
           </p>
         </div>
 
@@ -36,9 +36,9 @@ export default function Footer() {
         <div>
           <h4 className="font-mono text-xs font-semibold uppercase tracking-widest text-teal-light">Materials</h4>
           <ul className="mt-4 space-y-2.5 text-sm text-white/65">
-            {categories.flatMap((c) => c.subcategories).slice(0, 8).map((s) => (
-              <li key={s.id}>
-                <Link to={`/products?subcategory=${s.id}`} className="transition-colors hover:text-white">{s.name}</Link>
+            {categories.map((c) => (
+              <li key={c.id}>
+                <Link to={`/products?category=${c.id}`} className="transition-colors hover:text-white">{c.name}</Link>
               </li>
             ))}
           </ul>

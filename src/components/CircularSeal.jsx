@@ -40,11 +40,8 @@ export default function CircularSeal({ variant = 'light', className = '' }) {
         <text x="120" y="114" textAnchor="middle" className={`font-display ${dark ? 'fill-white' : 'fill-navy'}`} fontSize="17" fontWeight="700">
           JIMKEY
         </text>
-        <text x="120" y="130" textAnchor="middle" className={`font-mono ${dark ? 'fill-teal-light' : 'fill-teal-dark'}`} fontSize="8" letterSpacing="2">
+        <text x="120" y="132" textAnchor="middle" className={`font-mono ${dark ? 'fill-teal-light' : 'fill-teal-dark'}`} fontSize="8" letterSpacing="2">
           ECOPOWER
-        </text>
-        <text x="120" y="145" textAnchor="middle" className={`font-mono ${ring}`} fontSize="6.5" letterSpacing="1.5">
-          SINCE 2021
         </text>
       </svg>
 

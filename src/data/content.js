@@ -71,17 +71,6 @@ export const categories = [
     ],
   },
   {
-    id: 3,
-    name: 'Cleaning Chemicals',
-    subcategories: [
-      { id: 301, name: 'Dishwash' },
-      { id: 302, name: 'Toilet Cleaner' },
-      { id: 303, name: 'Bathroom Cleaner' },
-      { id: 304, name: 'Dishwash Liquid' },
-      { id: 305, name: 'Multipurpose Degreaser' },
-    ],
-  },
-  {
     id: 4,
     name: 'Extended Producer Responsibility',
     subcategories: [
@@ -102,6 +91,17 @@ export const categories = [
     id: 6,
     name: 'Industry Waste Management',
     subcategories: [{ id: 601, name: 'Industrial Waste Management' }],
+  },
+  {
+    id: 3,
+    name: 'Cleaning Chemicals',
+    subcategories: [
+      { id: 301, name: 'Dishwash' },
+      { id: 302, name: 'Toilet Cleaner' },
+      { id: 303, name: 'Bathroom Cleaner' },
+      { id: 304, name: 'Dishwash Liquid' },
+      { id: 305, name: 'Multipurpose Degreaser' },
+    ],
   },
 ]
 
@@ -323,10 +323,8 @@ export { vision, aboutImg, heroImg }
 
 
 export const stats = [
-  { value: '2021', label: 'Founded' },
   { value: '12+', label: 'Material streams traded' },
   { value: '21+', label: 'Partners & clients' },
-  
 ]
 
 export const valueProps = [

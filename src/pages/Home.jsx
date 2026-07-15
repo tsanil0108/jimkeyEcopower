@@ -88,7 +88,6 @@ export default function Home() {
             <div className="relative">
               <img src={aboutImg} alt="Jimkey Ecopower" className="w-full rounded-2xl" />
               <div className="absolute -bottom-5 -right-5 hidden rounded-xl border border-line bg-white px-5 py-4 shadow-lg sm:block">
-                <p className="font-display text-xl font-bold text-navy">Est. 2021</p>
                 <p className="font-mono text-[10px] uppercase tracking-widest text-steel">Mumbai, India</p>
               </div>
             </div>
