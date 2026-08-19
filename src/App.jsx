@@ -8,6 +8,8 @@ import Products from './pages/Products'
 import ProductDetail from './pages/ProductDetail'
 import Gallery from './pages/Gallery'
 import Clients from './pages/Clients'
+import Blog from './pages/Blog'
+import BlogPost from './pages/BlogPost'
 import Contact from './pages/Contact'
 import Login from './pages/Login'
 import Register from './pages/Register'
@@ -25,6 +27,8 @@ export default function App() {
           <Route path="/products/:id" element={<ProductDetail />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/clients" element={<Clients />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

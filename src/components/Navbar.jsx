@@ -11,6 +11,7 @@ const links = [
   ['Products', '/products'],
   ['Gallery/Media', '/gallery'],
   ['Clients', '/clients'],
+  ['Blog', '/blog'],
   ['Contact Us', '/contact'],
 ]
 
@@ -116,6 +117,7 @@ export default function Navbar() {
 
           <NavLink to="/gallery" className={navLink}>Gallery/Media</NavLink>
           <NavLink to="/clients" className={navLink}>Clients</NavLink>
+          <NavLink to="/blog" className={navLink}>Blog</NavLink>
           <NavLink to="/contact" className={navLink}>Contact Us</NavLink>
         </nav>
 
