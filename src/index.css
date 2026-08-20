@@ -3,60 +3,40 @@
 @import "tailwindcss";
 
 @theme {
-  /* Ink & paper */
   --color-ink: #191c19;
+
   --color-paper: #f6f2e8;
   --color-paper-soft: #eee7d5;
 
-  /* Primary */
   --color-navy: #14332a;
   --color-navy-deep: #0c2119;
 
-  /* Accent */
   --color-teal: #b8552e;
   --color-teal-dark: #8f3f21;
   --color-teal-light: #e2a377;
 
-  /* Secondary accent */
   --color-amber: #c3922e;
   --color-amber-dark: #93691c;
 
   --color-steel: #6b6355;
   --color-line: #e2d9c2;
 
-  --font-display: "Space Grotesk", sans-serif;
-  --font-body: "Inter", sans-serif;
-  --font-mono: "IBM Plex Mono", monospace;
+  --font-display:
+    "Space Grotesk",
+    sans-serif;
+
+  --font-body:
+    "Inter",
+    sans-serif;
+
+  --font-mono:
+    "IBM Plex Mono",
+    monospace;
 }
 
-/* =========================================================
-   ROOT / GLOBAL
-========================================================= */
-
-html {
-  scroll-behavior: smooth;
-}
-
-html,
-body,
-#root {
-  width: 100%;
-  min-height: 100%;
-}
-
-html,
-body {
-  overflow-x: hidden;
-}
-
-body {
-  margin: 0;
-  background-color: var(--color-paper);
-  color: var(--color-ink);
-  font-family: var(--font-body);
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-}
+/* =====================================================
+   RESET
+===================================================== */
 
 *,
 *::before,
@@ -64,36 +44,82 @@ body {
   box-sizing: border-box;
 }
 
+html {
+  width: 100%;
+  max-width: 100%;
+  min-height: 100%;
+
+  scroll-behavior: smooth;
+
+  overflow-x: hidden;
+}
+
+body {
+  width: 100%;
+  max-width: 100%;
+  min-height: 100%;
+
+  margin: 0;
+
+  overflow-x: hidden;
+
+  background-color:
+    var(--color-paper);
+
+  color:
+    var(--color-ink);
+
+  font-family:
+    var(--font-body);
+
+  -webkit-font-smoothing:
+    antialiased;
+
+  text-rendering:
+    optimizeLegibility;
+}
+
+#root {
+  width: 100%;
+  max-width: 100%;
+  min-height: 100vh;
+
+  overflow-x: hidden;
+}
+
 ::selection {
-  background: var(--color-teal);
+  background:
+    var(--color-teal);
+
   color: white;
 }
 
 .font-display {
-  font-family: var(--font-display);
+  font-family:
+    var(--font-display);
 }
 
 .font-mono {
-  font-family: var(--font-mono);
+  font-family:
+    var(--font-mono);
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-teal);
+  outline:
+    2px solid
+    var(--color-teal);
+
   outline-offset: 3px;
 }
 
-/* =========================================================
-   MEDIA SAFETY
-========================================================= */
+/* =====================================================
+   MEDIA
+===================================================== */
 
-/*
- * IMPORTANT:
- * Do NOT use height:auto globally on img/video.
- * Tailwind h-* classes must control height.
- */
 img,
 video,
-iframe {
+iframe,
+svg {
   max-width: 100%;
 }
 
@@ -102,14 +128,15 @@ video {
   display: block;
 }
 
-/* Keep SVGs responsive */
-svg {
-  flex-shrink: 0;
-}
+/*
+  IMPORTANT:
+  height:auto globally mat lagana.
+  Tailwind h-full/h-* break ho jayega.
+*/
 
-/* =========================================================
-   TEXT SAFETY
-========================================================= */
+/* =====================================================
+   TEXT OVERFLOW SAFETY
+===================================================== */
 
 h1,
 h2,
@@ -118,24 +145,30 @@ h4,
 h5,
 h6,
 p,
+li,
 a,
-span,
-li {
+span {
+  min-width: 0;
+
   overflow-wrap: break-word;
+
   word-break: normal;
 }
 
-/* =========================================================
+/* =====================================================
    TEXTURE
-========================================================= */
+===================================================== */
 
 .grain-bg {
   background-image:
     radial-gradient(
-      rgba(20, 51, 42, 0.07) 1px,
+      rgba(20, 51, 42, 0.07)
+      1px,
       transparent 1px
     );
-  background-size: 18px 18px;
+
+  background-size:
+    18px 18px;
 }
 
 .dotted-rule {
@@ -146,104 +179,156 @@ li {
       transparent 0%
     );
 
-  background-position: bottom;
-  background-size: 8px 1px;
-  background-repeat: repeat-x;
+  background-position:
+    bottom;
+
+  background-size:
+    8px 1px;
+
+  background-repeat:
+    repeat-x;
 }
 
-/* =========================================================
-   SCROLL REVEAL
-========================================================= */
+/* =====================================================
+   REVEAL
+===================================================== */
 
 .reveal {
   opacity: 0;
-  transform: translateY(28px);
+
+  transform:
+    translateY(28px);
 
   transition:
-    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-
-  will-change: opacity, transform;
+    opacity 0.8s
+      cubic-bezier(
+        0.16,
+        1,
+        0.3,
+        1
+      ),
+    transform 0.8s
+      cubic-bezier(
+        0.16,
+        1,
+        0.3,
+        1
+      );
 }
 
 .reveal.is-visible {
   opacity: 1;
-  transform: translateY(0);
+
+  transform:
+    translateY(0);
 }
 
-/* =========================================================
-   SIGNATURE SEAL
-========================================================= */
+/* =====================================================
+   SEAL
+===================================================== */
 
 @keyframes spin-slow {
   from {
-    transform: rotate(0deg);
+    transform:
+      rotate(0deg);
   }
 
   to {
-    transform: rotate(360deg);
+    transform:
+      rotate(360deg);
   }
 }
 
 @keyframes spin-slow-reverse {
   from {
-    transform: rotate(360deg);
+    transform:
+      rotate(360deg);
   }
 
   to {
-    transform: rotate(0deg);
+    transform:
+      rotate(0deg);
   }
 }
 
 .seal-ring {
-  animation: spin-slow 42s linear infinite;
-  transform-origin: 50% 50%;
+  animation:
+    spin-slow
+    42s
+    linear
+    infinite;
+
+  transform-origin:
+    50% 50%;
 }
 
 .seal-ring-reverse {
-  animation: spin-slow-reverse 60s linear infinite;
-  transform-origin: 50% 50%;
+  animation:
+    spin-slow-reverse
+    60s
+    linear
+    infinite;
+
+  transform-origin:
+    50% 50%;
 }
 
-.seal-group:hover .seal-ring {
-  animation-play-state: paused;
+.seal-group:hover
+.seal-ring {
+  animation-play-state:
+    paused;
 }
 
-/* =========================================================
+/* =====================================================
    MARQUEE
-========================================================= */
+===================================================== */
 
 @keyframes marquee-x {
   from {
-    transform: translateX(0);
+    transform:
+      translateX(0);
   }
 
   to {
-    transform: translateX(-50%);
+    transform:
+      translateX(-50%);
   }
 }
 
 @keyframes marquee-x-reverse {
   from {
-    transform: translateX(-50%);
+    transform:
+      translateX(-50%);
   }
 
   to {
-    transform: translateX(0);
+    transform:
+      translateX(0);
   }
 }
 
 .marquee-track {
-  animation: marquee-x 32s linear infinite;
+  animation:
+    marquee-x
+    32s
+    linear
+    infinite;
 }
 
 .marquee-track-reverse {
-  animation: marquee-x-reverse 38s linear infinite;
+  animation:
+    marquee-x-reverse
+    38s
+    linear
+    infinite;
 }
 
-.marquee-row:hover .marquee-track,
-.marquee-row:hover .marquee-track-reverse {
-  animation-play-state: paused;
+.marquee-row:hover
+.marquee-track,
+.marquee-row:hover
+.marquee-track-reverse {
+  animation-play-state:
+    paused;
 }
 
 .marquee-fade {
@@ -266,45 +351,70 @@ li {
     );
 }
 
-/* =========================================================
-   FLOAT / PULSE
-========================================================= */
+/* =====================================================
+   FLOAT
+===================================================== */
 
 @keyframes float-y {
   0%,
   100% {
-    transform: translateY(0);
+    transform:
+      translateY(0);
   }
 
   50% {
-    transform: translateY(-8px);
+    transform:
+      translateY(-8px);
   }
 }
 
 .float-y {
-  animation: float-y 5s ease-in-out infinite;
+  animation:
+    float-y
+    5s
+    ease-in-out
+    infinite;
 }
+
+/* =====================================================
+   WHATSAPP PULSE
+===================================================== */
 
 @keyframes pulse-ring {
   0% {
     box-shadow:
       0 0 0 0
-      rgba(184, 85, 46, 0.45);
+      rgba(
+        37,
+        211,
+        102,
+        0.35
+      );
   }
 
   100% {
     box-shadow:
-      0 0 0 14px
-      rgba(184, 85, 46, 0);
+      0 0 0 12px
+      rgba(
+        37,
+        211,
+        102,
+        0
+      );
   }
 }
 
 .pulse-ring {
   animation:
-    pulse-ring 2.2s
-    cubic-bezier(0.4, 0, 0.6, 1)
+    pulse-ring
+    2.2s
+    ease-out
     infinite;
 }
+
+/* =====================================================
+   FADE
+===================================================== */
 
 @keyframes fade-in {
   from {
@@ -317,58 +427,81 @@ li {
 }
 
 .fade-in {
-  animation: fade-in 0.9s ease both;
+  animation:
+    fade-in
+    0.9s
+    ease
+    both;
 }
+
+/* =====================================================
+   RISE
+===================================================== */
 
 @keyframes rise {
   from {
     opacity: 0;
-    transform: translateY(18px);
+
+    transform:
+      translateY(18px);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0);
+
+    transform:
+      translateY(0);
   }
 }
 
 .rise {
   animation:
-    rise 0.8s
-    cubic-bezier(0.16, 1, 0.3, 1)
+    rise
+    0.8s
+    cubic-bezier(
+      0.16,
+      1,
+      0.3,
+      1
+    )
     both;
 }
 
-/* =========================================================
-   RESPONSIVE TABLE / ADMIN SAFETY
-========================================================= */
+/* =====================================================
+   TABLE
+===================================================== */
 
 table {
   width: 100%;
+
   max-width: 100%;
-  border-collapse: collapse;
+
+  border-collapse:
+    collapse;
 }
 
-/*
- * Use this class around tables:
- * <div className="table-scroll">...</div>
- */
 .table-scroll {
   width: 100%;
+
+  max-width: 100%;
+
   overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
+
+  -webkit-overflow-scrolling:
+    touch;
 }
 
-/* =========================================================
-   FORM SAFETY
-========================================================= */
+/* =====================================================
+   FORMS
+===================================================== */
 
 button,
 a,
 input,
 select,
 textarea {
-  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color:
+    transparent;
 }
 
 input,
@@ -381,117 +514,103 @@ button {
 input,
 select,
 textarea {
+  width: auto;
+
   max-width: 100%;
 }
 
-/* =========================================================
-   VIDEO / HERO SAFETY
-========================================================= */
+/* =====================================================
+   NAVBAR IMAGE SAFETY
+===================================================== */
 
-video {
-  object-fit: cover;
-}
-
-/*
- * Reusable helper if needed:
- * className="hero-media"
- */
-.hero-media {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/*
- * Use for images where full image should remain visible.
- */
-.media-contain {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-/* =========================================================
-   NAVBAR SAFETY
-========================================================= */
-
-/*
- * Prevent large logo/images from stretching navbar
- * even if source image itself is huge.
- */
-nav img,
 header img {
-  max-height: 64px;
   width: auto;
 }
 
-/*
- * On smaller screens reduce accidental overflow.
- */
-@media (max-width: 767px) {
-  nav img,
-  header img {
-    max-height: 52px;
-  }
-}
+/* =====================================================
+   MOBILE
+===================================================== */
 
-/* =========================================================
-   MOBILE RESPONSIVE SAFETY
-========================================================= */
+@media (
+  max-width: 639px
+) {
 
-@media (max-width: 639px) {
   body {
-    font-size: 14px;
+    font-size:
+      14px;
   }
 
   h1 {
-    line-height: 1.08;
+    max-width:
+      100%;
+
+    line-height:
+      1.08;
   }
 
   h2,
   h3 {
-    line-height: 1.15;
+    max-width:
+      100%;
+
+    line-height:
+      1.15;
   }
 
   .marquee-track,
   .marquee-track-reverse {
-    animation-duration: 24s;
+    animation-duration:
+      24s;
   }
+
 }
 
-/* =========================================================
-   TABLET
-========================================================= */
+/* =====================================================
+   VERY SMALL MOBILE
+===================================================== */
 
-@media (min-width: 640px) and (max-width: 1023px) {
-  nav img,
-  header img {
-    max-height: 58px;
+@media (
+  max-width: 359px
+) {
+
+  body {
+    font-size:
+      13px;
   }
+
 }
 
-/* =========================================================
+/* =====================================================
    REDUCED MOTION
-========================================================= */
+===================================================== */
 
-@media (prefers-reduced-motion: reduce) {
+@media (
+  prefers-reduced-motion:
+  reduce
+) {
+
   html {
-    scroll-behavior: auto;
+    scroll-behavior:
+      auto;
   }
 
   *,
   *::before,
   *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+    animation-duration:
+      0.01ms !important;
+
+    animation-iteration-count:
+      1 !important;
+
+    transition-duration:
+      0.01ms !important;
   }
 
   .reveal {
     opacity: 1;
+
     transform: none;
   }
+
 }

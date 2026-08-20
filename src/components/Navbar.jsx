@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
+
 import {
   Menu,
   X,
@@ -23,7 +24,7 @@ const links = [
 ]
 
 const navLink = ({ isActive }) =>
-  `relative text-[14px] font-semibold tracking-wide transition-colors
+  `relative whitespace-nowrap text-[13px] font-semibold tracking-wide transition-colors
    after:absolute after:-bottom-1.5 after:left-0 after:h-[2px]
    after:w-0 after:bg-teal after:transition-all after:duration-300
    hover:text-teal-dark hover:after:w-full
@@ -35,16 +36,25 @@ const navLink = ({ isActive }) =>
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
-  const [productsOpen, setProductsOpen] = useState(false)
-  const [categories, setCategories] = useState([])
-  const [activeCat, setActiveCat] = useState(null)
-  const [scrolled, setScrolled] = useState(false)
+  const [productsOpen, setProductsOpen] =
+    useState(false)
+
+  const [categories, setCategories] =
+    useState([])
+
+  const [activeCat, setActiveCat] =
+    useState(null)
+
+  const [scrolled, setScrolled] =
+    useState(false)
 
   useEffect(() => {
     api
       .getCategories()
       .then((data) => {
-        const list = Array.isArray(data) ? data : []
+        const list = Array.isArray(data)
+          ? data
+          : []
 
         setCategories(list)
 
@@ -89,59 +99,86 @@ export default function Navbar() {
     <header
       className={`
         fixed
-        left-0
-        right-0
+        inset-x-0
         top-0
         z-[9999]
         w-full
+
         border-b
+
         bg-paper/95
         backdrop-blur-xl
-        transition-all
+
+        transition-shadow
         duration-300
+
         ${
           scrolled
-            ? 'border-line shadow-[0_8px_24px_rgba(20,51,42,0.10)]'
+            ? 'border-line shadow-[0_5px_24px_rgba(20,51,42,0.10)]'
             : 'border-transparent'
         }
       `}
     >
+
       <div
         className="
           mx-auto
           flex
           h-[72px]
+          w-full
           max-w-7xl
           items-center
           justify-between
-          gap-4
-          px-5
+          gap-3
+          px-4
+
           sm:h-[76px]
+          sm:px-5
+
           lg:h-[80px]
           lg:px-8
         "
       >
+
         {/* LOGO */}
         <Link
           to="/"
-          className="shrink-0"
           onClick={() => setOpen(false)}
+          className="flex min-w-0 shrink-0 items-center"
         >
           <img
             src={logo}
             alt="Jimkey Ecopower"
             className="
-              h-11
+              h-[46px]
+              max-w-[205px]
               w-auto
               object-contain
-              sm:h-12
-              lg:h-14
+
+              min-[380px]:max-w-[230px]
+
+              sm:h-[50px]
+              sm:max-w-[260px]
+
+              lg:h-[54px]
+              lg:max-w-none
             "
           />
         </Link>
 
         {/* DESKTOP NAV */}
-        <nav className="hidden items-center gap-6 xl:gap-7 lg:flex">
+        <nav
+          className="
+            hidden
+            min-w-0
+            items-center
+            gap-4
+
+            lg:flex
+
+            xl:gap-6
+          "
+        >
 
           <NavLink
             to="/"
@@ -158,7 +195,7 @@ export default function Navbar() {
             About Us
           </NavLink>
 
-          {/* PRODUCTS MEGA MENU */}
+          {/* PRODUCTS */}
           <div
             className="relative"
             onMouseEnter={() =>
@@ -168,16 +205,19 @@ export default function Navbar() {
               setProductsOpen(false)
             }
           >
+
             <NavLink
               to="/products"
               className={({ isActive }) =>
-                `${navLink({ isActive })} flex items-center gap-1`
+                `${navLink({
+                  isActive,
+                })} flex items-center gap-1`
               }
             >
               Products
 
               <ChevronDown
-                size={14}
+                size={13}
                 className={`transition-transform duration-300 ${
                   productsOpen
                     ? 'rotate-180 text-teal'
@@ -186,16 +226,21 @@ export default function Navbar() {
               />
             </NavLink>
 
+            {/* MEGA MENU */}
             <div
               className={`
                 absolute
                 left-1/2
                 top-full
-                w-[min(600px,90vw)]
+
+                w-[min(600px,88vw)]
+
                 -translate-x-1/2
                 pt-4
+
                 transition-all
                 duration-200
+
                 ${
                   productsOpen
                     ? 'pointer-events-auto translate-y-0 opacity-100'
@@ -203,6 +248,7 @@ export default function Navbar() {
                 }
               `}
             >
+
               <div
                 className="
                   flex
@@ -215,7 +261,7 @@ export default function Navbar() {
                   shadow-[0_24px_60px_-20px_rgba(20,51,42,0.25)]
                 "
               >
-                {/* CATEGORY COLUMN */}
+
                 <ul
                   className="
                     w-60
@@ -227,12 +273,14 @@ export default function Navbar() {
                     py-3
                   "
                 >
+
                   <li className="px-4 pb-2 font-mono text-[10px] uppercase tracking-widest text-steel">
                     Categories
                   </li>
 
                   {categories.map((cat) => (
                     <li key={cat.id}>
+
                       <Link
                         to={`/products?category=${cat.id}`}
                         onMouseEnter={() =>
@@ -249,6 +297,7 @@ export default function Navbar() {
                           text-sm
                           font-semibold
                           transition-colors
+
                           ${
                             activeCat === cat.id
                               ? 'border-teal bg-white text-teal-dark'
@@ -258,19 +307,14 @@ export default function Navbar() {
                       >
                         {cat.name}
                       </Link>
+
                     </li>
                   ))}
+
                 </ul>
 
-                {/* SUBCATEGORY COLUMN */}
-                <ul
-                  className="
-                    min-w-0
-                    flex-1
-                    overflow-y-auto
-                    py-3
-                  "
-                >
+                <ul className="min-w-0 flex-1 overflow-y-auto py-3">
+
                   <li className="px-5 pb-2 font-mono text-[10px] uppercase tracking-widest text-steel">
                     Materials
                   </li>
@@ -283,6 +327,7 @@ export default function Navbar() {
                     ?.subcategories?.map(
                       (sub) => (
                         <li key={sub.id}>
+
                           <Link
                             to={`/products?subcategory=${sub.id}`}
                             onClick={() =>
@@ -291,6 +336,7 @@ export default function Navbar() {
                             className="
                               group
                               flex
+                              min-w-0
                               items-center
                               justify-between
                               gap-3
@@ -303,27 +349,28 @@ export default function Navbar() {
                               hover:text-navy
                             "
                           >
+
                             <span className="min-w-0 truncate">
                               {sub.name}
                             </span>
 
                             <ArrowUpRight
                               size={14}
-                              className="
-                                shrink-0
-                                text-teal
-                                opacity-0
-                                transition-opacity
-                                group-hover:opacity-100
-                              "
+                              className="shrink-0 text-teal opacity-0 transition-opacity group-hover:opacity-100"
                             />
+
                           </Link>
+
                         </li>
                       )
                     )}
+
                 </ul>
+
               </div>
+
             </div>
+
           </div>
 
           <NavLink
@@ -353,60 +400,42 @@ export default function Navbar() {
           >
             Contact Us
           </NavLink>
+
         </nav>
 
         {/* DESKTOP RIGHT */}
-        <div className="hidden items-center gap-3 xl:gap-4 lg:flex">
+        <div className="hidden shrink-0 items-center gap-3 lg:flex">
 
           <a
             href={`tel:${company.phone}`}
-            className="
-              flex
-              shrink-0
-              items-center
-              gap-2
-              font-mono
-              text-xs
-              font-semibold
-              text-navy
-            "
+            className="flex items-center gap-2 font-mono text-[11px] font-semibold text-navy"
           >
-            <span
-              className="
-                flex
-                h-8
-                w-8
-                items-center
-                justify-center
-                rounded-full
-                bg-teal/10
-                text-teal-dark
-              "
-            >
+
+            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-teal/10 text-teal-dark">
               <Phone size={14} />
             </span>
 
             <span className="hidden xl:inline">
               {company.phone}
             </span>
+
           </a>
 
           <Link
             to="/contact"
             className="
-              shrink-0
+              whitespace-nowrap
               rounded-full
               bg-teal
-              px-5
+              px-4
               py-2.5
-              text-sm
+              text-[13px]
               font-semibold
               text-white
               transition-all
               hover:-translate-y-0.5
               hover:bg-teal-dark
               hover:shadow-lg
-              hover:shadow-teal/25
             "
           >
             Get a Quote
@@ -414,9 +443,14 @@ export default function Navbar() {
 
         </div>
 
-        {/* MOBILE BUTTON */}
+        {/* MOBILE MENU BUTTON */}
         <button
           type="button"
+          onClick={() =>
+            setOpen((value) => !value)
+          }
+          aria-label="Toggle menu"
+          aria-expanded={open}
           className="
             flex
             h-10
@@ -430,18 +464,14 @@ export default function Navbar() {
             hover:bg-navy/5
             lg:hidden
           "
-          onClick={() =>
-            setOpen((value) => !value)
-          }
-          aria-label="Toggle menu"
-          aria-expanded={open}
         >
           {open ? (
-            <X size={24} />
+            <X size={25} />
           ) : (
-            <Menu size={24} />
+            <Menu size={25} />
           )}
         </button>
+
       </div>
 
       {/* MOBILE MENU */}
@@ -453,6 +483,7 @@ export default function Navbar() {
           transition-all
           duration-300
           lg:hidden
+
           ${
             open
               ? 'max-h-[calc(100svh-72px)] opacity-100'
@@ -460,14 +491,9 @@ export default function Navbar() {
           }
         `}
       >
-        <div
-          className="
-            max-h-[calc(100svh-72px)]
-            overflow-y-auto
-            px-5
-            py-4
-          "
-        >
+
+        <div className="max-h-[calc(100svh-72px)] overflow-y-auto px-4 py-4">
+
           <div className="flex flex-col gap-1">
 
             {links.map(
@@ -482,21 +508,33 @@ export default function Navbar() {
                   style={{
                     transitionDelay:
                       open
-                        ? `${i * 35}ms`
+                        ? `${i * 30}ms`
                         : '0ms',
                   }}
                   className={({
                     isActive,
                   }) =>
-                    `rounded-lg px-3 py-3 text-[15px] font-semibold transition-all duration-300 ${
-                      open
-                        ? 'translate-x-0 opacity-100'
-                        : '-translate-x-2 opacity-0'
-                    } ${
-                      isActive
-                        ? 'bg-teal/10 text-teal-dark'
-                        : 'text-navy hover:bg-white'
-                    }`
+                    `
+                      rounded-xl
+                      px-4
+                      py-3
+                      text-[15px]
+                      font-semibold
+                      transition-all
+                      duration-300
+
+                      ${
+                        open
+                          ? 'translate-x-0 opacity-100'
+                          : '-translate-x-2 opacity-0'
+                      }
+
+                      ${
+                        isActive
+                          ? 'bg-teal/10 text-teal-dark'
+                          : 'text-navy hover:bg-white'
+                      }
+                    `
                   }
                 >
                   {label}
@@ -548,8 +586,11 @@ export default function Navbar() {
             </Link>
 
           </div>
+
         </div>
+
       </div>
+
     </header>
   )
 }

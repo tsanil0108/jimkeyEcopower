@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { ImageOff } from 'lucide-react'
+
 import Reveal from './Reveal'
 import { resolveMediaUrl } from '../lib/api'
 
@@ -9,15 +10,33 @@ export function SectionLabel({
 }) {
   return (
     <span
-      className={`font-mono inline-flex max-w-full items-center gap-2 rounded-full border px-3 py-1 text-[10px] font-semibold uppercase tracking-widest sm:text-[11px] ${
-        dark
-          ? 'border-white/25 bg-black/20 text-[#f2a574] backdrop-blur'
-          : 'border-teal/25 bg-teal/10 text-teal-dark'
-      }`}
+      className={`
+        font-mono
+        inline-flex
+        max-w-full
+        items-center
+        gap-2
+        rounded-full
+        border
+        px-3
+        py-1
+        text-[9px]
+        font-semibold
+        uppercase
+        tracking-wider
+
+        sm:text-[11px]
+
+        ${
+          dark
+            ? 'border-white/30 bg-black/20 text-[#f2a574] backdrop-blur-sm'
+            : 'border-teal/25 bg-teal/10 text-teal-dark'
+        }
+      `}
     >
       <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-current" />
 
-      <span className="truncate">
+      <span className="min-w-0 truncate">
         {children}
       </span>
     </span>
@@ -38,10 +57,10 @@ export function Button({
 
   const styles = {
     primary:
-      'bg-navy text-white hover:-translate-y-0.5 hover:shadow-lg hover:shadow-navy/20',
+      'bg-navy text-white hover:-translate-y-0.5 hover:shadow-lg',
 
     accent:
-      'bg-teal text-white hover:-translate-y-0.5 hover:bg-teal-dark hover:shadow-lg hover:shadow-teal/30',
+      'bg-teal text-white hover:-translate-y-0.5 hover:bg-teal-dark hover:shadow-lg',
 
     outline:
       'border border-navy/30 text-navy hover:border-navy hover:bg-navy hover:text-white',
@@ -50,7 +69,8 @@ export function Button({
       'text-teal-dark hover:text-navy',
   }
 
-  const cls = `${base} ${styles[variant]} ${className}`
+  const cls =
+    `${base} ${styles[variant]} ${className}`
 
   if (to) {
     return (
@@ -88,13 +108,7 @@ export function Button({
 }
 
 /* =========================================================
-   UNIVERSAL RESPONSIVE HERO
-
-   - FULL video/image visible
-   - NO green overlay
-   - NO heavy dark overlay
-   - object-contain = no crop
-   - responsive mobile/tablet/desktop
+   COMMON RESPONSIVE PAGE HERO
 ========================================================= */
 
 export function PageBanner({
@@ -105,7 +119,8 @@ export function PageBanner({
   image,
   mediaPosition = 'center',
 }) {
-  const hasMedia = Boolean(video || image)
+  const hasMedia =
+    Boolean(video || image)
 
   return (
     <section
@@ -114,58 +129,52 @@ export function PageBanner({
         isolate
         w-full
         overflow-hidden
-        bg-black
+        bg-[#111]
         text-white
       "
     >
+
       <div
         className="
           relative
           flex
-          min-h-[320px]
+          min-h-[300px]
           w-full
-          items-center
-          justify-center
+          items-end
           overflow-hidden
-          bg-black
-          sm:min-h-[380px]
-          md:min-h-[430px]
-          lg:min-h-[500px]
-          xl:min-h-[540px]
+
+          sm:min-h-[350px]
+          md:min-h-[390px]
+          lg:min-h-[430px]
         "
       >
 
-        {/* =====================================================
-            VIDEO BACKGROUND
-        ====================================================== */}
-
+        {/* VIDEO */}
         {video && (
           <video
             key={video}
             src={video}
             autoPlay
-            loop
             muted
+            loop
             playsInline
-            preload="auto"
+            preload="metadata"
             aria-hidden="true"
             className="
               absolute
               inset-0
               h-full
               w-full
-              object-contain
+              object-cover
             "
             style={{
-              objectPosition: mediaPosition,
+              objectPosition:
+                mediaPosition,
             }}
           />
         )}
 
-        {/* =====================================================
-            IMAGE BACKGROUND
-        ====================================================== */}
-
+        {/* IMAGE */}
         {!video && image && (
           <img
             src={image}
@@ -176,26 +185,25 @@ export function PageBanner({
               inset-0
               h-full
               w-full
-              object-contain
+              object-cover
             "
             style={{
-              objectPosition: mediaPosition,
+              objectPosition:
+                mediaPosition,
             }}
           />
         )}
 
-        {/* =====================================================
-            FALLBACK
-        ====================================================== */}
-
+        {/* NO-MEDIA FALLBACK */}
         {!hasMedia && (
-          <div className="absolute inset-0 bg-[linear-gradient(135deg,#202020,#080808)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(135deg,#1a1a1a,#090909)]" />
         )}
 
-        {/* =====================================================
-            VERY LIGHT BOTTOM FADE ONLY
-        ====================================================== */}
+        {/*
+          No full dark overlay.
 
+          Only bottom fade where text sits.
+        */}
         {hasMedia && (
           <div
             className="
@@ -203,56 +211,40 @@ export function PageBanner({
               absolute
               inset-x-0
               bottom-0
-              h-[38%]
+              h-[62%]
+
               bg-gradient-to-t
-              from-black/45
-              via-black/10
+              from-black/65
+              via-black/20
               to-transparent
             "
           />
         )}
 
-        {/* =====================================================
-            CONTENT
-        ====================================================== */}
-
+        {/* CONTENT */}
         <div
           className="
             relative
             z-10
             mx-auto
-            flex
-            min-h-[320px]
             w-full
             max-w-7xl
-            items-end
+
             px-5
             pb-8
-            pt-24
-            sm:min-h-[380px]
+            pt-20
+
             sm:pb-10
-            md:min-h-[430px]
+
             md:pb-12
-            lg:min-h-[500px]
+
             lg:px-8
             lg:pb-14
-            xl:min-h-[540px]
           "
         >
-          <div
-            className="
-              max-w-4xl
-              rounded-2xl
-              border
-              border-white/10
-              bg-black/30
-              p-4
-              shadow-2xl
-              backdrop-blur-[2px]
-              sm:p-5
-              md:p-6
-            "
-          >
+
+          <div className="min-w-0 max-w-4xl">
+
             {eyebrow && (
               <SectionLabel dark>
                 {eyebrow}
@@ -261,15 +253,18 @@ export function PageBanner({
 
             <h1
               className="
-                mt-3
-                max-w-4xl
+                mt-4
+                max-w-full
                 break-words
+
                 font-display
-                text-[clamp(2rem,7vw,3.75rem)]
                 font-bold
-                leading-[1.05]
+                leading-[1.06]
                 text-white
-                drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]
+
+                text-[clamp(2rem,10vw,3.75rem)]
+
+                drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]
               "
             >
               {title}
@@ -282,15 +277,18 @@ export function PageBanner({
                 flex-wrap
                 items-center
                 gap-2
+
                 font-mono
                 text-[10px]
-                text-white/80
+                text-white/85
+
                 sm:text-xs
               "
             >
+
               <Link
                 to="/"
-                className="transition-colors hover:text-white"
+                className="hover:text-white"
               >
                 Home
               </Link>
@@ -300,11 +298,15 @@ export function PageBanner({
               <span className="text-[#f2a574]">
                 {crumb || title}
               </span>
+
             </div>
+
           </div>
+
         </div>
 
       </div>
+
     </section>
   )
 }
@@ -369,8 +371,9 @@ export function ProductImage({
   className = '',
 }) {
   const src =
-    resolveMediaUrl(product.imageUrl) ||
-    product.image
+    resolveMediaUrl(
+      product.imageUrl
+    ) || product.image
 
   if (src) {
     return (
@@ -387,6 +390,7 @@ export function ProductImage({
     <div
       className={`flex flex-col items-center justify-center gap-2 bg-[linear-gradient(135deg,var(--color-navy),var(--color-navy-deep))] text-center text-white ${className}`}
     >
+
       <ImageOff
         size={26}
         className="text-white/50"
@@ -399,6 +403,7 @@ export function ProductImage({
       <span className="font-mono text-[10px] uppercase tracking-widest text-white/40">
         Photo coming soon
       </span>
+
     </div>
   )
 }
