@@ -19,6 +19,7 @@ export default function App() {
   return (
     <div className="flex min-h-screen flex-col">
       <Navbar />
+
       <main className="flex-1">
         <Routes>
           <Route path="/" element={<Home />} />
@@ -27,14 +28,17 @@ export default function App() {
           <Route path="/products/:id" element={<ProductDetail />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/clients" element={<Clients />} />
+
           <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/:slug" element={<BlogPost />} />
+          <Route path="/blog/:id" element={<BlogPost />} />
+
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/admin" element={<AdminDashboard />} />
         </Routes>
       </main>
+
       <Footer />
       <FloatingContact />
     </div>
