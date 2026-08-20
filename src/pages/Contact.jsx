@@ -21,29 +21,24 @@ import { api } from '../lib/api'
 import video2 from '../assets/products/vodeo2.mp4'
 
 export default function Contact() {
-  const [sent, setSent] =
-    useState(false)
+  const [sent, setSent] = useState(false)
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
 
-  const [error, setError] =
-    useState('')
-
-  const [loading, setLoading] =
-    useState(false)
-
-  const [form, setForm] =
-    useState({
-      name: '',
-      email: '',
-      mobile: '',
-      message: '',
-    })
+  const [form, setForm] = useState({
+    name: '',
+    email: '',
+    mobile: '',
+    message: '',
+  })
 
   function update(field) {
-    return (e) =>
-      setForm((f) => ({
-        ...f,
+    return (e) => {
+      setForm((prev) => ({
+        ...prev,
         [field]: e.target.value,
       }))
+    }
   }
 
   async function handleSubmit(e) {
@@ -85,14 +80,12 @@ export default function Contact() {
       value: company.phone,
       href: `tel:${company.phone}`,
     },
-
     {
       icon: Mail,
       title: 'Mail Here',
       value: company.email,
       href: `mailto:${company.email}`,
     },
-
     {
       icon: MapPin,
       title: 'Visit Here',
@@ -101,8 +94,9 @@ export default function Contact() {
   ]
 
   return (
-    <div>
+    <div className="w-full overflow-x-hidden">
 
+      {/* HERO */}
       <PageBanner
         title="Contact Us"
         crumb="Contact"
@@ -111,72 +105,65 @@ export default function Contact() {
         mediaPosition="center"
       />
 
-      <section className="mx-auto max-w-7xl px-5 py-14 sm:py-16 lg:px-8 lg:py-20">
+      {/* MAIN */}
+      <section className="mx-auto w-full max-w-7xl px-5 py-12 sm:py-16 lg:px-8 lg:py-20">
 
-        {/* CONTACT INFO CARDS */}
+        {/* INFO CARDS */}
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
 
-          {infoCards.map(
-            (c, i) => {
+          {infoCards.map((card, index) => {
+            const Icon = card.icon
 
-              const Icon = c.icon
+            return (
+              <Reveal
+                key={card.title}
+                delay={index * 90}
+                className="rounded-2xl border border-line bg-white p-6 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-teal/40 hover:shadow-lg sm:p-7"
+              >
+                <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-teal/10 text-teal-dark">
+                  <Icon size={22} />
+                </span>
 
-              return (
-                <Reveal
-                  key={c.title}
-                  delay={i * 90}
-                  className="rounded-2xl border border-line bg-white p-6 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-teal/40 hover:shadow-lg sm:p-7"
-                >
+                <h3 className="font-display mt-3 text-base font-bold text-navy">
+                  {card.title}
+                </h3>
 
-                  <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-teal/10 text-teal-dark">
-
-                    <Icon size={22} />
-
-                  </span>
-
-                  <h3 className="font-display mt-3 font-bold text-navy">
-                    {c.title}
-                  </h3>
-
-                  {c.href ? (
-                    <a
-                      href={c.href}
-                      className="mt-1 block break-words text-sm text-steel transition-colors hover:text-teal-dark"
-                    >
-                      {c.value}
-                    </a>
-                  ) : (
-                    <p className="mt-1 break-words text-sm leading-6 text-steel">
-                      {c.value}
-                    </p>
-                  )}
-
-                </Reveal>
-              )
-            }
-          )}
+                {card.href ? (
+                  <a
+                    href={card.href}
+                    className="mt-2 block break-words text-sm leading-6 text-steel transition-colors hover:text-teal-dark"
+                  >
+                    {card.value}
+                  </a>
+                ) : (
+                  <p className="mt-2 break-words text-sm leading-6 text-steel">
+                    {card.value}
+                  </p>
+                )}
+              </Reveal>
+            )
+          })}
 
         </div>
 
         {/* FORM + MAP */}
-        <div className="mt-12 grid items-stretch gap-10 lg:mt-14 lg:grid-cols-2 lg:gap-12">
+        <div className="mt-12 grid gap-10 lg:mt-14 lg:grid-cols-2 lg:items-stretch lg:gap-12">
 
-          {/* FORM */}
-          <Reveal>
+          {/* LEFT FORM */}
+          <Reveal className="min-w-0">
 
             <h2 className="font-display text-2xl font-bold text-navy sm:text-3xl">
               Send us a message
             </h2>
 
-            <p className="mt-2 max-w-xl text-sm leading-7 text-steel sm:text-base">
-              Tell us what material, waste stream,
-              service or business requirement you
-              would like to discuss. Our team will
-              get back to you as soon as possible.
+            <p className="mt-3 max-w-xl text-sm leading-7 text-steel sm:text-base">
+              Tell us what material, waste stream, service or business
+              requirement you would like to discuss. Our team will get
+              back to you as soon as possible.
             </p>
 
             {sent ? (
-              <div className="mt-6 flex items-start gap-3 rounded-xl border border-teal/30 bg-teal/10 p-5 text-sm font-medium text-teal-dark sm:p-6">
+              <div className="mt-7 flex items-start gap-3 rounded-2xl border border-teal/30 bg-teal/10 p-5 text-sm text-teal-dark sm:p-6">
 
                 <CheckCircle2
                   size={20}
@@ -188,9 +175,9 @@ export default function Contact() {
                     Message sent successfully.
                   </p>
 
-                  <p className="mt-1 font-normal leading-6">
-                    Thanks — your message has been noted.
-                    We'll be in touch soon.
+                  <p className="mt-1 leading-6">
+                    Thanks — your message has been noted. We'll be in
+                    touch soon.
                   </p>
                 </div>
 
@@ -198,11 +185,11 @@ export default function Contact() {
             ) : (
               <form
                 onSubmit={handleSubmit}
-                className="mt-6 space-y-4"
+                className="mt-7 space-y-4"
               >
 
                 {error && (
-                  <div className="flex items-start gap-2 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600">
+                  <div className="flex items-start gap-2 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600">
 
                     <AlertCircle
                       size={16}
@@ -216,77 +203,90 @@ export default function Contact() {
                   </div>
                 )}
 
+                {/* NAME + EMAIL */}
                 <div className="grid gap-4 sm:grid-cols-2">
 
-                  <input
-                    required
-                    value={form.name}
-                    onChange={update('name')}
-                    placeholder="Your Name *"
-                    className="w-full rounded-lg border border-line bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-teal"
-                  />
+                  <div className="min-w-0">
+                    <input
+                      required
+                      value={form.name}
+                      onChange={update('name')}
+                      placeholder="Your Name *"
+                      className="w-full rounded-xl border border-line bg-white px-4 py-3.5 text-sm text-navy outline-none transition-colors placeholder:text-steel/70 focus:border-teal"
+                    />
+                  </div>
 
-                  <input
-                    required
-                    type="email"
-                    value={form.email}
-                    onChange={update('email')}
-                    placeholder="Your Email *"
-                    className="w-full rounded-lg border border-line bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-teal"
-                  />
+                  <div className="min-w-0">
+                    <input
+                      required
+                      type="email"
+                      value={form.email}
+                      onChange={update('email')}
+                      placeholder="Your Email *"
+                      className="w-full rounded-xl border border-line bg-white px-4 py-3.5 text-sm text-navy outline-none transition-colors placeholder:text-steel/70 focus:border-teal"
+                    />
+                  </div>
 
                 </div>
 
-                <input
-                  required
-                  inputMode="numeric"
-                  maxLength={10}
-                  value={form.mobile}
-                  onChange={update('mobile')}
-                  placeholder="Mobile Number *"
-                  className="w-full rounded-lg border border-line bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-teal"
-                />
+                {/* MOBILE */}
+                <div className="w-full">
+                  <input
+                    required
+                    type="tel"
+                    inputMode="numeric"
+                    maxLength={10}
+                    value={form.mobile}
+                    onChange={update('mobile')}
+                    placeholder="Mobile Number *"
+                    className="w-full rounded-xl border border-line bg-white px-4 py-3.5 text-sm text-navy outline-none transition-colors placeholder:text-steel/70 focus:border-teal"
+                  />
+                </div>
 
-                <textarea
-                  required
-                  rows={6}
-                  value={form.message}
-                  onChange={update('message')}
-                  placeholder="Your Message *"
-                  className="w-full resize-y rounded-lg border border-line bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-teal"
-                />
+                {/* MESSAGE */}
+                <div className="w-full">
+                  <textarea
+                    required
+                    rows={6}
+                    value={form.message}
+                    onChange={update('message')}
+                    placeholder="Your Message *"
+                    className="min-h-[150px] w-full resize-y rounded-xl border border-line bg-white px-4 py-3.5 text-sm leading-6 text-navy outline-none transition-colors placeholder:text-steel/70 focus:border-teal"
+                  />
+                </div>
 
-                <Button
-                  as="button"
-                  variant="accent"
-                  className="w-full sm:w-auto"
-                  disabled={loading}
-                >
-                  {loading
-                    ? 'Sending…'
-                    : 'Send Message'}
+                {/* SUBMIT */}
+                <div className="pt-1">
+                  <Button
+                    as="button"
+                    variant="accent"
+                    className="w-full sm:w-auto"
+                    disabled={loading}
+                  >
+                    {loading
+                      ? 'Sending…'
+                      : 'Send Message'}
 
-                  <Send size={15} />
-                </Button>
+                    <Send size={15} />
+                  </Button>
+                </div>
 
               </form>
             )}
 
           </Reveal>
 
-          {/* MAP */}
+          {/* RIGHT MAP */}
           <Reveal
             delay={120}
-            className="min-h-[340px] overflow-hidden rounded-2xl border border-line bg-white shadow-sm sm:min-h-[400px]"
+            className="min-h-[360px] overflow-hidden rounded-2xl border border-line bg-white shadow-sm sm:min-h-[430px] lg:min-h-full"
           >
-
             <iframe
               title="Jimkey Ecopower location"
-              className="h-full min-h-[340px] w-full sm:min-h-[400px]"
               loading="lazy"
               src="https://www.google.com/maps?q=Andheri+East,+Mumbai&output=embed"
+              className="h-full min-h-[360px] w-full border-0 sm:min-h-[430px]"
             />
-
           </Reveal>
 
         </div>
