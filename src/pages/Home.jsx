@@ -132,13 +132,12 @@ export default function Home() {
           {/* LEFT */}
           <div className="rise min-w-0 w-full max-w-full lg:max-w-3xl">
 
-            <SectionLabel dark>
-              Manifest No. JEP–2026 · Alternative Fuel Resources
-            </SectionLabel>
+            
+            
 
             <h1
               className="
-                mt-5
+                mt-0
                 w-full
                 max-w-full
 
