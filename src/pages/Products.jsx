@@ -1,3 +1,4 @@
+
 import { useEffect, useMemo, useState } from 'react'
 import { useSearchParams, Link } from 'react-router-dom'
 import { ArrowUpRight, Search, X, LayoutGrid, Loader2 } from 'lucide-react'
@@ -51,7 +52,7 @@ export default function Products() {
   }
 
   return (
-    <div>
+    <div className="products-page">
       <PageBanner
         title="Products"
         crumb="Products"

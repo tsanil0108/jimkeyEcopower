@@ -1,3 +1,4 @@
+
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import {
@@ -247,7 +248,7 @@ export default function BlogPost() {
     containsHtml(post.content || '')
 
   return (
-    <div>
+    <div className="blog-post-page">
 
       {/* =====================================================
           HERO

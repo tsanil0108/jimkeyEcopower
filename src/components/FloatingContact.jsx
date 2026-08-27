@@ -1,3 +1,4 @@
+import './FloatingContact.css'
 import {
   Phone,
   MessageCircle,

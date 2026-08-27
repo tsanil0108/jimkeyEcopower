@@ -1,3 +1,4 @@
+import './Gallery.css'
 import { Expand } from 'lucide-react'
 import { PageBanner, Reveal } from '../components/ui'
 import { gallery } from '../data/content'
@@ -5,7 +6,7 @@ import video2 from '../assets/products/vodeo2.mp4'
 
 export default function Gallery() {
   return (
-    <div>
+    <div className="gallery-page">
       <PageBanner title="Gallery / Media" crumb="Gallery" eyebrow="On the Ground" video={video2} />
       <section className="mx-auto max-w-7xl px-5 py-16 lg:px-8">
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">

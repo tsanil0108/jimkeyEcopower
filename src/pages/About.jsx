@@ -1,3 +1,4 @@
+
 import {
   ArrowRight,
   CheckCircle2,
@@ -60,7 +61,7 @@ const principles = [
 
 export default function About() {
   return (
-    <div>
+    <div className="about-page">
 
       {/* HERO */}
       <PageBanner

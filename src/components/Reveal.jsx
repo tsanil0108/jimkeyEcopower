@@ -1,3 +1,4 @@
+import './Reveal.css'
 import { useEffect, useRef, useState } from 'react'
 
 /**

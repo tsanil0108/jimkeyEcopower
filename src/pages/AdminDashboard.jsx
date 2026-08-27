@@ -1,3 +1,4 @@
+import './AdminDashboard.css'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
@@ -302,7 +303,7 @@ export default function AdminDashboard() {
   if (!session || session.role !== 'ADMIN') return null
 
   return (
-    <div>
+    <div className="admin-page">
       <PageBanner title="Admin Dashboard" crumb="Admin" eyebrow={`Signed in as ${session.name || session.email}`} />
 
       <section className="mx-auto max-w-7xl px-5 py-10 lg:px-8">

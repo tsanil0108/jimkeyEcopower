@@ -1,3 +1,4 @@
+import './MaterialStream.css'
 const stages = ['Collect', 'Process', 'Recover', 'Reuse']
 const materials = ['UCO', 'Carbon Black', 'Pyrolysis Oil', 'Tallow Oil', 'Steel Wire']
 
@@ -9,7 +10,7 @@ export default function MaterialStream({ variant = 'light' }) {
   const dark = variant === 'dark'
   return (
     <div className={`rounded-2xl border p-5 sm:p-6 ${dark ? 'border-white/10 bg-white/5' : 'border-line bg-white'}`}>
-      <div className="flex flex-wrap items-center justify-between gap-3">
+      <div className="material-stream-scope flex flex-wrap items-center justify-between gap-3">
         {stages.map((s, i) => (
           <div key={s} className="flex items-center gap-3">
             <div className="flex items-center gap-2">

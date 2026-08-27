@@ -1,3 +1,4 @@
+
 import { PageBanner, SectionLabel } from '../components/ui'
 import video2 from '../assets/products/vodeo2.mp4'
 
@@ -21,7 +22,7 @@ function LogoCard({ img, i }) {
 
 export default function Clients() {
   return (
-    <div>
+    <div className="clients-page">
       <PageBanner title="Our Clients" crumb="Clients" eyebrow={`${clientImages.length}+ Partners`} video={video2} />
 
       <section className="mx-auto max-w-7xl px-5 py-16 lg:px-8">

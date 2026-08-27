@@ -1,0 +1,2 @@
+.material-stream-scope { position:relative; overflow:hidden; }
+.material-stream-scope::before { content:""; position:absolute; inset:0; pointer-events:none; background:linear-gradient(90deg,rgba(232,245,247,.7),transparent 30%,transparent 70%,rgba(232,245,247,.7)); }

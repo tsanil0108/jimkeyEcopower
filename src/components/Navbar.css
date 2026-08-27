@@ -1,0 +1,3 @@
+.navbar-scope { --nav-accent:var(--color-teal); }
+.navbar-scope a, .navbar-scope button { transition:color .2s ease, background-color .2s ease, border-color .2s ease, transform .2s ease; }
+.navbar-scope .nav-dropdown { box-shadow:0 24px 70px rgba(16,42,67,.16); }

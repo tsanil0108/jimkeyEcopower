@@ -1,0 +1,4 @@
+.app-shell { min-height:100vh; width:100%; display:flex; flex-direction:column; overflow-x:hidden; background:var(--color-paper); }
+.app-main { min-width:0; flex:1; padding-top:72px; }
+@media (min-width:640px){.app-main{padding-top:76px;}}
+@media (min-width:1024px){.app-main{padding-top:80px;}}

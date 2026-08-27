@@ -1,3 +1,4 @@
+
 import { useState } from 'react'
 
 import {
@@ -170,7 +171,7 @@ export default function Contact() {
                   className="mt-0.5 shrink-0"
                 />
 
-                <div>
+                <div className="contact-page">
                   <p className="font-semibold">
                     Message sent successfully.
                   </p>

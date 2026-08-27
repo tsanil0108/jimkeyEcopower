@@ -1,0 +1,225 @@
+.home-page { background:var(--color-paper); }
+.home-page .home-hero { position:relative; isolation:isolate; overflow:hidden; background:var(--color-navy-deep); color:#fff; }
+.home-page .home-accent { color:var(--color-teal-light); }
+.home-page .home-card { border:1px solid var(--color-line); background:#fff; border-radius:18px; box-shadow:var(--shadow-soft); }
+@keyframes home-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.home-page .float-y{animation:home-float 5s ease-in-out infinite;}
+@keyframes home-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.home-page .marquee-track{animation:home-marquee 32s linear infinite;}
+
+
+/* =====================================================
+   FEATURED PROJECT + SERVICE
+===================================================== */
+
+.home-feature-section {
+  padding: 88px 0;
+  background: #ffffff;
+  border-top: 1px solid var(--color-line);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.home-feature-container {
+  width: min(100% - 40px, 1280px);
+  margin: 0 auto;
+}
+
+.home-feature-heading {
+  margin-bottom: 36px;
+}
+
+.home-feature-title {
+  max-width: 720px;
+  margin: 16px 0 0;
+  color: var(--color-navy);
+  font-family: var(--font-display);
+  font-size: clamp(30px, 3vw, 44px);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.home-feature-title span {
+  color: var(--color-teal);
+}
+
+.home-feature-intro {
+  max-width: 640px;
+  margin: 14px 0 0;
+  color: var(--color-steel);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.home-feature-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.home-feature-card {
+  position: relative;
+  min-height: 360px;
+  padding: 34px;
+  overflow: hidden;
+  border: 1px solid var(--color-line);
+  border-radius: 24px;
+  background: linear-gradient(145deg, #ffffff 0%, #f8fcfd 100%);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.home-feature-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(27, 134, 158, 0.4);
+  box-shadow: 0 24px 60px rgba(16, 42, 67, 0.12);
+}
+
+.home-project-card::before {
+  content: "";
+  position: absolute;
+  width: 240px;
+  height: 240px;
+  right: -90px;
+  top: -90px;
+  border-radius: 50%;
+  background: rgba(27, 134, 158, 0.08);
+}
+
+.home-service-feature-card {
+  background: linear-gradient(145deg, var(--color-navy) 0%, #123a4c 100%);
+  border-color: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+.home-service-feature-card::before {
+  content: "";
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  right: -100px;
+  bottom: -100px;
+  border-radius: 50%;
+  background: rgba(27, 134, 158, 0.28);
+}
+
+.home-feature-badge {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: var(--color-paper-soft);
+  color: var(--color-teal);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+.home-service-feature-card .home-feature-badge {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--color-teal-light);
+}
+
+.home-feature-card-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  min-height: 260px;
+  flex-direction: column;
+  margin-top: 34px;
+}
+
+.home-feature-number {
+  color: var(--color-teal);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+}
+
+.home-service-feature-card .home-feature-number {
+  color: var(--color-teal-light);
+}
+
+.home-feature-card h3 {
+  max-width: 430px;
+  margin: 14px 0 0;
+  color: var(--color-navy);
+  font-family: var(--font-display);
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.home-service-feature-card h3 {
+  color: #ffffff;
+}
+
+.home-feature-card p {
+  max-width: 500px;
+  margin: 15px 0 0;
+  color: var(--color-steel);
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.home-service-feature-card p {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.home-feature-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  margin-top: auto;
+  padding-top: 32px;
+  color: var(--color-teal);
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: gap 0.25s ease, color 0.25s ease;
+}
+
+.home-feature-link:hover {
+  gap: 12px;
+  color: var(--color-navy);
+}
+
+.home-service-feature-card .home-feature-link {
+  color: var(--color-teal-light);
+}
+
+.home-service-feature-card .home-feature-link:hover {
+  color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .home-feature-section {
+    padding: 68px 0;
+  }
+
+  .home-feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-feature-card {
+    min-height: 320px;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-feature-container {
+    width: min(100% - 30px, 1280px);
+  }
+
+  .home-feature-card {
+    padding: 26px;
+  }
+
+  .home-feature-card h3 {
+    font-size: 22px;
+  }
+}

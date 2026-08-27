@@ -1,3 +1,4 @@
+
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
@@ -244,7 +245,7 @@ export default function Blog() {
       : filtered
 
   return (
-    <div>
+    <div className="blog-page">
       <PageBanner
         title="Insights & Circular Economy Blog"
         crumb="Blog"

@@ -1,3 +1,4 @@
+import './App.css'
 import { Routes, Route } from 'react-router-dom'
 
 import Navbar from './components/Navbar'
@@ -16,10 +17,11 @@ import Contact from './pages/Contact'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import AdminDashboard from './pages/AdminDashboard'
+import ForgotPassword from './pages/ForgotPassword'
 
 export default function App() {
   return (
-    <div className="flex min-h-screen w-full flex-col overflow-x-hidden">
+    <div className="app-shell">
 
       <Navbar />
 
@@ -30,7 +32,7 @@ export default function App() {
         Small: 76px
         Desktop: 80px
       */}
-      <main className="min-w-0 flex-1 pt-[72px] sm:pt-[76px] lg:pt-[80px]">
+      <main className="app-main">
 
         <Routes>
           <Route
@@ -82,6 +84,8 @@ export default function App() {
             path="/login"
             element={<Login />}
           />
+
+          <Route path="/forgot-password" element={<ForgotPassword />} />
 
           <Route
             path="/register"

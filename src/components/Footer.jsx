@@ -1,3 +1,4 @@
+
 import { Link } from 'react-router-dom'
 import { MapPin, Phone, Mail, ArrowUpRight } from 'lucide-react'
 import logo from '../assets/logo.png'
@@ -15,7 +16,7 @@ export default function Footer() {
       </div>
 
       <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-10 px-5 py-14 sm:grid-cols-2 lg:grid-cols-4 lg:px-8">
-        <div>
+        <div className="footer-scope">
           <img src={logo} alt="Jimkey Ecopower" className="h-14 w-auto brightness-0 invert" />
           <p className="mt-4 text-sm leading-relaxed text-white/55">
             Trading alternative fuel resources and championing circular-economy solutions.

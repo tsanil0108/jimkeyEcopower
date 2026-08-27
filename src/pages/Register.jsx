@@ -1,3 +1,4 @@
+import './Register.css'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { AlertCircle } from 'lucide-react'
@@ -43,7 +44,7 @@ export default function Register() {
   }
 
   return (
-    <div className="grain-bg flex min-h-[calc(100vh-64px)] items-center justify-center bg-paper px-5 py-16">
+    <div className="register-page grain-bg flex min-h-[calc(100vh-64px)] items-center justify-center bg-paper px-5 py-16">
       <Reveal className="w-full max-w-lg rounded-2xl border border-line bg-white p-8 shadow-[0_24px_60px_-24px_rgba(20,51,42,0.2)] sm:p-10">
         <img src={logo} alt="Jimkey Ecopower" className="mx-auto h-14 w-auto" />
         <h1 className="font-display mt-6 text-center text-2xl font-bold text-navy">Create an Account</h1>

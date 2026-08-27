@@ -1,3 +1,4 @@
+import './CircularSeal.css'
 const stages = [
   { n: '01', label: 'Collect', pos: 'left-0 top-0 -translate-x-1/2 -translate-y-1/2' },
   { n: '02', label: 'Process', pos: 'right-0 top-0 translate-x-1/2 -translate-y-1/2' },

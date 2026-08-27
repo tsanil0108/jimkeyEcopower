@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 
@@ -404,7 +405,7 @@ export default function Navbar() {
         </nav>
 
         {/* DESKTOP RIGHT */}
-        <div className="hidden shrink-0 items-center gap-3 lg:flex">
+        <div className="navbar-scope hidden shrink-0 items-center gap-3 lg:flex">
 
           <a
             href={`tel:${company.phone}`}

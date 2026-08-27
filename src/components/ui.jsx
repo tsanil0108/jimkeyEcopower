@@ -1,3 +1,4 @@
+import './ui.css'
 import { Link } from 'react-router-dom'
 import { ImageOff } from 'lucide-react'
 
@@ -29,7 +30,7 @@ export function SectionLabel({
 
         ${
           dark
-            ? 'border-white/30 bg-black/20 text-[#f2a574] backdrop-blur-sm'
+            ? 'border-white/30 bg-black/20 text-teal-light backdrop-blur-sm'
             : 'border-teal/25 bg-teal/10 text-teal-dark'
         }
       `}
@@ -196,7 +197,7 @@ export function PageBanner({
 
         {/* NO-MEDIA FALLBACK */}
         {!hasMedia && (
-          <div className="absolute inset-0 bg-[linear-gradient(135deg,#1a1a1a,#090909)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(135deg,var(--color-navy),var(--color-navy-deep))]" />
         )}
 
         {/*
@@ -295,7 +296,7 @@ export function PageBanner({
 
               <span>/</span>
 
-              <span className="text-[#f2a574]">
+              <span className="text-teal-light">
                 {crumb || title}
               </span>
 

@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { Recycle, Phone, Mail, Tag, Loader2 } from 'lucide-react'
@@ -59,7 +60,7 @@ export default function ProductDetail() {
   const Icon = getCategoryIcon(category?.icon)
 
   return (
-    <div>
+    <div className="product-detail-page">
       <PageBanner
         title={product.name}
         crumb={product.name}

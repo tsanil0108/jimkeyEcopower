@@ -1,0 +1,4 @@
+.gallery-page { background:var(--color-paper); }
+.gallery-page .gallery-item { overflow:hidden; border:1px solid var(--color-line); border-radius:18px; background:#fff; }
+.gallery-page .gallery-item img { transition:transform .45s ease; }
+.gallery-page .gallery-item:hover img { transform:scale(1.06); }
