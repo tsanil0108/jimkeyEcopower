@@ -223,3 +223,151 @@
     font-size: 22px;
   }
 }
+
+/* =====================================================
+   SERVICE CARDS
+===================================================== */
+
+.service-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #ffffff;
+  border: 1px solid var(--color-line);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-soft);
+  transition: all 0.3s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(27, 134, 158, 0.3);
+  box-shadow: 0 12px 32px rgba(16, 42, 67, 0.08);
+}
+
+.service-card h3 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--color-navy);
+  margin: 1rem 0 0;
+}
+
+.service-card p {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--color-steel);
+  margin: 0.5rem 0 0;
+  flex-grow: 1;
+}
+
+@media (max-width: 640px) {
+  .service-card {
+    padding: 1.25rem;
+  }
+
+  .service-card h3 {
+    font-size: 1rem;
+  }
+
+  .service-card p {
+    font-size: 0.8125rem;
+  }
+}
+
+/* =====================================================
+   PREMIUM PRODUCT & SERVICE CARDS
+===================================================== */
+
+.premium-product-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #ffffff;
+  border: 1.5px solid var(--color-line);
+  border-radius: 1.75rem;
+  box-shadow: 0 4px 20px rgba(16, 42, 67, 0.06);
+  overflow: hidden;
+}
+
+.premium-product-card:hover {
+  box-shadow: 0 30px 60px rgba(251, 146, 60, 0.15);
+}
+
+/* Product Card Title */
+.premium-product-card h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-navy);
+  line-height: 1.3;
+}
+
+/* Product Card Description */
+.premium-product-card p {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--color-steel);
+}
+
+/* Service Card Styles */
+.premium-service-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: linear-gradient(135deg, #0d1f2d 0%, #1b5a6f 50%, #0d2d3a 100%);
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1.75rem;
+  box-shadow: 0 4px 20px rgba(27, 134, 158, 0.12);
+  overflow: hidden;
+}
+
+.premium-service-card:hover {
+  box-shadow: 0 30px 60px rgba(27, 134, 158, 0.25);
+}
+
+/* Service Card Title */
+.premium-service-card h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.3;
+}
+
+/* Service Card Description */
+.premium-service-card p {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .premium-product-card h3,
+  .premium-service-card h3 {
+    font-size: 1.25rem;
+  }
+
+  .premium-product-card p,
+  .premium-service-card p {
+    font-size: 0.875rem;
+  }
+
+  .premium-product-card,
+  .premium-service-card {
+    border-radius: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .premium-product-card h3,
+  .premium-service-card h3 {
+    font-size: 1.125rem;
+  }
+
+  .premium-product-card,
+  .premium-service-card {
+    border-radius: 1.25rem;
+  }
+}

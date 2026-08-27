@@ -5,9 +5,11 @@ import {
   Truck,
   FileCheck2,
   Leaf,
+  Flame,
 } from 'lucide-react'
 
 import { Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 
 import CircularSeal from '../components/CircularSeal'
 
@@ -21,7 +23,6 @@ import {
   stats,
   valueProps,
   faqs,
-  products,
   categoryMeta,
 } from '../data/content'
 
@@ -32,6 +33,8 @@ import {
   ProductImage,
   Badge,
 } from '../components/ui'
+
+import { api } from '../lib/api'
 
 const valueIcons = [
   ShieldCheck,
@@ -52,6 +55,16 @@ const clientLogos =
   )
 
 export default function Home() {
+  const [products, setProducts] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    api.getProducts()
+      .then(setProducts)
+      .catch(() => setProducts([]))
+      .finally(() => setLoading(false))
+  }, [])
+
   return (
     <div className="w-full min-w-0 overflow-x-hidden">
 
@@ -590,25 +603,24 @@ export default function Home() {
       </section>
 
       {/* =====================================================
-          PRODUCTS
+          PRODUCTS & SERVICES
       ====================================================== */}
 
       <section className="mx-auto max-w-7xl px-5 py-14 sm:py-20 lg:px-8">
 
-        <Reveal className="flex flex-col items-start justify-between gap-5 sm:flex-row sm:items-end">
+        <Reveal className="flex flex-col items-start justify-between gap-5 sm:flex-row sm:items-end mb-12">
 
           <div>
 
             <SectionLabel>
-              Traded Materials
+              Traded Materials & Services
             </SectionLabel>
 
-            <h2 className="font-display mt-4 text-2xl font-bold text-navy sm:text-3xl">
-              Explore{' '}
+            <h2 className="font-display mt-4 text-3xl font-bold text-navy sm:text-4xl md:text-5xl">
+              Explore Our{' '}
               <span className="text-teal-dark">
-                Jimkey Ecopower
-              </span>{' '}
-              Products
+                Products & Services
+              </span>
             </h2>
 
           </div>
@@ -622,89 +634,181 @@ export default function Home() {
 
         </Reveal>
 
-        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-2">
 
-          {products
-            .slice(0, 3)
-            .map((p, i) => {
+          {products && products.length > 0 && (
+            <Reveal
+              delay={0}
+            >
 
-              const meta =
-                categoryMeta[
-                  p.categoryId
-                ]
+              <Link
+                to={`/products/${products[0].id}`}
+                className="premium-product-card group relative block h-full overflow-hidden rounded-3xl border border-line bg-white transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl"
+              >
 
-              const Icon =
-                meta?.icon
+                {/* Background Glow Effect */}
+                <div className="absolute -right-20 -top-20 h-96 w-96 rounded-full bg-gradient-to-br from-amber-100/40 to-transparent opacity-0 transition-opacity duration-700 group-hover:opacity-100"></div>
 
-              return (
-                <Reveal
-                  key={p.id}
-                  delay={i * 100}
-                >
+                {/* Product Image Container */}
+                <div className="relative h-64 overflow-hidden bg-gradient-to-br from-slate-50 to-slate-100">
 
-                  <Link
-                    to={`/products/${p.id}`}
-                    className="group block h-full overflow-hidden rounded-2xl border border-line bg-white shadow-sm transition-all hover:-translate-y-1.5 hover:shadow-xl"
-                  >
+                  <div className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-10">
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,rgba(251,146,60,0.4),transparent)]"></div>
+                  </div>
 
-                    <div className="relative h-48 overflow-hidden sm:h-52">
+                  <ProductImage
+                    product={products[0]}
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
 
-                      <ProductImage
-                        product={p}
-                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-                      />
+                  {/* Icon Badge */}
+                  <div className="absolute left-5 top-5 flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-amber-400 to-orange-500 text-white shadow-lg backdrop-blur transition-transform duration-500 group-hover:scale-110">
+                    <Flame size={22} />
+                  </div>
 
-                      {Icon && (
-                        <span className="absolute left-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 text-navy">
+                  {/* Overlay Bar on Hover */}
+                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-400 via-orange-400 to-red-500 transition-all duration-500 group-hover:h-2"></div>
 
-                          <Icon size={15} />
+                </div>
 
-                        </span>
-                      )}
+                {/* Content Container */}
+                <div className="relative z-10 space-y-4 p-8 sm:p-9">
 
+                  {/* Category Tag */}
+                  <div className="inline-flex items-center gap-2 rounded-full bg-amber-50 px-3 py-1.5">
+                    <div className="h-2 w-2 rounded-full bg-amber-500"></div>
+                    <span className="text-xs font-bold tracking-widest text-amber-700 uppercase">
+                      Traded Material
+                    </span>
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="font-display group/title flex items-start justify-between gap-3 text-2xl font-bold leading-snug text-navy transition-colors duration-300">
+
+                    <span className="min-w-0">
+                      {products[0].name}
+                    </span>
+
+                    <ArrowUpRight
+                      size={24}
+                      className="shrink-0 rounded-full bg-amber-50 p-1.5 text-amber-600 transition-all duration-500 group-hover:bg-amber-500 group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1"
+                    />
+
+                  </h3>
+
+                  {/* Description */}
+                  <p className="text-sm leading-relaxed text-steel line-clamp-2">
+                    {products[0].tagline}
+                  </p>
+
+                  {/* Badge */}
+                  {products[0].form && (
+                    <div className="pt-2 flex items-center gap-2">
+                      <Badge tone="amber">
+                        {products[0].form}
+                      </Badge>
+                      <span className="text-xs text-steel/60 font-medium">Premium Material</span>
                     </div>
+                  )}
 
-                    <div className="p-5">
+                  {/* CTA Text */}
+                  <div className="pt-3 flex items-center gap-2 text-sm font-semibold text-amber-600 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+                    <span>Explore Details</span>
+                    <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+                  </div>
 
-                      <h3 className="font-display flex items-start justify-between gap-3 font-bold text-navy">
+                </div>
 
-                        <span className="min-w-0">
-                          {p.name}
-                        </span>
+              </Link>
 
-                        <ArrowUpRight
-                          size={16}
-                          className="shrink-0"
-                        />
+            </Reveal>
+          )}
 
-                      </h3>
+          {/* EPR SERVICE CARD - Premium Design */}
+          <Reveal
+            delay={100}
+          >
 
-                      <p className="mt-1 text-sm text-steel">
-                        {p.tagline}
-                      </p>
+            <Link
+              to="/products?category=4"
+              className="premium-service-card group relative block h-full overflow-hidden rounded-3xl border border-line bg-gradient-to-br from-navy via-teal-dark to-navy-dark text-white transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl"
+            >
 
-                      {p.form && (
-                        <div className="mt-3">
+              {/* Animated Background Elements */}
+              <div className="absolute -right-24 -top-24 h-96 w-96 rounded-full bg-gradient-to-br from-teal-400/20 to-transparent opacity-0 transition-opacity duration-700 group-hover:opacity-100"></div>
+              <div className="absolute -bottom-24 -left-24 h-96 w-96 rounded-full bg-gradient-to-tr from-teal-500/10 to-transparent"></div>
 
-                          <Badge
-                            tone={
-                              meta?.accent ||
-                              'teal'
-                            }
-                          >
-                            {p.form}
-                          </Badge>
+              {/* Icon Section */}
+              <div className="relative z-10 h-64 flex flex-col items-center justify-center space-y-4">
 
-                        </div>
-                      )}
+                <div className="relative">
+                  {/* Animated Ring */}
+                  <div className="absolute inset-0 rounded-full border-2 border-teal-400/30 transition-transform duration-700 group-hover:scale-125 group-hover:border-teal-300/50"></div>
+                  
+                  {/* Main Icon */}
+                  <div className="relative flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-teal-400/20 to-teal-500/10 text-6xl backdrop-blur transition-all duration-500 group-hover:scale-110 group-hover:bg-gradient-to-br group-hover:from-teal-400/40 group-hover:to-teal-500/20">
+                    📋
+                  </div>
+                </div>
 
-                    </div>
+                <div className="space-y-2 text-center">
+                  <div className="h-1 w-8 bg-gradient-to-r from-teal-400 to-cyan-400 mx-auto rounded-full transform scale-0 transition-transform duration-500 group-hover:scale-100"></div>
+                  <p className="text-xs font-bold tracking-widest text-teal-200 uppercase">Compliance Solution</p>
+                </div>
 
-                  </Link>
+              </div>
 
-                </Reveal>
-              )
-            })}
+              {/* Content Container */}
+              <div className="relative z-10 space-y-4 px-8 pb-8 sm:px-9">
+
+                {/* Service Badge */}
+                <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1.5 backdrop-blur-sm border border-white/20">
+                  <div className="h-2 w-2 rounded-full bg-teal-400"></div>
+                  <span className="text-xs font-bold tracking-widest text-teal-200 uppercase">Service</span>
+                </div>
+
+                {/* Title */}
+                <h3 className="font-display flex items-start justify-between gap-3 text-2xl font-bold leading-snug text-white">
+
+                  <span className="min-w-0">
+                    Extended Producer Responsibility
+                  </span>
+
+                  <ArrowUpRight
+                    size={24}
+                    className="shrink-0 rounded-full bg-white/10 p-1.5 text-teal-300 transition-all duration-500 group-hover:bg-teal-400 group-hover:text-navy group-hover:translate-x-1 group-hover:-translate-y-1 backdrop-blur"
+                  />
+
+                </h3>
+
+                {/* Description */}
+                <p className="text-sm leading-relaxed text-white/80 line-clamp-2">
+                  End-to-end EPR compliance support and services for regulatory excellence
+                </p>
+
+                {/* Features List */}
+                <div className="pt-3 space-y-2 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+                  <div className="flex items-center gap-2 text-xs text-teal-200">
+                    <div className="h-1.5 w-1.5 rounded-full bg-teal-400"></div>
+                    <span>Comprehensive Compliance</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-xs text-teal-200">
+                    <div className="h-1.5 w-1.5 rounded-full bg-teal-400"></div>
+                    <span>Expert Support Team</span>
+                  </div>
+                </div>
+
+                {/* CTA */}
+                <div className="pt-4 flex items-center gap-2 text-sm font-semibold text-teal-300 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+                  <span>Discover Services</span>
+                  <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+                </div>
+
+              </div>
+
+            </Link>
+
+          </Reveal>
 
         </div>
 
