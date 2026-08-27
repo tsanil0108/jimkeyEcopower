@@ -1,58 +1,318 @@
+import './Products.css'
 
-import { useEffect, useMemo, useState } from 'react'
-import { useSearchParams, Link } from 'react-router-dom'
-import { ArrowUpRight, Search, X, LayoutGrid, Loader2 } from 'lucide-react'
-import { PageBanner, ProductImage, Reveal, Badge } from '../components/ui'
+import {
+  useEffect,
+  useMemo,
+  useState,
+} from 'react'
+
+import {
+  useSearchParams,
+  Link,
+} from 'react-router-dom'
+
+import {
+  ArrowUpRight,
+  Search,
+  X,
+  LayoutGrid,
+  Loader2,
+  SlidersHorizontal,
+} from 'lucide-react'
+
+import {
+  PageBanner,
+  ProductImage,
+  Reveal,
+  Badge,
+} from '../components/ui'
+
+import CategoryJourney
+  from '../components/CategoryJourney'
+
 import { api } from '../lib/api'
-import { getCategoryIcon } from '../lib/icons'
-import video2 from '../assets/products/vodeo2.mp4'
+
+import {
+  getCategoryIcon,
+} from '../lib/icons'
+
+import video2
+  from '../assets/products/vodeo2.mp4'
+
 
 export default function Products() {
-  const [params, setParams] = useSearchParams()
-  const categoryParam = params.get('category')
-  const subParam = params.get('subcategory')
-  const [query, setQuery] = useState('')
 
-  const [categories, setCategories] = useState([])
-  const [products, setProducts] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState('')
+  const [
+    params,
+    setParams,
+  ] =
+    useSearchParams()
+
+
+  const categoryParam =
+    params.get('category')
+
+  const subParam =
+    params.get('subcategory')
+
+
+  const [
+    query,
+    setQuery,
+  ] =
+    useState('')
+
+
+  const [
+    categories,
+    setCategories,
+  ] =
+    useState([])
+
+
+  const [
+    products,
+    setProducts,
+  ] =
+    useState([])
+
+
+  const [
+    loading,
+    setLoading,
+  ] =
+    useState(true)
+
+
+  const [
+    error,
+    setError,
+  ] =
+    useState('')
+
+
+  /* =====================================================
+     LOAD DATA
+  ====================================================== */
 
   useEffect(() => {
+
     let cancelled = false
+
     setLoading(true)
     setError('')
-    Promise.all([api.getCategories(), api.getProducts()])
-      .then(([cats, prods]) => {
-        if (cancelled) return
-        setCategories(cats)
-        setProducts(prods)
+
+
+    Promise.all([
+      api.getCategories(),
+      api.getProducts(),
+    ])
+
+      .then(
+        ([
+          cats,
+          prods,
+        ]) => {
+
+          if (cancelled) {
+            return
+          }
+
+
+          setCategories(
+            Array.isArray(cats)
+              ? cats
+              : []
+          )
+
+
+          setProducts(
+            Array.isArray(prods)
+              ? prods
+              : []
+          )
+        }
+      )
+
+      .catch((err) => {
+
+        if (!cancelled) {
+
+          setError(
+            err.message ||
+              'Could not load products'
+          )
+        }
       })
-      .catch((err) => !cancelled && setError(err.message || 'Could not load products'))
-      .finally(() => !cancelled && setLoading(false))
-    return () => { cancelled = true }
+
+      .finally(() => {
+
+        if (!cancelled) {
+          setLoading(false)
+        }
+      })
+
+
+    return () => {
+      cancelled = true
+    }
+
   }, [])
 
-  const activeCategory = categories.find((c) => String(c.id) === categoryParam)
 
-  const filtered = useMemo(() => {
-    let list = products
-    if (subParam) list = list.filter((p) => String(p.subcategoryId) === subParam)
-    else if (categoryParam) list = list.filter((p) => String(p.categoryId) === categoryParam)
-    if (query.trim()) {
-      const q = query.trim().toLowerCase()
-      list = list.filter((p) => p.name.toLowerCase().includes(q) || (p.tagline || '').toLowerCase().includes(q))
-    }
-    return list
-  }, [products, categoryParam, subParam, query])
+  /* =====================================================
+     ACTIVE CATEGORY
+  ====================================================== */
+
+  const activeCategory =
+    categories.find(
+      (category) =>
+        String(category.id) ===
+        categoryParam
+    )
+
+
+  /* =====================================================
+     FILTER PRODUCTS
+  ====================================================== */
+
+  const filtered =
+    useMemo(() => {
+
+      let list =
+        [...products]
+
+
+      if (subParam) {
+
+        list =
+          list.filter(
+            (product) =>
+              String(
+                product.subcategoryId
+              ) ===
+              subParam
+          )
+
+      } else if (
+        categoryParam
+      ) {
+
+        list =
+          list.filter(
+            (product) =>
+              String(
+                product.categoryId
+              ) ===
+              categoryParam
+          )
+      }
+
+
+      if (
+        query.trim()
+      ) {
+
+        const normalizedQuery =
+          query
+            .trim()
+            .toLowerCase()
+
+
+        list =
+          list.filter(
+            (product) => {
+
+              const name =
+                String(
+                  product?.name ||
+                  ''
+                )
+                  .toLowerCase()
+
+
+              const tagline =
+                String(
+                  product?.tagline ||
+                  ''
+                )
+                  .toLowerCase()
+
+
+              const description =
+                String(
+                  product?.description ||
+                  ''
+                )
+                  .toLowerCase()
+
+
+              return (
+                name.includes(
+                  normalizedQuery
+                ) ||
+                tagline.includes(
+                  normalizedQuery
+                ) ||
+                description.includes(
+                  normalizedQuery
+                )
+              )
+            }
+          )
+      }
+
+
+      return list
+
+    }, [
+      products,
+      categoryParam,
+      subParam,
+      query,
+    ])
+
+
+  /* =====================================================
+     CATEGORY SELECT
+  ====================================================== */
 
   function selectCategory(id) {
-    if (id === null) setParams({})
-    else setParams({ category: String(id) })
+
+    if (id === null) {
+
+      setParams({})
+
+      return
+    }
+
+
+    setParams({
+      category:
+        String(id),
+    })
   }
+
+
+  /* =====================================================
+     CLEAR FILTERS
+  ====================================================== */
+
+  function clearFilters() {
+
+    setQuery('')
+
+    setParams({})
+  }
+
 
   return (
     <div className="products-page">
+
+      {/* =====================================================
+          HERO
+      ====================================================== */}
+
       <PageBanner
         title="Products"
         crumb="Products"
@@ -60,136 +320,533 @@ export default function Products() {
         video={video2}
       />
 
-      <section className="border-b border-line bg-white/80 py-6 backdrop-blur lg:sticky lg:top-[73px] lg:z-30">
-        <div className="mx-auto max-w-7xl px-5 lg:px-8">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <div className="relative w-full sm:max-w-xs">
-              <Search size={16} className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-steel" />
-              <input
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search materials…"
-                className="w-full rounded-full border border-line bg-paper py-2.5 pl-10 pr-9 text-sm outline-none transition-colors focus:border-teal"
+
+      {/* =====================================================
+          CATEGORY JOURNEY
+      ====================================================== */}
+
+      <CategoryJourney />
+
+
+      {/* =====================================================
+          SEARCH + FILTER BAR
+      ====================================================== */}
+
+      <section className="products-toolbar">
+
+        <div className="products-toolbar-inner">
+
+          {/* TOP */}
+
+          <div className="products-toolbar-top">
+
+            <div className="products-search-box">
+
+              <Search
+                size={17}
+                className="products-search-icon"
               />
+
+
+              <input
+                type="search"
+                value={query}
+                onChange={(event) =>
+                  setQuery(
+                    event.target.value
+                  )
+                }
+                placeholder="Search materials..."
+                aria-label="Search materials"
+              />
+
+
               {query && (
-                <button onClick={() => setQuery('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-steel hover:text-navy" aria-label="Clear search">
-                  <X size={14} />
+
+                <button
+                  type="button"
+                  className="products-search-clear"
+                  onClick={() =>
+                    setQuery('')
+                  }
+                  aria-label="Clear search"
+                >
+
+                  <X size={15} />
+
                 </button>
+
               )}
+
             </div>
-            <p className="font-mono shrink-0 text-xs uppercase tracking-widest text-steel">
-              {filtered.length} material{filtered.length !== 1 && 's'} found
-            </p>
+
+
+            <div className="products-result-info">
+
+              <SlidersHorizontal
+                size={14}
+              />
+
+              <span>
+                {filtered.length}
+              </span>
+
+              <span>
+                material
+                {filtered.length !== 1
+                  ? 's'
+                  : ''}
+                {' '}found
+              </span>
+
+            </div>
+
           </div>
 
-          <div className="mt-4 flex gap-2 overflow-x-auto pb-1">
-            <button
-              onClick={() => selectCategory(null)}
-              className={`flex shrink-0 items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition-colors ${
-                !categoryParam ? 'border-navy bg-navy text-white' : 'border-line text-navy hover:border-teal/40 hover:text-teal-dark'
-              }`}
-            >
-              <LayoutGrid size={14} /> All Materials
-            </button>
-            {categories.map((c) => {
-              const Icon = getCategoryIcon(c.icon)
-              const active = categoryParam === String(c.id)
-              return (
-                <button
-                  key={c.id}
-                  onClick={() => selectCategory(c.id)}
-                  className={`flex shrink-0 items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition-colors ${
-                    active ? 'border-navy bg-navy text-white' : 'border-line text-navy hover:border-teal/40 hover:text-teal-dark'
-                  }`}
-                >
-                  <Icon size={14} /> {c.name}
-                </button>
-              )
-            })}
+
+          {/* =================================================
+              CATEGORY SCROLLER
+          ================================================== */}
+
+          <div className="products-category-wrap">
+
+            <div className="products-category-scroll">
+
+              <button
+                type="button"
+                onClick={() =>
+                  selectCategory(null)
+                }
+                className={`
+                  products-category-chip
+                  ${
+                    !categoryParam
+                      ? 'active'
+                      : ''
+                  }
+                `}
+              >
+
+                <LayoutGrid
+                  size={15}
+                />
+
+                <span>
+                  All Materials
+                </span>
+
+              </button>
+
+
+              {categories.map(
+                (category) => {
+
+                  const Icon =
+                    getCategoryIcon(
+                      category.icon
+                    )
+
+
+                  const isActive =
+                    categoryParam ===
+                    String(
+                      category.id
+                    )
+
+
+                  return (
+                    <button
+                      type="button"
+                      key={
+                        category.id
+                      }
+                      onClick={() =>
+                        selectCategory(
+                          category.id
+                        )
+                      }
+                      className={`
+                        products-category-chip
+                        ${
+                          isActive
+                            ? 'active'
+                            : ''
+                        }
+                      `}
+                    >
+
+                      <Icon
+                        size={15}
+                      />
+
+                      <span>
+                        {
+                          category.name
+                        }
+                      </span>
+
+                    </button>
+                  )
+                }
+              )}
+
+            </div>
+
           </div>
+
+
+          {/* =================================================
+              SUBCATEGORIES
+          ================================================== */}
 
           {activeCategory && (
-            <div className="mt-3 flex flex-wrap gap-2 border-t border-line pt-3">
+
+            <div className="products-subcategory-row">
+
               <Link
                 to={`/products?category=${activeCategory.id}`}
-                className={`rounded-full px-3 py-1 text-xs font-semibold transition-colors ${
-                  !subParam ? 'bg-teal/10 text-teal-dark' : 'text-steel hover:text-navy'
-                }`}
+                className={`
+                  products-subcategory-chip
+                  ${
+                    !subParam
+                      ? 'active'
+                      : ''
+                  }
+                `}
               >
-                All {activeCategory.name}
+
+                All{' '}
+                {
+                  activeCategory.name
+                }
+
               </Link>
-              {activeCategory.subcategories.map((s) => (
-                <Link
-                  key={s.id}
-                  to={`/products?subcategory=${s.id}`}
-                  className={`rounded-full px-3 py-1 text-xs font-semibold transition-colors ${
-                    subParam === String(s.id) ? 'bg-teal/10 text-teal-dark' : 'text-steel hover:text-navy'
-                  }`}
-                >
-                  {s.name}
-                </Link>
-              ))}
+
+
+              {activeCategory
+                .subcategories
+                ?.map(
+                  (
+                    subcategory
+                  ) => (
+
+                    <Link
+                      key={
+                        subcategory.id
+                      }
+                      to={`/products?subcategory=${subcategory.id}`}
+                      className={`
+                        products-subcategory-chip
+                        ${
+                          subParam ===
+                          String(
+                            subcategory.id
+                          )
+                            ? 'active'
+                            : ''
+                        }
+                      `}
+                    >
+
+                      {
+                        subcategory.name
+                      }
+
+                    </Link>
+
+                  )
+                )}
+
             </div>
+
           )}
+
         </div>
+
       </section>
 
-      <section className="mx-auto max-w-7xl px-5 py-14 lg:px-8">
-        {loading ? (
-          <div className="flex items-center justify-center gap-2 py-24 text-steel">
-            <Loader2 size={18} className="animate-spin" /> Loading materials…
-          </div>
-        ) : error ? (
-          <div className="rounded-2xl border border-red-200 bg-red-50 py-16 text-center text-sm text-red-600">
-            {error} — is the backend running on <code>localhost:8080</code>?
-          </div>
-        ) : filtered.length === 0 ? (
-          <div className="rounded-2xl border border-dashed border-line bg-paper-soft/50 py-20 text-center">
-            <p className="font-display text-lg font-bold text-navy">No materials match "{query}"</p>
-            <p className="mt-2 text-sm text-steel">Try a different search term, or browse by category above.</p>
-          </div>
-        ) : (
-          <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
-            {filtered.map((p, i) => {
-              const cat = categories.find((c) => c.id === p.categoryId)
-              const Icon = getCategoryIcon(cat?.icon)
-              return (
-                <Reveal key={p.id} delay={Math.min(i, 6) * 60}>
-                  <Link
-                    to={`/products/${p.id}`}
-                    className="group flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-white shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl"
-                  >
-                    <div className="relative h-52 overflow-hidden">
-                      <ProductImage product={p} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
-                      <div className="absolute inset-x-0 top-0 flex items-center justify-between p-3">
-                        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white/90 text-navy shadow-sm backdrop-blur">
-                          <Icon size={15} />
-                        </span>
-                        {p.form && (
-                          <span className="font-mono rounded-full bg-navy/80 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-white backdrop-blur">
-                            {p.form}
+
+      {/* =====================================================
+          PRODUCT CONTENT
+      ====================================================== */}
+
+      <section className="products-content">
+
+        <div className="products-content-inner">
+
+          {/* LOADING */}
+
+          {loading ? (
+
+            <div className="products-status products-loading">
+
+              <span className="products-loader">
+
+                <Loader2
+                  size={22}
+                />
+
+              </span>
+
+              <div>
+
+                <strong>
+                  Loading materials
+                </strong>
+
+                <p>
+                  Fetching the latest
+                  product catalogue.
+                </p>
+
+              </div>
+
+            </div>
+
+          ) : error ? (
+
+            /* ERROR */
+
+            <div className="products-status products-error">
+
+              <strong>
+                Products could not
+                be loaded
+              </strong>
+
+              <p>
+                {error}
+              </p>
+
+              <small>
+                Check whether your
+                backend API is running.
+              </small>
+
+            </div>
+
+          ) : filtered.length ===
+            0 ? (
+
+            /* EMPTY */
+
+            <div className="products-status products-empty">
+
+              <span className="products-empty-icon">
+
+                <Search
+                  size={20}
+                />
+
+              </span>
+
+              <strong>
+                No matching
+                materials
+              </strong>
+
+              <p>
+                Try another search
+                term or category.
+              </p>
+
+              <button
+                type="button"
+                onClick={
+                  clearFilters
+                }
+              >
+                Clear Filters
+              </button>
+
+            </div>
+
+          ) : (
+
+            /* =================================================
+                PRODUCTS GRID
+            ================================================== */
+
+            <div className="products-grid">
+
+              {filtered.map(
+                (
+                  product,
+                  index
+                ) => {
+
+                  const category =
+                    categories.find(
+                      (item) =>
+                        String(
+                          item.id
+                        ) ===
+                        String(
+                          product.categoryId
+                        )
+                    )
+
+
+                  const Icon =
+                    getCategoryIcon(
+                      category?.icon
+                    )
+
+
+                  return (
+                    <Reveal
+                      key={
+                        product.id
+                      }
+                      delay={
+                        Math.min(
+                          index,
+                          6
+                        ) * 55
+                      }
+                    >
+
+                      <Link
+                        to={`/products/${product.id}`}
+                        className="products-card"
+                      >
+
+                        {/* MEDIA */}
+
+                        <div className="products-card-media">
+
+                          <ProductImage
+                            product={
+                              product
+                            }
+                            className="products-card-image"
+                          />
+
+
+                          <div className="products-card-overlay" />
+
+
+                          <span className="products-card-category-icon">
+
+                            <Icon
+                              size={16}
+                            />
+
                           </span>
-                        )}
-                      </div>
-                    </div>
-                    <div className="flex flex-1 flex-col p-5">
-                      <h3 className="font-display flex items-center justify-between font-bold text-navy group-hover:text-teal-dark">
-                        {p.name}
-                        <ArrowUpRight size={16} className="shrink-0 opacity-0 transition-opacity group-hover:opacity-100" />
-                      </h3>
-                      <p className="mt-1 text-sm text-steel">{p.tagline}</p>
-                      <p className="mt-3 line-clamp-2 text-xs leading-relaxed text-steel/80">{p.description}</p>
-                      <div className="mt-4 flex items-center gap-2 border-t border-line pt-3">
-                        <Badge tone={cat?.accent || 'teal'}>{p.categoryName}</Badge>
-                      </div>
-                    </div>
-                  </Link>
-                </Reveal>
-              )
-            })}
-          </div>
-        )}
+
+
+                          {product.form && (
+
+                            <span className="products-card-form">
+
+                              {
+                                product.form
+                              }
+
+                            </span>
+
+                          )}
+
+
+                          <span className="products-card-arrow">
+
+                            <ArrowUpRight
+                              size={17}
+                            />
+
+                          </span>
+
+                        </div>
+
+
+                        {/* BODY */}
+
+                        <div className="products-card-body">
+
+                          <div className="products-card-title-row">
+
+                            <h3>
+                              {
+                                product.name
+                              }
+                            </h3>
+
+                          </div>
+
+
+                          {product.tagline && (
+
+                            <p className="products-card-tagline">
+
+                              {
+                                product.tagline
+                              }
+
+                            </p>
+
+                          )}
+
+
+                          {product.description && (
+
+                            <p className="products-card-description">
+
+                              {
+                                product.description
+                              }
+
+                            </p>
+
+                          )}
+
+
+                          <div className="products-card-footer">
+
+                            <Badge
+                              tone={
+                                category?.accent ||
+                                'teal'
+                              }
+                            >
+
+                              {
+                                product.categoryName ||
+                                category?.name ||
+                                'Material'
+                              }
+
+                            </Badge>
+
+
+                            <span className="products-card-view">
+
+                              View details
+
+                              <ArrowUpRight
+                                size={13}
+                              />
+
+                            </span>
+
+                          </div>
+
+                        </div>
+
+                      </Link>
+
+                    </Reveal>
+                  )
+                }
+              )}
+
+            </div>
+
+          )}
+
+        </div>
+
       </section>
+
     </div>
   )
 }
