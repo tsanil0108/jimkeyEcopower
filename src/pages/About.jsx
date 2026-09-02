@@ -453,47 +453,6 @@ export default function About() {
 
       </section>
 
-      {/* ==================================================
-          CTA
-      =================================================== */}
-
-      <section className="mx-auto max-w-7xl px-5 pb-14 sm:pb-20 lg:px-8">
-
-        <Reveal className="relative overflow-hidden rounded-3xl bg-navy px-6 py-10 text-center text-white sm:px-12 sm:py-14">
-
-          <div className="grain-bg pointer-events-none absolute inset-0 opacity-20" />
-
-          <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-teal/20 blur-3xl" />
-
-          <h2 className="font-display relative mx-auto max-w-2xl text-2xl font-bold sm:text-3xl">
-
-            Have a material requirement or a
-            recoverable waste stream?
-
-          </h2>
-
-          <p className="relative mx-auto mt-3 max-w-xl text-sm leading-7 text-white/65 sm:text-base">
-
-            Tell us the material, expected volume,
-            location and requirement. Our team can
-            understand the opportunity and discuss
-            the next step with you.
-
-          </p>
-
-          <Button
-            to="/contact"
-            variant="accent"
-            className="relative mt-7"
-          >
-            Talk to Jimkey
-
-            <ArrowRight size={16} />
-          </Button>
-
-        </Reveal>
-
-      </section>
 
     </div>
   )

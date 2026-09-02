@@ -869,45 +869,8 @@ export default function Home() {
 
       </section>
 
-      {/* =====================================================
-          CTA
-      ====================================================== */}
+   
 
-      <section className="mx-auto max-w-7xl px-5 py-14 sm:py-20 lg:px-8">
-
-        <Reveal className="relative overflow-hidden rounded-3xl bg-navy px-5 py-10 text-center text-white sm:px-14 sm:py-14">
-
-          <h2 className="font-display relative mx-auto max-w-2xl text-2xl font-bold sm:text-3xl">
-            Have material to move, or a plant that needs feedstock?
-          </h2>
-
-          <p className="relative mx-auto mt-3 max-w-xl text-sm leading-7 text-white/70 sm:text-base">
-            Tell us the material, volume and timeline — we'll take it from there.
-          </p>
-
-          <div className="relative mt-7 flex flex-col justify-center gap-3 min-[420px]:flex-row">
-
-            <Button
-              to="/contact"
-              variant="accent"
-            >
-              Get in Touch
-              <ArrowRight size={16} />
-            </Button>
-
-            <Button
-              href="tel:+919768008679"
-              variant="outline"
-              className="border-white/30 text-white hover:bg-white hover:text-navy"
-            >
-              Call Us Directly
-            </Button>
-
-          </div>
-
-        </Reveal>
-
-      </section>
 
     </div>
   )

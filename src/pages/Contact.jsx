@@ -1,4 +1,3 @@
-
 import { useState } from 'react'
 
 import {
@@ -33,6 +32,7 @@ export default function Contact() {
     message: '',
   })
 
+  // Update form fields
   function update(field) {
     return (e) => {
       setForm((prev) => ({
@@ -42,6 +42,7 @@ export default function Contact() {
     }
   }
 
+  // Submit form
   async function handleSubmit(e) {
     e.preventDefault()
 
@@ -66,7 +67,7 @@ export default function Contact() {
       console.error(err)
 
       setError(
-        err.message ||
+        err?.message ||
           'Could not send your message. Please try again.'
       )
     } finally {
@@ -74,6 +75,7 @@ export default function Contact() {
     }
   }
 
+  // Contact information cards
   const infoCards = [
     {
       icon: Phone,
@@ -91,13 +93,16 @@ export default function Contact() {
       icon: MapPin,
       title: 'Visit Here',
       value: company.address,
+      href: null,
     },
   ]
 
   return (
     <div className="w-full overflow-x-hidden">
 
-      {/* HERO */}
+      {/* =========================
+          HERO
+      ========================== */}
       <PageBanner
         title="Contact Us"
         crumb="Contact"
@@ -106,10 +111,14 @@ export default function Contact() {
         mediaPosition="center"
       />
 
-      {/* MAIN */}
+      {/* =========================
+          MAIN CONTENT
+      ========================== */}
       <section className="mx-auto w-full max-w-7xl px-5 py-12 sm:py-16 lg:px-8 lg:py-20">
 
-        {/* INFO CARDS */}
+        {/* =========================
+            INFO CARDS
+        ========================== */}
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
 
           {infoCards.map((card, index) => {
@@ -121,23 +130,26 @@ export default function Contact() {
                 delay={index * 90}
                 className="rounded-2xl border border-line bg-white p-6 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-teal/40 hover:shadow-lg sm:p-7"
               >
+                {/* ICON */}
                 <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-teal/10 text-teal-dark">
                   <Icon size={22} />
                 </span>
 
+                {/* TITLE */}
                 <h3 className="font-display mt-3 text-base font-bold text-navy">
                   {card.title}
                 </h3>
 
+                {/* VALUE */}
                 {card.href ? (
                   <a
                     href={card.href}
-                    className="mt-2 block break-words text-sm leading-6 text-steel transition-colors hover:text-teal-dark"
+                    className="mt-2 block break-words text-base leading-7 text-steel transition-colors hover:text-teal-dark"
                   >
                     {card.value}
                   </a>
                 ) : (
-                  <p className="mt-2 break-words text-sm leading-6 text-steel">
+                  <p className="mt-2 break-words text-base leading-7 text-steel">
                     {card.value}
                   </p>
                 )}
@@ -147,24 +159,33 @@ export default function Contact() {
 
         </div>
 
-        {/* FORM + MAP */}
+        {/* =========================
+            FORM + MAP
+        ========================== */}
         <div className="mt-12 grid gap-10 lg:mt-14 lg:grid-cols-2 lg:items-stretch lg:gap-12">
 
-          {/* LEFT FORM */}
+          {/* =========================
+              LEFT - CONTACT FORM
+          ========================== */}
           <Reveal className="min-w-0">
 
+            {/* HEADING */}
             <h2 className="font-display text-2xl font-bold text-navy sm:text-3xl">
               Send us a message
             </h2>
 
-            <p className="mt-3 max-w-xl text-sm leading-7 text-steel sm:text-base">
+            {/* DESCRIPTION */}
+            <p className="mt-3 max-w-xl text-base leading-7 text-steel sm:text-lg">
               Tell us what material, waste stream, service or business
               requirement you would like to discuss. Our team will get
               back to you as soon as possible.
             </p>
 
+            {/* =========================
+                SUCCESS MESSAGE
+            ========================== */}
             {sent ? (
-              <div className="mt-7 flex items-start gap-3 rounded-2xl border border-teal/30 bg-teal/10 p-5 text-sm text-teal-dark sm:p-6">
+              <div className="mt-7 flex items-start gap-3 rounded-2xl border border-teal/30 bg-teal/10 p-5 text-base text-teal-dark sm:p-6">
 
                 <CheckCircle2
                   size={20}
@@ -172,25 +193,43 @@ export default function Contact() {
                 />
 
                 <div className="contact-page">
+
                   <p className="font-semibold">
                     Message sent successfully.
                   </p>
 
-                  <p className="mt-1 leading-6">
-                    Thanks — your message has been noted. We'll be in
-                    touch soon.
+                  <p className="mt-1 text-base leading-7">
+                    Thanks — your message has been noted.
+                    We'll be in touch soon.
                   </p>
-                </div>
 
+                  {/* SEND ANOTHER MESSAGE */}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSent(false)
+                      setError('')
+                    }}
+                    className="mt-4 font-semibold text-teal-dark underline underline-offset-4 hover:no-underline"
+                  >
+                    Send another message
+                  </button>
+
+                </div>
               </div>
             ) : (
+
+              /* =========================
+                 FORM
+              ========================== */
               <form
                 onSubmit={handleSubmit}
                 className="mt-7 space-y-4"
               >
 
+                {/* ERROR MESSAGE */}
                 {error && (
-                  <div className="flex items-start gap-2 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600">
+                  <div className="flex items-start gap-2 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-base text-red-600">
 
                     <AlertCircle
                       size={16}
@@ -204,19 +243,25 @@ export default function Contact() {
                   </div>
                 )}
 
-                {/* NAME + EMAIL */}
+                {/* =========================
+                    NAME + EMAIL
+                ========================== */}
                 <div className="grid gap-4 sm:grid-cols-2">
 
+                  {/* NAME */}
                   <div className="min-w-0">
                     <input
                       required
+                      type="text"
                       value={form.name}
                       onChange={update('name')}
                       placeholder="Your Name *"
-                      className="w-full rounded-xl border border-line bg-white px-4 py-3.5 text-sm text-navy outline-none transition-colors placeholder:text-steel/70 focus:border-teal"
+                      autoComplete="name"
+                      className="w-full rounded-xl border border-line bg-white px-4 py-3.5 text-base text-navy outline-none transition-colors placeholder:text-steel/70 focus:border-teal"
                     />
                   </div>
 
+                  {/* EMAIL */}
                   <div className="min-w-0">
                     <input
                       required
@@ -224,52 +269,84 @@ export default function Contact() {
                       value={form.email}
                       onChange={update('email')}
                       placeholder="Your Email *"
-                      className="w-full rounded-xl border border-line bg-white px-4 py-3.5 text-sm text-navy outline-none transition-colors placeholder:text-steel/70 focus:border-teal"
+                      autoComplete="email"
+                      className="w-full rounded-xl border border-line bg-white px-4 py-3.5 text-base text-navy outline-none transition-colors placeholder:text-steel/70 focus:border-teal"
                     />
                   </div>
 
                 </div>
 
-                {/* MOBILE */}
+                {/* =========================
+                    MOBILE
+                ========================== */}
                 <div className="w-full">
+
                   <input
                     required
                     type="tel"
                     inputMode="numeric"
+                    pattern="[0-9]{10}"
                     maxLength={10}
                     value={form.mobile}
-                    onChange={update('mobile')}
+                    onChange={(e) => {
+                      const value = e.target.value
+                        .replace(/\D/g, '')
+                        .slice(0, 10)
+
+                      setForm((prev) => ({
+                        ...prev,
+                        mobile: value,
+                      }))
+                    }}
                     placeholder="Mobile Number *"
-                    className="w-full rounded-xl border border-line bg-white px-4 py-3.5 text-sm text-navy outline-none transition-colors placeholder:text-steel/70 focus:border-teal"
+                    autoComplete="tel"
+                    className="w-full rounded-xl border border-line bg-white px-4 py-3.5 text-base text-navy outline-none transition-colors placeholder:text-steel/70 focus:border-teal"
                   />
+
                 </div>
 
-                {/* MESSAGE */}
+                {/* =========================
+                    MESSAGE
+                ========================== */}
                 <div className="w-full">
+
                   <textarea
                     required
                     rows={6}
                     value={form.message}
                     onChange={update('message')}
                     placeholder="Your Message *"
-                    className="min-h-[150px] w-full resize-y rounded-xl border border-line bg-white px-4 py-3.5 text-sm leading-6 text-navy outline-none transition-colors placeholder:text-steel/70 focus:border-teal"
+                    className="min-h-[150px] w-full resize-y rounded-xl border border-line bg-white px-4 py-3.5 text-base leading-7 text-navy outline-none transition-colors placeholder:text-steel/70 focus:border-teal"
                   />
+
                 </div>
 
-                {/* SUBMIT */}
+                {/* =========================
+                    SUBMIT BUTTON
+                ========================== */}
                 <div className="pt-1">
+
                   <Button
                     as="button"
+                    type="submit"
                     variant="accent"
                     className="w-full sm:w-auto"
                     disabled={loading}
                   >
-                    {loading
-                      ? 'Sending…'
-                      : 'Send Message'}
 
-                    <Send size={15} />
+                    {loading ? (
+                      <>
+                        Sending…
+                      </>
+                    ) : (
+                      <>
+                        Send Message
+                        <Send size={15} />
+                      </>
+                    )}
+
                   </Button>
+
                 </div>
 
               </form>
@@ -277,17 +354,22 @@ export default function Contact() {
 
           </Reveal>
 
-          {/* RIGHT MAP */}
+          {/* =========================
+              RIGHT - GOOGLE MAP
+          ========================== */}
           <Reveal
             delay={120}
             className="min-h-[360px] overflow-hidden rounded-2xl border border-line bg-white shadow-sm sm:min-h-[430px] lg:min-h-full"
           >
+
             <iframe
               title="Jimkey Ecopower location"
               loading="lazy"
               src="https://www.google.com/maps?q=Andheri+East,+Mumbai&output=embed"
               className="h-full min-h-[360px] w-full border-0 sm:min-h-[430px]"
+              referrerPolicy="no-referrer-when-downgrade"
             />
+
           </Reveal>
 
         </div>

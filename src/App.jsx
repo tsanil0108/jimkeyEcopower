@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import HelpBanner from './components/HelpBanner'
 import FloatingContact from './components/FloatingContact'
 
 import Home from './pages/Home'
@@ -25,80 +26,27 @@ export default function App() {
 
       <Navbar />
 
-      {/*
-        Navbar fixed hai.
-
-        Mobile: 72px
-        Small: 76px
-        Desktop: 80px
-      */}
       <main className="app-main">
 
         <Routes>
-          <Route
-            path="/"
-            element={<Home />}
-          />
-
-          <Route
-            path="/about"
-            element={<About />}
-          />
-
-          <Route
-            path="/products"
-            element={<Products />}
-          />
-
-          <Route
-            path="/products/:id"
-            element={<ProductDetail />}
-          />
-
-          <Route
-            path="/gallery"
-            element={<Gallery />}
-          />
-
-          <Route
-            path="/clients"
-            element={<Clients />}
-          />
-
-          <Route
-            path="/blog"
-            element={<Blog />}
-          />
-
-          <Route
-            path="/blog/:id"
-            element={<BlogPost />}
-          />
-
-          <Route
-            path="/contact"
-            element={<Contact />}
-          />
-
-          <Route
-            path="/login"
-            element={<Login />}
-          />
-
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/products/:id" element={<ProductDetail />} />
+          <Route path="/gallery" element={<Gallery />} />
+          <Route path="/clients" element={<Clients />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:id" element={<BlogPost />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
-
-          <Route
-            path="/register"
-            element={<Register />}
-          />
-
-          <Route
-            path="/admin"
-            element={<AdminDashboard />}
-          />
+          <Route path="/register" element={<Register />} />
+          <Route path="/admin" element={<AdminDashboard />} />
         </Routes>
 
       </main>
+
+      <HelpBanner />
 
       <Footer />
 
