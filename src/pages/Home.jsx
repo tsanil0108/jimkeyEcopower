@@ -163,6 +163,75 @@ const clientLogos =
     )
   )
 
+/* =====================================================
+   SECTION GLOW — soft light-green / light-blue backdrop
+   used to alternate section backgrounds across the page,
+   in the style of a faint gradient with drifting blobs
+   and thin curved accent lines.
+====================================================== */
+
+function SectionGlow({ tone = 'green' }) {
+  const isGreen = tone === 'green'
+
+  const bgColor = isGreen
+    ? '#d1fae5' /* light green */
+    : '#dbeafe' /* light blue */
+
+  const blobAColor = isGreen
+    ? 'rgba(16,185,129,0.35)'
+    : 'rgba(56,189,248,0.35)'
+
+  const blobBColor = isGreen
+    ? 'rgba(20,184,166,0.3)'
+    : 'rgba(59,130,246,0.3)'
+
+  const lineColor = isGreen
+    ? 'rgba(13,148,136,0.35)'
+    : 'rgba(2,132,199,0.35)'
+
+  return (
+    <div
+      className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
+      style={{ backgroundColor: bgColor }}
+    >
+
+      <div
+        className="absolute -top-24 -right-16 h-72 w-72 rounded-full blur-3xl"
+        style={{ backgroundColor: blobAColor }}
+      />
+
+      <div
+        className="absolute -bottom-28 -left-20 h-80 w-80 rounded-full blur-3xl"
+        style={{ backgroundColor: blobBColor }}
+      />
+
+      <svg
+        className="absolute inset-0 h-full w-full opacity-60"
+        viewBox="0 0 100 100"
+        preserveAspectRatio="none"
+      >
+
+        <path
+          d="M0,68 Q28,42 58,54 T100,28"
+          fill="none"
+          stroke={lineColor}
+          strokeWidth="0.35"
+        />
+
+        <path
+          d="M0,86 Q38,62 68,70 T100,48"
+          fill="none"
+          stroke={lineColor}
+          strokeWidth="0.25"
+          strokeDasharray="1.2,2"
+        />
+
+      </svg>
+
+    </div>
+  )
+}
+
 export default function Home() {
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
@@ -452,7 +521,21 @@ export default function Home() {
 
       <section className="marquee-row overflow-hidden border-b border-line bg-white py-5 sm:py-6">
 
-        <div className="marquee-track flex w-max items-center gap-10 sm:gap-14">
+        {/* Self-contained infinite scroll — always moves on its own */}
+        <style>{`
+          @keyframes clientLogosMarquee {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+          }
+          .client-logos-track {
+            animation: clientLogosMarquee 26s linear infinite;
+          }
+          .client-logos-track:hover {
+            animation-play-state: paused;
+          }
+        `}</style>
+
+        <div className="marquee-track client-logos-track flex w-max items-center gap-10 sm:gap-14">
 
           {[
             ...clientLogos,
@@ -462,7 +545,7 @@ export default function Home() {
               key={i}
               src={img}
               alt=""
-              className="h-8 w-auto shrink-0 grayscale opacity-50 transition-opacity hover:opacity-100 sm:h-10"
+              className="h-8 w-auto shrink-0 sm:h-10"
             />
           ))}
 
@@ -474,7 +557,11 @@ export default function Home() {
           ABOUT
       ====================================================== */}
 
-      <section className="mx-auto max-w-7xl px-5 py-14 sm:py-20 lg:px-8">
+      <section className="relative overflow-hidden py-14 sm:py-20">
+
+        <SectionGlow tone="blue" />
+
+        <div className="mx-auto max-w-7xl px-5 lg:px-8">
 
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-12">
 
@@ -539,13 +626,17 @@ export default function Home() {
 
         </div>
 
+        </div>
+
       </section>
 
       {/* =====================================================
           WHY JIMKEY
       ====================================================== */}
 
-      <section className="bg-white py-14 sm:py-20">
+      <section className="relative overflow-hidden py-14 sm:py-20">
+
+        <SectionGlow tone="green" />
 
         <div className="mx-auto max-w-7xl px-5 lg:px-8">
 
@@ -601,7 +692,9 @@ export default function Home() {
           VISION
       ====================================================== */}
 
-      <section className="py-14 sm:py-20">
+      <section className="relative overflow-hidden py-14 sm:py-20">
+
+        <SectionGlow tone="blue" />
 
         <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 lg:grid-cols-2 lg:px-8">
 
@@ -663,7 +756,9 @@ export default function Home() {
           the "Our Way of Working" reference layout.
       ====================================================== */}
 
-      <section className="bg-white py-14 sm:py-20">
+      <section className="relative overflow-hidden py-14 sm:py-20">
+
+        <SectionGlow tone="green" />
 
         <div className="mx-auto max-w-7xl px-5 lg:px-8">
 
@@ -838,7 +933,9 @@ export default function Home() {
           own image in /public and update those two paths).
       ====================================================== */}
 
-      <section className="bg-paper py-14 sm:py-20">
+      <section className="relative overflow-hidden py-14 sm:py-20">
+
+        <SectionGlow tone="blue" />
 
         <div className="mx-auto max-w-7xl px-5 lg:px-8">
 
@@ -1021,7 +1118,9 @@ export default function Home() {
           FAQ
       ====================================================== */}
 
-      <section className="bg-white py-14 sm:py-20">
+      <section className="relative overflow-hidden py-14 sm:py-20">
+
+        <SectionGlow tone="green" />
 
         <div className="mx-auto max-w-4xl px-5 lg:px-8">
 
