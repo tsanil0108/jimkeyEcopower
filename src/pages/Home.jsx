@@ -1,11 +1,13 @@
 import {
   ArrowRight,
-  ArrowUpRight,
   ShieldCheck,
   Truck,
   FileCheck2,
   Leaf,
-  Flame,
+  Search,
+  Recycle,
+  Settings2,
+  TrendingUp,
 } from 'lucide-react'
 
 import { Link } from 'react-router-dom'
@@ -18,20 +20,16 @@ import heroBg from '../assets/products/hero.png'
 import {
   aboutImg,
   vision,
-  workingSteps,
   visionMission,
   stats,
   valueProps,
   faqs,
-  categoryMeta,
 } from '../data/content'
 
 import {
   Button,
   SectionLabel,
   Reveal,
-  ProductImage,
-  Badge,
 } from '../components/ui'
 
 import { api } from '../lib/api'
@@ -41,6 +39,117 @@ const valueIcons = [
   Truck,
   FileCheck2,
   Leaf,
+]
+
+/* =====================================================
+   SERVICES & SOLUTIONS — background images
+   Drop your images into /public and update these two
+   paths (or replace with an `import x from '../assets/...'`
+   if you'd rather keep them inside src/assets).
+====================================================== */
+
+const productsCardBg = '/products-card-bg.jpg'
+const servicesCardBg = '/services-card-bg.jpg'
+
+const productBullets = [
+  {
+    label: 'Alternative Fuel Resource (AFR)',
+    desc: 'Tyre pyrolysis oil, black carbon powder, UCO, tallow oil',
+  },
+  {
+    label: 'Steel Wire',
+    desc: 'Burnt & unburnt waste-tyre steel wire',
+  },
+  {
+    label: 'Cleaning Chemicals',
+    desc: 'Dishwash, degreaser & bathroom-care range',
+  },
+  {
+    label: 'Quality Assurance',
+    desc: 'Verified sourcing with consistent specification',
+  },
+]
+
+const serviceBullets = [
+  {
+    label: 'EPR Compliance',
+    desc: 'Plastic, battery, e-waste, used-oil & tyre obligations',
+  },
+  {
+    label: 'Municipal Waste Management',
+    desc: 'MSW collection & processing support',
+  },
+  {
+    label: 'Industrial Waste Management',
+    desc: 'On-site industrial waste handling',
+  },
+  {
+    label: 'Reporting & Documentation',
+    desc: 'Targets, records & regulatory filings',
+  },
+]
+
+/* =====================================================
+   PROCESS STEPS
+   Assess -> Recover -> Process -> Optimise -> Sustain
+====================================================== */
+
+const processSteps = [
+  {
+    n: '01',
+    title: 'Assess',
+    desc: 'We evaluate waste streams, material quality, recovery potential and operational requirements.',
+    icon: Search,
+    dot: 'bg-amber-dark',
+    iconBg: 'bg-amber-dark/10',
+    iconColor: 'text-amber-dark',
+    wave: 'fill-amber-dark/70',
+    line: 'stroke-amber-dark/60',
+  },
+  {
+    n: '02',
+    title: 'Plan',
+    desc: 'We design a clear recovery roadmap, matching materials to the right buyers, routes and compliance needs.',
+    icon: Recycle,
+    dot: 'bg-teal-dark',
+    iconBg: 'bg-teal-dark/10',
+    iconColor: 'text-teal-dark',
+    wave: 'fill-teal-dark/70',
+    line: 'stroke-teal-dark/60',
+  },
+  {
+    n: '03',
+    title: 'Execute',
+    desc: 'We move materials through sourcing, processing and logistics with quality checks at every stage.',
+    icon: Settings2,
+    dot: 'bg-navy',
+    iconBg: 'bg-navy/10',
+    iconColor: 'text-navy',
+    wave: 'fill-navy/70',
+    line: 'stroke-navy/60',
+  },
+  {
+    n: '04',
+    title: 'Manage',
+    desc: 'We monitor the entire supply chain during transaction, keeping performance and reporting on track.',
+    icon: TrendingUp,
+    dot: 'bg-amber-dark',
+    iconBg: 'bg-amber-dark/10',
+    iconColor: 'text-amber-dark',
+    wave: 'fill-amber-dark/70',
+    line: 'stroke-amber-dark/60',
+  },
+  {
+    n: '05',
+    title: 'Maintain',
+    desc: 'We build long-term circular solutions that reduce waste and support a cleaner future.',
+    icon: Leaf,
+    dot: 'bg-navy',
+    iconBg: 'bg-navy/10',
+    iconColor: 'text-navy',
+    wave: 'fill-navy/70',
+    line: 'stroke-navy/60',
+  },
 ]
 
 const clientLogos =
@@ -144,9 +253,6 @@ export default function Home() {
 
           {/* LEFT */}
           <div className="rise min-w-0 w-full max-w-full lg:max-w-3xl">
-
-            
-            
 
             <h1
               className="
@@ -552,6 +658,9 @@ export default function Home() {
 
       {/* =====================================================
           PROCESS
+          Redesigned: numbered nodes + curved connectors +
+          icon-circle cards with a colour wave accent, matching
+          the "Our Way of Working" reference layout.
       ====================================================== */}
 
       <section className="bg-white py-14 sm:py-20">
@@ -564,37 +673,154 @@ export default function Home() {
               Process
             </SectionLabel>
 
-            <h2 className="font-display mt-4 text-2xl font-bold text-navy sm:text-3xl">
-              Our Way of Working
+            <h2 className="font-display mx-auto mt-4 max-w-3xl text-3xl font-bold text-navy sm:text-4xl md:text-5xl">
+              Our Way of{' '}
+              <span className="text-teal-dark">
+                Working
+              </span>
             </h2>
+
+            <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-steel sm:text-lg">
+              A clear, responsible process that ensures quality,
+              transparency and long-term value.
+            </p>
 
           </Reveal>
 
-          <div className="mt-10 grid gap-5 min-[450px]:grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
+          <div className="relative mt-20">
 
-            {workingSteps.map(
-              (s, i) => (
-                <Reveal
-                  key={s.n}
-                  delay={i * 80}
-                  className="rounded-2xl border border-line bg-paper p-5 text-center transition-all hover:-translate-y-1 hover:shadow-lg"
-                >
+            {/* Self-contained animation for the automatic step-chase effect */}
+            <style>{`
+              @keyframes processNodePulse {
+                0%, 6% {
+                  transform: scale(1.18);
+                  box-shadow: 0 0 0 8px rgba(27,134,158,0.18), 0 10px 22px rgba(16,42,67,0.25);
+                }
+                16%, 100% {
+                  transform: scale(1);
+                  box-shadow: 0 0 0 0 rgba(27,134,158,0);
+                }
+              }
+            `}</style>
 
-                  <div className="font-mono mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-navy text-sm font-bold text-white">
-                    {s.n}
-                  </div>
+            {/* Curved connectors — desktop only, aligned to the
+                5-column grid centres (10%, 30%, 50%, 70%, 90%).
+                A small dot travels along this path forever, and
+                each node below pulses in sequence as it passes. */}
+            <svg
+              className="pointer-events-none absolute inset-x-0 top-[26px] hidden h-20 w-full lg:block"
+              viewBox="0 0 100 16"
+              preserveAspectRatio="none"
+            >
+              {processSteps.slice(0, -1).map((s, i) => {
 
-                  <h3 className="font-display mt-3 text-base font-bold text-navy">
-                    {s.title}
-                  </h3>
+                const x1 = 10 + i * 20
+                const x2 = 10 + (i + 1) * 20
 
-                  <p className="mt-2 text-xs leading-relaxed text-steel">
-                    {s.desc}
-                  </p>
+                return (
+                  <path
+                    key={s.n}
+                    d={`M ${x1} 9 Q ${(x1 + x2) / 2} -3 ${x2} 9`}
+                    fill="none"
+                    className={s.line}
+                    strokeWidth="0.5"
+                    strokeLinecap="round"
+                  />
+                )
+              })}
 
-                </Reveal>
-              )
-            )}
+              {/* traveling dot — loops the full route automatically */}
+              <circle
+                r="1.6"
+                className="fill-white stroke-teal-dark"
+                strokeWidth="0.6"
+              >
+                <animateMotion
+                  dur="6s"
+                  repeatCount="indefinite"
+                  rotate="auto"
+                  path={
+                    processSteps
+                      .slice(0, -1)
+                      .map((s, i) => {
+                        const x1 = 10 + i * 20
+                        const x2 = 10 + (i + 1) * 20
+                        const mid = (x1 + x2) / 2
+                        return i === 0
+                          ? `M ${x1} 9 Q ${mid} -3 ${x2} 9`
+                          : `Q ${mid} -3 ${x2} 9`
+                      })
+                      .join(' ')
+                  }
+                />
+              </circle>
+
+            </svg>
+
+            <div className="grid gap-10 min-[450px]:grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 lg:gap-7">
+
+              {processSteps.map((s, i) => {
+
+                const Icon = s.icon
+
+                return (
+                  <Reveal
+                    key={s.n}
+                    delay={i * 90}
+                    className="relative flex flex-col items-center"
+                  >
+
+                    {/* number node — pulses automatically, in sequence */}
+                    <div
+                      className={`relative z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-full font-display text-base font-bold text-white ring-4 ring-white ${s.dot}`}
+                      style={{
+                        animation: 'processNodePulse 6s ease-in-out infinite',
+                        animationDelay: `${-(i * 1.2)}s`,
+                      }}
+                    >
+                      {s.n}
+                    </div>
+
+                    {/* card */}
+                    <div className="relative mt-6 w-full overflow-hidden rounded-2xl border border-line bg-paper p-7 pb-12 text-center transition-all hover:-translate-y-1 hover:shadow-lg">
+
+                      <span
+                        className={`mx-auto flex h-16 w-16 items-center justify-center rounded-full ${s.iconBg} ${s.iconColor}`}
+                      >
+                        <Icon size={28} strokeWidth={1.75} />
+                      </span>
+
+                      <span
+                        className={`mx-auto mt-5 block h-0.5 w-8 rounded-full ${s.dot}`}
+                      />
+
+                      <h3 className="font-display mt-4 text-lg font-bold text-navy sm:text-xl">
+                        {s.title}
+                      </h3>
+
+                      <p className="mt-3 text-sm leading-relaxed text-steel">
+                        {s.desc}
+                      </p>
+
+                      {/* wave accent */}
+                      <svg
+                        className="absolute inset-x-0 bottom-0 h-8 w-full"
+                        viewBox="0 0 200 40"
+                        preserveAspectRatio="none"
+                      >
+                        <path
+                          d="M0,40 L0,26 Q100,2 200,20 L200,40 Z"
+                          className={s.wave}
+                        />
+                      </svg>
+
+                    </div>
+
+                  </Reveal>
+                )
+              })}
+
+            </div>
 
           </div>
 
@@ -603,212 +829,189 @@ export default function Home() {
       </section>
 
       {/* =====================================================
-          PRODUCTS & SERVICES
+          SERVICES & SOLUTIONS
+          Two-card layout: coloured top bar, numbered label,
+          heading, bullet list and a full-card link — one card
+          for Products, one for Services. Each card also carries
+          a faint background image (see productsCardBg /
+          servicesCardBg at the top of this file — drop your
+          own image in /public and update those two paths).
       ====================================================== */}
 
-      <section className="mx-auto max-w-7xl px-5 py-14 sm:py-20 lg:px-8">
+      <section className="bg-paper py-14 sm:py-20">
 
-        <Reveal className="flex flex-col items-start justify-between gap-5 sm:flex-row sm:items-end mb-12">
+        <div className="mx-auto max-w-7xl px-5 lg:px-8">
 
-          <div>
+          <Reveal className="mb-12">
 
             <SectionLabel>
-              Traded Materials & Services
+              What We Offer
             </SectionLabel>
 
-            <h2 className="font-display mt-4 text-3xl font-bold text-navy sm:text-4xl md:text-5xl">
+            <h2 className="font-display mt-4 max-w-2xl text-3xl font-bold text-navy sm:text-4xl md:text-5xl">
               Explore Our{' '}
               <span className="text-teal-dark">
-                Products & Services
+                Services & Solutions
               </span>
             </h2>
 
-          </div>
+          </Reveal>
 
-          <Button
-            to="/products"
-            variant="outline"
-          >
-            View All
-          </Button>
+          <div className="grid gap-6 lg:grid-cols-2 lg:gap-8">
 
-        </Reveal>
-
-        <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-2">
-
-          {products && products.length > 0 && (
-            <Reveal
-              delay={0}
-            >
+            {/* PRODUCTS CARD */}
+            <Reveal delay={0}>
 
               <Link
-                to={`/products/${products[0].id}`}
-                className="premium-product-card group relative block h-full overflow-hidden rounded-3xl border border-line bg-white transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl"
+                to="/products"
+                className="group relative block h-full overflow-hidden rounded-2xl border border-line bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
               >
 
-                {/* Background Glow Effect */}
-                <div className="absolute -right-20 -top-20 h-96 w-96 rounded-full bg-gradient-to-br from-amber-100/40 to-transparent opacity-0 transition-opacity duration-700 group-hover:opacity-100"></div>
+                <div className="h-1.5 w-full bg-teal-dark" />
 
-                {/* Product Image Container */}
-                <div className="relative h-64 overflow-hidden bg-gradient-to-br from-slate-50 to-slate-100">
+                {/* background image — swap the path in productsCardBg (top of file) */}
+                <img
+                  src={productsCardBg}
+                  alt=""
+                  className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.07] transition-opacity duration-500 group-hover:opacity-[0.12]"
+                />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white via-white/95 to-white" />
 
-                  <div className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-10">
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,rgba(251,146,60,0.4),transparent)]"></div>
-                  </div>
+                <div className="relative z-10 p-7 sm:p-9">
 
-                  <ProductImage
-                    product={products[0]}
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-
-                  {/* Icon Badge */}
-                  <div className="absolute left-5 top-5 flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-amber-400 to-orange-500 text-white shadow-lg backdrop-blur transition-transform duration-500 group-hover:scale-110">
-                    <Flame size={22} />
-                  </div>
-
-                  {/* Overlay Bar on Hover */}
-                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-400 via-orange-400 to-red-500 transition-all duration-500 group-hover:h-2"></div>
-
-                </div>
-
-                {/* Content Container */}
-                <div className="relative z-10 space-y-4 p-8 sm:p-9">
-
-                  {/* Category Tag */}
-                  <div className="inline-flex items-center gap-2 rounded-full bg-amber-50 px-3 py-1.5">
-                    <div className="h-2 w-2 rounded-full bg-amber-500"></div>
-                    <span className="text-xs font-bold tracking-widest text-amber-700 uppercase">
-                      Traded Material
-                    </span>
-                  </div>
-
-                  {/* Title */}
-                  <h3 className="font-display group/title flex items-start justify-between gap-3 text-2xl font-bold leading-snug text-navy transition-colors duration-300">
-
-                    <span className="min-w-0">
-                      {products[0].name}
-                    </span>
-
-                    <ArrowUpRight
-                      size={24}
-                      className="shrink-0 rounded-full bg-amber-50 p-1.5 text-amber-600 transition-all duration-500 group-hover:bg-amber-500 group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1"
-                    />
-
-                  </h3>
-
-                  {/* Description */}
-                  <p className="text-sm leading-relaxed text-steel line-clamp-2">
-                    {products[0].tagline}
+                  <p className="font-mono text-xs font-bold uppercase tracking-widest text-teal-dark">
+                    01 — We Trade
                   </p>
 
-                  {/* Badge */}
-                  {products[0].form && (
-                    <div className="pt-2 flex items-center gap-2">
-                      <Badge tone="amber">
-                        {products[0].form}
-                      </Badge>
-                      <span className="text-xs text-steel/60 font-medium">Premium Material</span>
-                    </div>
-                  )}
+                  <h3 className="font-display mt-3 text-3xl font-black uppercase tracking-tight text-navy sm:text-4xl">
+                    Products
+                  </h3>
 
-                  {/* CTA Text */}
-                  <div className="pt-3 flex items-center gap-2 text-sm font-semibold text-amber-600 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-                    <span>Explore Details</span>
-                    <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
-                  </div>
+                  <div className="mt-4 h-px w-16 bg-line" />
+
+                  <p className="mt-4 max-w-md text-sm leading-relaxed text-steel sm:text-base">
+                    Sourced, verified and moved — alternative fuel
+                    resources, recovered oils, carbon materials and
+                    reclaimed steel, ready for industrial use.
+                  </p>
+
+                  <ul className="mt-6 space-y-3">
+
+                    {productBullets.map((b) => (
+                      <li
+                        key={b.label}
+                        className="flex items-start gap-3 border-b border-line pb-3 text-sm last:border-b-0 last:pb-0"
+                      >
+
+                        <ArrowRight
+                          size={14}
+                          className="mt-1 shrink-0 text-teal-dark"
+                        />
+
+                        <span className="text-steel">
+                          <strong className="font-semibold text-navy">
+                            {b.label}
+                          </strong>
+                          {' — '}
+                          {b.desc}
+                        </span>
+
+                      </li>
+                    ))}
+
+                  </ul>
+
+                  <span className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full border border-teal-dark/60 px-5 py-3 text-sm font-semibold text-teal-dark transition-colors duration-300 group-hover:bg-teal-dark group-hover:text-white">
+                    View All Products
+                    <ArrowRight
+                      size={16}
+                      className="transition-transform group-hover:translate-x-1"
+                    />
+                  </span>
 
                 </div>
 
               </Link>
 
             </Reveal>
-          )}
 
-          {/* EPR SERVICE CARD - Premium Design */}
-          <Reveal
-            delay={100}
-          >
+            {/* SERVICES CARD */}
+            <Reveal delay={100}>
 
-            <Link
-              to="/products?category=4"
-              className="premium-service-card group relative block h-full overflow-hidden rounded-3xl border border-line bg-gradient-to-br from-navy via-teal-dark to-navy-dark text-white transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl"
-            >
+              <Link
+                to="/products?category=4"
+                className="group relative block h-full overflow-hidden rounded-2xl border border-line bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+              >
 
-              {/* Animated Background Elements */}
-              <div className="absolute -right-24 -top-24 h-96 w-96 rounded-full bg-gradient-to-br from-teal-400/20 to-transparent opacity-0 transition-opacity duration-700 group-hover:opacity-100"></div>
-              <div className="absolute -bottom-24 -left-24 h-96 w-96 rounded-full bg-gradient-to-tr from-teal-500/10 to-transparent"></div>
+                <div className="h-1.5 w-full bg-amber-dark" />
 
-              {/* Icon Section */}
-              <div className="relative z-10 h-64 flex flex-col items-center justify-center space-y-4">
+                {/* background image — swap the path in servicesCardBg (top of file) */}
+                <img
+                  src={servicesCardBg}
+                  alt=""
+                  className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.07] transition-opacity duration-500 group-hover:opacity-[0.12]"
+                />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white via-white/95 to-white" />
 
-                <div className="relative">
-                  {/* Animated Ring */}
-                  <div className="absolute inset-0 rounded-full border-2 border-teal-400/30 transition-transform duration-700 group-hover:scale-125 group-hover:border-teal-300/50"></div>
-                  
-                  {/* Main Icon */}
-                  <div className="relative flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-teal-400/20 to-teal-500/10 text-6xl backdrop-blur transition-all duration-500 group-hover:scale-110 group-hover:bg-gradient-to-br group-hover:from-teal-400/40 group-hover:to-teal-500/20">
-                    📋
-                  </div>
-                </div>
+                <div className="relative z-10 p-7 sm:p-9">
 
-                <div className="space-y-2 text-center">
-                  <div className="h-1 w-8 bg-gradient-to-r from-teal-400 to-cyan-400 mx-auto rounded-full transform scale-0 transition-transform duration-500 group-hover:scale-100"></div>
-                  <p className="text-xs font-bold tracking-widest text-teal-200 uppercase">Compliance Solution</p>
-                </div>
+                  <p className="font-mono text-xs font-bold uppercase tracking-widest text-amber-dark">
+                    02 — We Deliver
+                  </p>
 
-              </div>
+                  <h3 className="font-display mt-3 text-3xl font-black uppercase tracking-tight text-navy sm:text-4xl">
+                    Services
+                  </h3>
 
-              {/* Content Container */}
-              <div className="relative z-10 space-y-4 px-8 pb-8 sm:px-9">
+                  <div className="mt-4 h-px w-16 bg-line" />
 
-                {/* Service Badge */}
-                <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1.5 backdrop-blur-sm border border-white/20">
-                  <div className="h-2 w-2 rounded-full bg-teal-400"></div>
-                  <span className="text-xs font-bold tracking-widest text-teal-200 uppercase">Service</span>
-                </div>
+                  <p className="mt-4 max-w-md text-sm leading-relaxed text-steel sm:text-base">
+                    End-to-end compliance and waste-management
+                    support — from EPR obligations to municipal and
+                    industrial waste handling.
+                  </p>
 
-                {/* Title */}
-                <h3 className="font-display flex items-start justify-between gap-3 text-2xl font-bold leading-snug text-white">
+                  <ul className="mt-6 space-y-3">
 
-                  <span className="min-w-0">
-                    Extended Producer Responsibility
+                    {serviceBullets.map((b) => (
+                      <li
+                        key={b.label}
+                        className="flex items-start gap-3 border-b border-line pb-3 text-sm last:border-b-0 last:pb-0"
+                      >
+
+                        <ArrowRight
+                          size={14}
+                          className="mt-1 shrink-0 text-amber-dark"
+                        />
+
+                        <span className="text-steel">
+                          <strong className="font-semibold text-navy">
+                            {b.label}
+                          </strong>
+                          {' — '}
+                          {b.desc}
+                        </span>
+
+                      </li>
+                    ))}
+
+                  </ul>
+
+                  <span className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full border border-amber-dark/60 px-5 py-3 text-sm font-semibold text-amber-dark transition-colors duration-300 group-hover:bg-amber-dark group-hover:text-white">
+                    View All Services
+                    <ArrowRight
+                      size={16}
+                      className="transition-transform group-hover:translate-x-1"
+                    />
                   </span>
 
-                  <ArrowUpRight
-                    size={24}
-                    className="shrink-0 rounded-full bg-white/10 p-1.5 text-teal-300 transition-all duration-500 group-hover:bg-teal-400 group-hover:text-navy group-hover:translate-x-1 group-hover:-translate-y-1 backdrop-blur"
-                  />
-
-                </h3>
-
-                {/* Description */}
-                <p className="text-sm leading-relaxed text-white/80 line-clamp-2">
-                  End-to-end EPR compliance support and services for regulatory excellence
-                </p>
-
-                {/* Features List */}
-                <div className="pt-3 space-y-2 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-                  <div className="flex items-center gap-2 text-xs text-teal-200">
-                    <div className="h-1.5 w-1.5 rounded-full bg-teal-400"></div>
-                    <span>Comprehensive Compliance</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-xs text-teal-200">
-                    <div className="h-1.5 w-1.5 rounded-full bg-teal-400"></div>
-                    <span>Expert Support Team</span>
-                  </div>
                 </div>
 
-                {/* CTA */}
-                <div className="pt-4 flex items-center gap-2 text-sm font-semibold text-teal-300 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-                  <span>Discover Services</span>
-                  <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
-                </div>
+              </Link>
 
-              </div>
+            </Reveal>
 
-            </Link>
-
-          </Reveal>
+          </div>
 
         </div>
 
@@ -868,9 +1071,6 @@ export default function Home() {
         </div>
 
       </section>
-
-   
-
 
     </div>
   )
