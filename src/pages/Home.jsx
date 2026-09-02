@@ -14,8 +14,11 @@ import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 
 import CircularSeal from '../components/CircularSeal'
+import './Home.css'
 
 import heroBg from '../assets/products/hero.png'
+import productsCardPhoto from '../assets/products/pyrolysis-oil.jpg'
+import servicesCardPhoto from '../assets/products/Industry Waste Management.png'
 
 import {
   aboutImg,
@@ -41,52 +44,11 @@ const valueIcons = [
   Leaf,
 ]
 
-/* =====================================================
-   SERVICES & SOLUTIONS — background images
-   Drop your images into /public and update these two
-   paths (or replace with an `import x from '../assets/...'`
-   if you'd rather keep them inside src/assets).
-====================================================== */
-
-const productsCardBg = '/products-card-bg.jpg'
-const servicesCardBg = '/services-card-bg.jpg'
-
-const productBullets = [
-  {
-    label: 'Alternative Fuel Resource (AFR)',
-    desc: 'Tyre pyrolysis oil, black carbon powder, UCO, tallow oil',
-  },
-  {
-    label: 'Steel Wire',
-    desc: 'Burnt & unburnt waste-tyre steel wire',
-  },
-  {
-    label: 'Cleaning Chemicals',
-    desc: 'Dishwash, degreaser & bathroom-care range',
-  },
-  {
-    label: 'Quality Assurance',
-    desc: 'Verified sourcing with consistent specification',
-  },
-]
-
-const serviceBullets = [
-  {
-    label: 'EPR Compliance',
-    desc: 'Plastic, battery, e-waste, used-oil & tyre obligations',
-  },
-  {
-    label: 'Municipal Waste Management',
-    desc: 'MSW collection & processing support',
-  },
-  {
-    label: 'Industrial Waste Management',
-    desc: 'On-site industrial waste handling',
-  },
-  {
-    label: 'Reporting & Documentation',
-    desc: 'Targets, records & regulatory filings',
-  },
+const whyGradients = [
+  'from-teal-dark via-teal to-teal-light',
+  'from-amber-dark via-amber to-teal-light',
+  'from-navy via-teal-dark to-teal',
+  'from-teal via-amber-dark to-amber',
 ]
 
 /* =====================================================
@@ -163,78 +125,10 @@ const clientLogos =
     )
   )
 
-/* =====================================================
-   SECTION GLOW — soft light-green / light-blue backdrop
-   used to alternate section backgrounds across the page,
-   in the style of a faint gradient with drifting blobs
-   and thin curved accent lines.
-====================================================== */
-
-function SectionGlow({ tone = 'green' }) {
-  const isGreen = tone === 'green'
-
-  const bgColor = isGreen
-    ? '#d1fae5' /* light green */
-    : '#dbeafe' /* light blue */
-
-  const blobAColor = isGreen
-    ? 'rgba(16,185,129,0.35)'
-    : 'rgba(56,189,248,0.35)'
-
-  const blobBColor = isGreen
-    ? 'rgba(20,184,166,0.3)'
-    : 'rgba(59,130,246,0.3)'
-
-  const lineColor = isGreen
-    ? 'rgba(13,148,136,0.35)'
-    : 'rgba(2,132,199,0.35)'
-
-  return (
-    <div
-      className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
-      style={{ backgroundColor: bgColor }}
-    >
-
-      <div
-        className="absolute -top-24 -right-16 h-72 w-72 rounded-full blur-3xl"
-        style={{ backgroundColor: blobAColor }}
-      />
-
-      <div
-        className="absolute -bottom-28 -left-20 h-80 w-80 rounded-full blur-3xl"
-        style={{ backgroundColor: blobBColor }}
-      />
-
-      <svg
-        className="absolute inset-0 h-full w-full opacity-60"
-        viewBox="0 0 100 100"
-        preserveAspectRatio="none"
-      >
-
-        <path
-          d="M0,68 Q28,42 58,54 T100,28"
-          fill="none"
-          stroke={lineColor}
-          strokeWidth="0.35"
-        />
-
-        <path
-          d="M0,86 Q38,62 68,70 T100,48"
-          fill="none"
-          stroke={lineColor}
-          strokeWidth="0.25"
-          strokeDasharray="1.2,2"
-        />
-
-      </svg>
-
-    </div>
-  )
-}
-
 export default function Home() {
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
+  const [activeWhy, setActiveWhy] = useState(0)
 
   useEffect(() => {
     api.getProducts()
@@ -243,8 +137,15 @@ export default function Home() {
       .finally(() => setLoading(false))
   }, [])
 
+  useEffect(() => {
+    const id = setInterval(() => {
+      setActiveWhy((prev) => (prev + 1) % valueProps.length)
+    }, 3800)
+    return () => clearInterval(id)
+  }, [])
+
   return (
-    <div className="w-full min-w-0 overflow-x-hidden">
+    <div className="home-page w-full min-w-0 overflow-x-hidden">
 
       {/* =====================================================
           HERO
@@ -521,21 +422,7 @@ export default function Home() {
 
       <section className="marquee-row overflow-hidden border-b border-line bg-white py-5 sm:py-6">
 
-        {/* Self-contained infinite scroll — always moves on its own */}
-        <style>{`
-          @keyframes clientLogosMarquee {
-            from { transform: translateX(0); }
-            to { transform: translateX(-50%); }
-          }
-          .client-logos-track {
-            animation: clientLogosMarquee 26s linear infinite;
-          }
-          .client-logos-track:hover {
-            animation-play-state: paused;
-          }
-        `}</style>
-
-        <div className="marquee-track client-logos-track flex w-max items-center gap-10 sm:gap-14">
+        <div className="marquee-track flex w-max items-center gap-10 sm:gap-14">
 
           {[
             ...clientLogos,
@@ -545,7 +432,7 @@ export default function Home() {
               key={i}
               src={img}
               alt=""
-              className="h-8 w-auto shrink-0 sm:h-10"
+              className="h-8 w-auto shrink-0 opacity-90 transition-opacity hover:opacity-100 sm:h-10"
             />
           ))}
 
@@ -557,13 +444,9 @@ export default function Home() {
           ABOUT
       ====================================================== */}
 
-      <section className="relative overflow-hidden py-14 sm:py-20">
+      <section className="bg-blue-dark py-14 sm:py-20">
 
-        <SectionGlow tone="blue" />
-
-        <div className="mx-auto max-w-7xl px-5 lg:px-8">
-
-        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-12">
+        <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 lg:grid-cols-2 lg:gap-12 lg:px-8">
 
           <Reveal>
 
@@ -589,42 +472,40 @@ export default function Home() {
 
           <Reveal delay={120}>
 
-            <SectionLabel>
+            <SectionLabel dark>
               Who We Are
             </SectionLabel>
 
-            <h2 className="font-display mt-4 text-2xl font-bold leading-tight text-navy sm:text-3xl">
+            <h2 className="font-display mt-4 text-2xl font-bold leading-tight text-white sm:text-3xl">
               Circular trade built around{' '}
 
-              <span className="text-teal-dark">
+              <span className="text-teal-light">
                 useful resources
               </span>
             </h2>
 
-            <p className="mt-4 text-sm leading-7 text-steel sm:text-base">
+            <p className="mt-4 text-sm leading-7 text-white/80 sm:text-base">
               Jimkey Ecopower operates across alternative fuel
               resources, recovered materials, waste-management
               solutions and EPR-related services.
             </p>
 
-            <p className="mt-4 text-sm leading-7 text-steel sm:text-base">
+            <p className="mt-4 text-sm leading-7 text-white/80 sm:text-base">
               Our material portfolio includes used cooking oil,
               pyrolysis oil, recovered carbon materials, tallow oil
               and recycled steel wire, alongside compliance and
               waste-management solutions.
             </p>
 
-            <Button
+            <Link
               to="/about"
-              className="mt-6"
+              className="group/btn mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-navy transition-all duration-300 hover:-translate-y-0.5 hover:bg-teal-light hover:shadow-lg sm:px-6 sm:py-3"
             >
               Read More
               <ArrowRight size={16} />
-            </Button>
+            </Link>
 
           </Reveal>
-
-        </div>
 
         </div>
 
@@ -632,11 +513,13 @@ export default function Home() {
 
       {/* =====================================================
           WHY JIMKEY
+          Auto-cycling expandable cards — one card is active
+          (wider, shows image + description) at a time and the
+          set advances automatically; click any card to jump to
+          it, hover pauses the cycle.
       ====================================================== */}
 
-      <section className="relative overflow-hidden py-14 sm:py-20">
-
-        <SectionGlow tone="green" />
+      <section className="bg-blue-light py-14 sm:py-20">
 
         <div className="mx-auto max-w-7xl px-5 lg:px-8">
 
@@ -652,33 +535,86 @@ export default function Home() {
 
           </Reveal>
 
-          <div className="mt-9 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div
+            className="mt-12 flex flex-col gap-4 sm:h-[420px] sm:flex-row"
+          >
 
             {valueProps.map((v, i) => {
 
               const Icon =
                 valueIcons[i]
 
+              const isActive =
+                i === activeWhy
+
               return (
-                <Reveal
+                <button
                   key={v.title}
-                  delay={i * 90}
-                  className="rounded-2xl border border-line bg-paper p-5 transition-all hover:-translate-y-1 hover:shadow-lg sm:p-6"
+                  type="button"
+                  onClick={() => setActiveWhy(i)}
+                  aria-pressed={isActive}
+                  className={`
+                    group relative flex flex-col overflow-hidden rounded-2xl
+                    border border-line bg-white text-left shadow-sm
+                    transition-[flex-grow,box-shadow] duration-700 ease-in-out
+                    ${isActive
+                      ? 'shadow-lg sm:flex-[3]'
+                      : 'hover:shadow-md sm:flex-[1]'}
+                  `}
                 >
 
-                  <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-teal/10 text-teal-dark">
-                    <Icon size={20} />
-                  </span>
+                  {isActive ? (
+                    <>
 
-                  <h3 className="font-display mt-4 text-base font-bold text-navy">
-                    {v.title}
-                  </h3>
+                      <div
+                        className={`relative h-36 w-full shrink-0 overflow-hidden bg-gradient-to-br sm:h-44 ${whyGradients[i]}`}
+                      >
 
-                  <p className="mt-2 text-sm leading-relaxed text-steel">
-                    {v.desc}
-                  </p>
+                        <div className="absolute -left-6 -top-10 h-32 w-32 rounded-full bg-white/25 blur-2xl" />
+                        <div className="absolute -bottom-10 right-4 h-28 w-28 rounded-full bg-navy/25 blur-2xl" />
 
-                </Reveal>
+                      </div>
+
+                      <div className="flex flex-1 flex-col p-6 sm:p-7">
+
+                        <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-teal/10 text-teal-dark">
+                          <Icon size={18} />
+                        </span>
+
+                        <h3 className="font-display mt-4 text-xl font-bold text-navy sm:text-2xl">
+                          {v.title}
+                        </h3>
+
+                        <p className="mt-2 text-sm leading-relaxed text-steel">
+                          {v.desc}
+                        </p>
+
+                      </div>
+
+                    </>
+                  ) : (
+                    <div className="flex h-full flex-row items-center justify-between gap-4 p-6 sm:flex-col sm:items-start sm:justify-between sm:p-6">
+
+                      <span className="font-display text-3xl font-bold text-navy/10 sm:text-4xl">
+                        {String(i + 1).padStart(2, '0')}.
+                      </span>
+
+                      <div className="text-right sm:text-left">
+
+                        <span className="ml-auto flex h-8 w-8 items-center justify-center rounded-lg bg-teal/10 text-teal-dark sm:ml-0">
+                          <Icon size={16} />
+                        </span>
+
+                        <h3 className="font-display mt-3 text-sm font-bold text-navy">
+                          {v.title}
+                        </h3>
+
+                      </div>
+
+                    </div>
+                  )}
+
+                </button>
               )
             })}
 
@@ -690,45 +626,47 @@ export default function Home() {
 
       {/* =====================================================
           VISION
+          Vertical timeline treatment — a continuous connecting
+          line with numbered circle markers, image framed with a
+          brand-colour offset panel.
       ====================================================== */}
 
-      <section className="relative overflow-hidden py-14 sm:py-20">
+      <section className="py-14 sm:py-20 bg-blue-dark">
 
-        <SectionGlow tone="blue" />
+        <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 lg:grid-cols-2 lg:gap-16 lg:px-8">
 
-        <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 lg:grid-cols-2 lg:px-8">
+          <Reveal className="order-2 lg:order-1">
 
-          <Reveal className="order-2 space-y-7 lg:order-1">
+            <SectionLabel dark>
+              Our Foundation
+            </SectionLabel>
 
-            {visionMission.map((v, i) => (
-              <div
-                key={v.title}
-                className="flex gap-4"
-              >
+            <div className="relative mt-6 space-y-9 pl-12">
 
-                <span className="font-mono mt-0.5 shrink-0 text-xs font-semibold text-teal">
-                  {String(
-                    i + 1
-                  ).padStart(
-                    2,
-                    '0'
-                  )}
-                </span>
+              <span className="absolute left-4 top-1 bottom-1 w-px bg-white/25" />
 
-                <div className="min-w-0 border-l-2 border-teal/30 pl-4">
+              {visionMission.map((v, i) => (
+                <div
+                  key={v.title}
+                  className="relative"
+                >
 
-                  <h3 className="font-display text-lg font-bold text-navy">
+                  <span className="absolute -left-12 top-0 flex h-8 w-8 items-center justify-center rounded-full bg-white font-mono text-xs font-bold text-navy ring-4 ring-blue-dark">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+
+                  <h3 className="font-display text-lg font-bold text-white">
                     {v.title}
                   </h3>
 
-                  <p className="mt-1.5 text-sm leading-relaxed text-steel">
+                  <p className="mt-1.5 text-sm leading-relaxed text-white/75">
                     {v.desc}
                   </p>
 
                 </div>
+              ))}
 
-              </div>
-            ))}
+            </div>
 
           </Reveal>
 
@@ -737,11 +675,17 @@ export default function Home() {
             className="order-1 lg:order-2"
           >
 
-            <img
-              src={vision}
-              alt="Vision and mission"
-              className="aspect-[4/3] w-full rounded-2xl object-cover"
-            />
+            <div className="relative">
+
+              <div className="absolute -inset-3 -z-10 rounded-2xl bg-white/15" />
+
+              <img
+                src={vision}
+                alt="Vision and mission"
+                className="aspect-[4/3] w-full rounded-2xl border-4 border-white object-cover shadow-lg"
+              />
+
+            </div>
 
           </Reveal>
 
@@ -756,9 +700,7 @@ export default function Home() {
           the "Our Way of Working" reference layout.
       ====================================================== */}
 
-      <section className="relative overflow-hidden py-14 sm:py-20">
-
-        <SectionGlow tone="green" />
+      <section className="bg-blue-light py-14 sm:py-20">
 
         <div className="mx-auto max-w-7xl px-5 lg:px-8">
 
@@ -925,29 +867,24 @@ export default function Home() {
 
       {/* =====================================================
           SERVICES & SOLUTIONS
-          Two-card layout: coloured top bar, numbered label,
-          heading, bullet list and a full-card link — one card
-          for Products, one for Services. Each card also carries
-          a faint background image (see productsCardBg /
-          servicesCardBg at the top of this file — drop your
-          own image in /public and update those two paths).
+          Two-card layout: real photo, short description and a
+          full-card link to the products page — Services first,
+          then Products.
       ====================================================== */}
 
-      <section className="relative overflow-hidden py-14 sm:py-20">
-
-        <SectionGlow tone="blue" />
+      <section className="bg-blue-dark py-14 sm:py-20">
 
         <div className="mx-auto max-w-7xl px-5 lg:px-8">
 
           <Reveal className="mb-12">
 
-            <SectionLabel>
+            <SectionLabel dark>
               What We Offer
             </SectionLabel>
 
-            <h2 className="font-display mt-4 max-w-2xl text-3xl font-bold text-navy sm:text-4xl md:text-5xl">
+            <h2 className="font-display mt-4 max-w-2xl text-3xl font-bold text-white sm:text-4xl md:text-5xl">
               Explore Our{' '}
-              <span className="text-teal-dark">
+              <span className="text-teal-light">
                 Services & Solutions
               </span>
             </h2>
@@ -956,70 +893,40 @@ export default function Home() {
 
           <div className="grid gap-6 lg:grid-cols-2 lg:gap-8">
 
-            {/* PRODUCTS CARD */}
+            {/* SERVICES CARD */}
             <Reveal delay={0}>
 
               <Link
-                to="/products"
-                className="group relative block h-full overflow-hidden rounded-2xl border border-line bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                to="/products?category=4"
+                className="group relative flex h-[420px] w-full flex-col overflow-hidden rounded-2xl shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:h-[460px]"
               >
 
-                <div className="h-1.5 w-full bg-teal-dark" />
-
-                {/* background image — swap the path in productsCardBg (top of file) */}
                 <img
-                  src={productsCardBg}
-                  alt=""
-                  className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.07] transition-opacity duration-500 group-hover:opacity-[0.12]"
+                  src={servicesCardPhoto}
+                  alt="Waste management and EPR compliance services"
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white via-white/95 to-white" />
 
-                <div className="relative z-10 p-7 sm:p-9">
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy-deep via-navy-deep/70 to-navy-deep/10" />
 
-                  <p className="font-mono text-xs font-bold uppercase tracking-widest text-teal-dark">
-                    01 — We Trade
+                <div className="relative z-10 mt-auto flex flex-col p-7 sm:p-9">
+
+                  <p className="font-mono text-xs font-bold uppercase tracking-widest text-amber">
+                    We Deliver
                   </p>
 
-                  <h3 className="font-display mt-3 text-3xl font-black uppercase tracking-tight text-navy sm:text-4xl">
-                    Products
+                  <h3 className="font-display mt-3 text-3xl font-black uppercase tracking-tight text-white sm:text-4xl">
+                    Services
                   </h3>
 
-                  <div className="mt-4 h-px w-16 bg-line" />
-
-                  <p className="mt-4 max-w-md text-sm leading-relaxed text-steel sm:text-base">
-                    Sourced, verified and moved — alternative fuel
-                    resources, recovered oils, carbon materials and
-                    reclaimed steel, ready for industrial use.
+                  <p className="mt-4 text-sm leading-relaxed text-white/85 sm:text-base">
+                    End-to-end compliance and waste-management
+                    support — from EPR obligations to municipal and
+                    industrial waste handling.
                   </p>
 
-                  <ul className="mt-6 space-y-3">
-
-                    {productBullets.map((b) => (
-                      <li
-                        key={b.label}
-                        className="flex items-start gap-3 border-b border-line pb-3 text-sm last:border-b-0 last:pb-0"
-                      >
-
-                        <ArrowRight
-                          size={14}
-                          className="mt-1 shrink-0 text-teal-dark"
-                        />
-
-                        <span className="text-steel">
-                          <strong className="font-semibold text-navy">
-                            {b.label}
-                          </strong>
-                          {' — '}
-                          {b.desc}
-                        </span>
-
-                      </li>
-                    ))}
-
-                  </ul>
-
-                  <span className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full border border-teal-dark/60 px-5 py-3 text-sm font-semibold text-teal-dark transition-colors duration-300 group-hover:bg-teal-dark group-hover:text-white">
-                    View All Products
+                  <span className="mt-7 inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/70 px-5 py-3 text-sm font-semibold text-white transition-colors duration-300 group-hover:bg-white group-hover:text-navy">
+                    View All Services
                     <ArrowRight
                       size={16}
                       className="transition-transform group-hover:translate-x-1"
@@ -1032,70 +939,40 @@ export default function Home() {
 
             </Reveal>
 
-            {/* SERVICES CARD */}
+            {/* PRODUCTS CARD */}
             <Reveal delay={100}>
 
               <Link
-                to="/products?category=4"
-                className="group relative block h-full overflow-hidden rounded-2xl border border-line bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                to="/products"
+                className="group relative flex h-[420px] w-full flex-col overflow-hidden rounded-2xl shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:h-[460px]"
               >
 
-                <div className="h-1.5 w-full bg-amber-dark" />
-
-                {/* background image — swap the path in servicesCardBg (top of file) */}
                 <img
-                  src={servicesCardBg}
-                  alt=""
-                  className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.07] transition-opacity duration-500 group-hover:opacity-[0.12]"
+                  src={productsCardPhoto}
+                  alt="Alternative fuel resources and recovered materials"
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white via-white/95 to-white" />
 
-                <div className="relative z-10 p-7 sm:p-9">
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy-deep via-navy-deep/70 to-navy-deep/10" />
 
-                  <p className="font-mono text-xs font-bold uppercase tracking-widest text-amber-dark">
-                    02 — We Deliver
+                <div className="relative z-10 mt-auto flex flex-col p-7 sm:p-9">
+
+                  <p className="font-mono text-xs font-bold uppercase tracking-widest text-teal-light">
+                    We Trade
                   </p>
 
-                  <h3 className="font-display mt-3 text-3xl font-black uppercase tracking-tight text-navy sm:text-4xl">
-                    Services
+                  <h3 className="font-display mt-3 text-3xl font-black uppercase tracking-tight text-white sm:text-4xl">
+                    Products
                   </h3>
 
-                  <div className="mt-4 h-px w-16 bg-line" />
-
-                  <p className="mt-4 max-w-md text-sm leading-relaxed text-steel sm:text-base">
-                    End-to-end compliance and waste-management
-                    support — from EPR obligations to municipal and
-                    industrial waste handling.
+                  <p className="mt-4 text-sm leading-relaxed text-white/85 sm:text-base">
+                    Sourced, verified and moved — alternative fuel
+                    resources, recovered oils, carbon materials and
+                    reclaimed steel, ready for industrial use.
                   </p>
 
-                  <ul className="mt-6 space-y-3">
-
-                    {serviceBullets.map((b) => (
-                      <li
-                        key={b.label}
-                        className="flex items-start gap-3 border-b border-line pb-3 text-sm last:border-b-0 last:pb-0"
-                      >
-
-                        <ArrowRight
-                          size={14}
-                          className="mt-1 shrink-0 text-amber-dark"
-                        />
-
-                        <span className="text-steel">
-                          <strong className="font-semibold text-navy">
-                            {b.label}
-                          </strong>
-                          {' — '}
-                          {b.desc}
-                        </span>
-
-                      </li>
-                    ))}
-
-                  </ul>
-
-                  <span className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full border border-amber-dark/60 px-5 py-3 text-sm font-semibold text-amber-dark transition-colors duration-300 group-hover:bg-amber-dark group-hover:text-white">
-                    View All Services
+                  <span className="mt-7 inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/70 px-5 py-3 text-sm font-semibold text-white transition-colors duration-300 group-hover:bg-white group-hover:text-navy">
+                    View All Products
                     <ArrowRight
                       size={16}
                       className="transition-transform group-hover:translate-x-1"
@@ -1118,9 +995,7 @@ export default function Home() {
           FAQ
       ====================================================== */}
 
-      <section className="relative overflow-hidden py-14 sm:py-20">
-
-        <SectionGlow tone="green" />
+      <section className="bg-blue-light py-14 sm:py-20">
 
         <div className="mx-auto max-w-4xl px-5 lg:px-8">
 
