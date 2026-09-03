@@ -234,19 +234,19 @@ export default function Home() {
                 font-bold
                 text-white
 
-                text-[34px]
+                text-[40px]
                 leading-[1.08]
 
-                min-[380px]:text-[38px]
+                min-[380px]:text-[44px]
 
-                sm:text-[46px]
+                sm:text-[52px]
 
-                md:text-[54px]
+                md:text-[60px]
 
                 lg:max-w-3xl
-                lg:text-[60px]
+                lg:text-[68px]
 
-                xl:text-[64px]
+                xl:text-[72px]
 
                 drop-shadow-[0_3px_10px_rgba(0,0,0,0.8)]
               "
@@ -283,14 +283,14 @@ export default function Home() {
               "
             >
 
-              <p className="text-[14px] leading-6 text-white/95 sm:text-[15px] sm:leading-7 md:text-base">
+              <p className="text-[16px] leading-7 text-white/95 sm:text-[17px] sm:leading-8 md:text-lg">
                 Jimkey Ecopower connects industrial waste streams
                 with productive end use by sourcing, verifying and
                 moving alternative fuel resources, recovered oils,
                 carbon materials and reclaimed steel.
               </p>
 
-              <p className="mt-3 text-[14px] leading-6 text-white/85 sm:text-[15px] sm:leading-7 md:text-base">
+              <p className="mt-3 text-[16px] leading-7 text-white/85 sm:text-[17px] sm:leading-8 md:text-lg">
                 From material discovery and supplier coordination
                 to logistics and buyer requirements, our focus is
                 practical: keep useful resources in circulation and
@@ -318,10 +318,10 @@ export default function Home() {
               <Button
                 to="/products"
                 variant="accent"
-                className="w-full min-[480px]:w-auto"
+                className="w-full min-[480px]:w-auto text-base"
               >
                 Explore Materials
-                <ArrowRight size={16} />
+                <ArrowRight size={18} />
               </Button>
 
               <Button
@@ -332,6 +332,7 @@ export default function Home() {
                   border-white/60
                   bg-black/20
                   text-white
+                  text-base
 
                   hover:bg-white
                   hover:text-navy
@@ -369,11 +370,11 @@ export default function Home() {
                   className="min-w-0"
                 >
 
-                  <dt className="font-display text-xl font-bold text-[#f2a574] sm:text-2xl">
+                  <dt className="font-display text-2xl font-bold text-[#f2a574] sm:text-3xl">
                     {s.value}
                   </dt>
 
-                  <dd className="font-mono mt-1 text-[8px] uppercase leading-4 tracking-wider text-white/85 sm:text-[9px]">
+                  <dd className="font-mono mt-1 text-[10px] uppercase leading-4 tracking-wider text-white/85 sm:text-[11px]">
                     {s.label}
                   </dd>
 
@@ -441,7 +442,8 @@ export default function Home() {
       </section>
 
       {/* =====================================================
-          ABOUT
+          SECTION 1: WHO WE ARE (About)
+          Background: DARK BLUE
       ====================================================== */}
 
       <section className="bg-blue-dark py-14 sm:py-20">
@@ -460,7 +462,7 @@ export default function Home() {
 
               <div className="absolute -bottom-5 -right-3 hidden rounded-xl border border-line bg-white px-5 py-4 shadow-lg sm:block">
 
-                <p className="font-mono text-[10px] uppercase tracking-widest text-steel">
+                <p className="font-mono text-[11px] uppercase tracking-widest text-steel">
                   Mumbai, India
                 </p>
 
@@ -476,7 +478,7 @@ export default function Home() {
               Who We Are
             </SectionLabel>
 
-            <h2 className="font-display mt-4 text-2xl font-bold leading-tight text-white sm:text-3xl">
+            <h2 className="font-display mt-4 text-3xl font-bold leading-tight text-white sm:text-4xl">
               Circular trade built around{' '}
 
               <span className="text-teal-light">
@@ -484,13 +486,13 @@ export default function Home() {
               </span>
             </h2>
 
-            <p className="mt-4 text-sm leading-7 text-white/80 sm:text-base">
+            <p className="mt-4 text-base leading-7 text-white/80 sm:text-lg">
               Jimkey Ecopower operates across alternative fuel
               resources, recovered materials, waste-management
               solutions and EPR-related services.
             </p>
 
-            <p className="mt-4 text-sm leading-7 text-white/80 sm:text-base">
+            <p className="mt-4 text-base leading-7 text-white/80 sm:text-lg">
               Our material portfolio includes used cooking oil,
               pyrolysis oil, recovered carbon materials, tallow oil
               and recycled steel wire, alongside compliance and
@@ -499,10 +501,10 @@ export default function Home() {
 
             <Link
               to="/about"
-              className="group/btn mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-navy transition-all duration-300 hover:-translate-y-0.5 hover:bg-teal-light hover:shadow-lg sm:px-6 sm:py-3"
+              className="group/btn mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-white px-5 py-2.5 text-base font-semibold text-navy transition-all duration-300 hover:-translate-y-0.5 hover:bg-teal-light hover:shadow-lg sm:px-6 sm:py-3"
             >
               Read More
-              <ArrowRight size={16} />
+              <ArrowRight size={18} />
             </Link>
 
           </Reveal>
@@ -512,138 +514,23 @@ export default function Home() {
       </section>
 
       {/* =====================================================
-          WHY JIMKEY
-          Auto-cycling expandable cards — one card is active
-          (wider, shows image + description) at a time and the
-          set advances automatically; click any card to jump to
-          it, hover pauses the cycle.
+          SECTION 2: OUR FOUNDATION (Vision)
+          Background: LIGHT BLUE
       ====================================================== */}
 
-      <section className="bg-blue-light py-14 sm:py-20">
-
-        <div className="mx-auto max-w-7xl px-5 lg:px-8">
-
-          <Reveal className="text-center">
-
-            <SectionLabel>
-              Why Jimkey
-            </SectionLabel>
-
-            <h2 className="font-display mx-auto mt-4 max-w-2xl text-2xl font-bold text-navy sm:text-3xl">
-              Built for buyers who need it reliable
-            </h2>
-
-          </Reveal>
-
-          <div
-            className="mt-12 flex flex-col gap-4 sm:h-[420px] sm:flex-row"
-          >
-
-            {valueProps.map((v, i) => {
-
-              const Icon =
-                valueIcons[i]
-
-              const isActive =
-                i === activeWhy
-
-              return (
-                <button
-                  key={v.title}
-                  type="button"
-                  onClick={() => setActiveWhy(i)}
-                  aria-pressed={isActive}
-                  className={`
-                    group relative flex flex-col overflow-hidden rounded-2xl
-                    border border-line bg-white text-left shadow-sm
-                    transition-[flex-grow,box-shadow] duration-700 ease-in-out
-                    ${isActive
-                      ? 'shadow-lg sm:flex-[3]'
-                      : 'hover:shadow-md sm:flex-[1]'}
-                  `}
-                >
-
-                  {isActive ? (
-                    <>
-
-                      <div
-                        className={`relative h-36 w-full shrink-0 overflow-hidden bg-gradient-to-br sm:h-44 ${whyGradients[i]}`}
-                      >
-
-                        <div className="absolute -left-6 -top-10 h-32 w-32 rounded-full bg-white/25 blur-2xl" />
-                        <div className="absolute -bottom-10 right-4 h-28 w-28 rounded-full bg-navy/25 blur-2xl" />
-
-                      </div>
-
-                      <div className="flex flex-1 flex-col p-6 sm:p-7">
-
-                        <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-teal/10 text-teal-dark">
-                          <Icon size={18} />
-                        </span>
-
-                        <h3 className="font-display mt-4 text-xl font-bold text-navy sm:text-2xl">
-                          {v.title}
-                        </h3>
-
-                        <p className="mt-2 text-sm leading-relaxed text-steel">
-                          {v.desc}
-                        </p>
-
-                      </div>
-
-                    </>
-                  ) : (
-                    <div className="flex h-full flex-row items-center justify-between gap-4 p-6 sm:flex-col sm:items-start sm:justify-between sm:p-6">
-
-                      <span className="font-display text-3xl font-bold text-navy/10 sm:text-4xl">
-                        {String(i + 1).padStart(2, '0')}.
-                      </span>
-
-                      <div className="text-right sm:text-left">
-
-                        <span className="ml-auto flex h-8 w-8 items-center justify-center rounded-lg bg-teal/10 text-teal-dark sm:ml-0">
-                          <Icon size={16} />
-                        </span>
-
-                        <h3 className="font-display mt-3 text-sm font-bold text-navy">
-                          {v.title}
-                        </h3>
-
-                      </div>
-
-                    </div>
-                  )}
-
-                </button>
-              )
-            })}
-
-          </div>
-
-        </div>
-
-      </section>
-
-      {/* =====================================================
-          VISION
-          Vertical timeline treatment — a continuous connecting
-          line with numbered circle markers, image framed with a
-          brand-colour offset panel.
-      ====================================================== */}
-
-      <section className="py-14 sm:py-20 bg-blue-dark">
+      <section className="py-14 sm:py-20 bg-blue-light">
 
         <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 lg:grid-cols-2 lg:gap-16 lg:px-8">
 
           <Reveal className="order-2 lg:order-1">
 
-            <SectionLabel dark>
+            <SectionLabel>
               Our Foundation
             </SectionLabel>
 
             <div className="relative mt-6 space-y-9 pl-12">
 
-              <span className="absolute left-4 top-1 bottom-1 w-px bg-white/25" />
+              <span className="absolute left-4 top-1 bottom-1 w-px bg-navy/25" />
 
               {visionMission.map((v, i) => (
                 <div
@@ -651,15 +538,15 @@ export default function Home() {
                   className="relative"
                 >
 
-                  <span className="absolute -left-12 top-0 flex h-8 w-8 items-center justify-center rounded-full bg-white font-mono text-xs font-bold text-navy ring-4 ring-blue-dark">
+                  <span className="absolute -left-12 top-0 flex h-8 w-8 items-center justify-center rounded-full bg-navy font-mono text-sm font-bold text-white ring-4 ring-blue-light">
                     {String(i + 1).padStart(2, '0')}
                   </span>
 
-                  <h3 className="font-display text-lg font-bold text-white">
+                  <h3 className="font-display text-xl font-bold text-navy">
                     {v.title}
                   </h3>
 
-                  <p className="mt-1.5 text-sm leading-relaxed text-white/75">
+                  <p className="mt-1.5 text-base leading-relaxed text-navy/75">
                     {v.desc}
                   </p>
 
@@ -677,12 +564,12 @@ export default function Home() {
 
             <div className="relative">
 
-              <div className="absolute -inset-3 -z-10 rounded-2xl bg-white/15" />
+              <div className="absolute -inset-3 -z-10 rounded-2xl bg-navy/10" />
 
               <img
                 src={vision}
                 alt="Vision and mission"
-                className="aspect-[4/3] w-full rounded-2xl border-4 border-white object-cover shadow-lg"
+                className="aspect-[4/3] w-full rounded-2xl border-4 border-navy object-cover shadow-lg"
               />
 
             </div>
@@ -694,10 +581,132 @@ export default function Home() {
       </section>
 
       {/* =====================================================
-          PROCESS
-          Redesigned: numbered nodes + curved connectors +
-          icon-circle cards with a colour wave accent, matching
-          the "Our Way of Working" reference layout.
+          SECTION 3: SERVICES & SOLUTIONS
+          Background: DARK BLUE
+      ====================================================== */}
+
+      <section className="bg-blue-dark py-14 sm:py-20">
+
+        <div className="mx-auto max-w-7xl px-5 lg:px-8">
+
+          <Reveal className="mb-12">
+
+            <SectionLabel dark>
+              What We Offer
+            </SectionLabel>
+
+            <h2 className="font-display mt-4 max-w-2xl text-4xl font-bold text-white sm:text-5xl md:text-6xl">
+              Explore Our{' '}
+              <span className="text-teal-light">
+                Services & Solutions
+              </span>
+            </h2>
+
+          </Reveal>
+
+          <div className="grid gap-6 lg:grid-cols-2 lg:gap-8">
+
+            {/* SERVICES CARD */}
+            <Reveal delay={0}>
+
+              <Link
+                to="/products?category=4"
+                className="group relative flex h-[420px] w-full flex-col overflow-hidden rounded-2xl shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:h-[460px]"
+              >
+
+                <img
+                  src={servicesCardPhoto}
+                  alt="Waste management and EPR compliance services"
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy-deep via-navy-deep/70 to-navy-deep/10" />
+
+                <div className="relative z-10 mt-auto flex flex-col p-7 sm:p-9">
+
+                  <p className="font-mono text-sm font-bold uppercase tracking-widest text-amber">
+                    We Deliver
+                  </p>
+
+                  <h3 className="font-display mt-3 text-4xl font-black uppercase tracking-tight text-white sm:text-5xl">
+                    Services
+                  </h3>
+
+                  <p className="mt-4 text-base leading-relaxed text-white/85 sm:text-lg">
+                    End-to-end compliance and waste-management
+                    support — from EPR obligations to municipal and
+                    industrial waste handling.
+                  </p>
+
+                  <span className="mt-7 inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/70 px-5 py-3 text-base font-semibold text-white transition-colors duration-300 group-hover:bg-white group-hover:text-navy">
+                    View All Services
+                    <ArrowRight
+                      size={18}
+                      className="transition-transform group-hover:translate-x-1"
+                    />
+                  </span>
+
+                </div>
+
+              </Link>
+
+            </Reveal>
+
+            {/* PRODUCTS CARD */}
+            <Reveal delay={100}>
+
+              <Link
+                to="/products"
+                className="group relative flex h-[420px] w-full flex-col overflow-hidden rounded-2xl shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:h-[460px]"
+              >
+
+                <img
+                  src={productsCardPhoto}
+                  alt="Alternative fuel resources and recovered materials"
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy-deep via-navy-deep/70 to-navy-deep/10" />
+
+                <div className="relative z-10 mt-auto flex flex-col p-7 sm:p-9">
+
+                  <p className="font-mono text-sm font-bold uppercase tracking-widest text-teal-light">
+                    We Trade
+                  </p>
+
+                  <h3 className="font-display mt-3 text-4xl font-black uppercase tracking-tight text-white sm:text-5xl">
+                    Products
+                  </h3>
+
+                  <p className="mt-4 text-base leading-relaxed text-white/85 sm:text-lg">
+                    Sourced, verified and moved — alternative fuel
+                    resources, recovered oils, carbon materials and
+                    reclaimed steel, ready for industrial use.
+                  </p>
+
+                  <span className="mt-7 inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/70 px-5 py-3 text-base font-semibold text-white transition-colors duration-300 group-hover:bg-white group-hover:text-navy">
+                    View All Products
+                    <ArrowRight
+                      size={18}
+                      className="transition-transform group-hover:translate-x-1"
+                    />
+                  </span>
+
+                </div>
+
+              </Link>
+
+            </Reveal>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      {/* =====================================================
+          SECTION 4: OUR WAY OF WORKING (Process)
+          Background: LIGHT BLUE
       ====================================================== */}
 
       <section className="bg-blue-light py-14 sm:py-20">
@@ -710,14 +719,14 @@ export default function Home() {
               Process
             </SectionLabel>
 
-            <h2 className="font-display mx-auto mt-4 max-w-3xl text-3xl font-bold text-navy sm:text-4xl md:text-5xl">
+            <h2 className="font-display mx-auto mt-4 max-w-3xl text-4xl font-bold text-navy sm:text-5xl md:text-6xl">
               Our Way of{' '}
               <span className="text-teal-dark">
                 Working
               </span>
             </h2>
 
-            <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-steel sm:text-lg">
+            <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-steel sm:text-xl">
               A clear, responsible process that ensures quality,
               transparency and long-term value.
             </p>
@@ -809,7 +818,7 @@ export default function Home() {
 
                     {/* number node — pulses automatically, in sequence */}
                     <div
-                      className={`relative z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-full font-display text-base font-bold text-white ring-4 ring-white ${s.dot}`}
+                      className={`relative z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-full font-display text-lg font-bold text-white ring-4 ring-blue-light ${s.dot}`}
                       style={{
                         animation: 'processNodePulse 6s ease-in-out infinite',
                         animationDelay: `${-(i * 1.2)}s`,
@@ -831,11 +840,11 @@ export default function Home() {
                         className={`mx-auto mt-5 block h-0.5 w-8 rounded-full ${s.dot}`}
                       />
 
-                      <h3 className="font-display mt-4 text-lg font-bold text-navy sm:text-xl">
+                      <h3 className="font-display mt-4 text-xl font-bold text-navy sm:text-2xl">
                         {s.title}
                       </h3>
 
-                      <p className="mt-3 text-sm leading-relaxed text-steel">
+                      <p className="mt-3 text-base leading-relaxed text-steel">
                         {s.desc}
                       </p>
 
@@ -866,124 +875,112 @@ export default function Home() {
       </section>
 
       {/* =====================================================
-          SERVICES & SOLUTIONS
-          Two-card layout: real photo, short description and a
-          full-card link to the products page — Services first,
-          then Products.
+          SECTION 5: WHY JIMKEY
+          Background: DARK BLUE
+          Auto-cycling expandable cards — one card is active
+          (wider, shows image + description) at a time and the
+          set advances automatically; click any card to jump to
+          it, hover pauses the cycle.
       ====================================================== */}
 
       <section className="bg-blue-dark py-14 sm:py-20">
 
         <div className="mx-auto max-w-7xl px-5 lg:px-8">
 
-          <Reveal className="mb-12">
+          <Reveal className="text-center">
 
             <SectionLabel dark>
-              What We Offer
+              Why Jimkey
             </SectionLabel>
 
-            <h2 className="font-display mt-4 max-w-2xl text-3xl font-bold text-white sm:text-4xl md:text-5xl">
-              Explore Our{' '}
-              <span className="text-teal-light">
-                Services & Solutions
-              </span>
+            <h2 className="font-display mx-auto mt-4 max-w-2xl text-3xl font-bold text-white sm:text-4xl">
+              Built for buyers who need it reliable
             </h2>
 
           </Reveal>
 
-          <div className="grid gap-6 lg:grid-cols-2 lg:gap-8">
+          <div
+            className="mt-12 flex flex-col gap-4 sm:h-[420px] sm:flex-row"
+          >
 
-            {/* SERVICES CARD */}
-            <Reveal delay={0}>
+            {valueProps.map((v, i) => {
 
-              <Link
-                to="/products?category=4"
-                className="group relative flex h-[420px] w-full flex-col overflow-hidden rounded-2xl shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:h-[460px]"
-              >
+              const Icon =
+                valueIcons[i]
 
-                <img
-                  src={servicesCardPhoto}
-                  alt="Waste management and EPR compliance services"
-                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
+              const isActive =
+                i === activeWhy
 
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy-deep via-navy-deep/70 to-navy-deep/10" />
+              return (
+                <button
+                  key={v.title}
+                  type="button"
+                  onClick={() => setActiveWhy(i)}
+                  aria-pressed={isActive}
+                  className={`
+                    group relative flex flex-col overflow-hidden rounded-2xl
+                    border border-line bg-white text-left shadow-sm
+                    transition-[flex-grow,box-shadow] duration-700 ease-in-out
+                    ${isActive
+                      ? 'shadow-lg sm:flex-[3]'
+                      : 'hover:shadow-md sm:flex-[1]'}
+                  `}
+                >
 
-                <div className="relative z-10 mt-auto flex flex-col p-7 sm:p-9">
+                  {isActive ? (
+                    <>
 
-                  <p className="font-mono text-xs font-bold uppercase tracking-widest text-amber">
-                    We Deliver
-                  </p>
+                      <div
+                        className={`relative h-36 w-full shrink-0 overflow-hidden bg-gradient-to-br sm:h-44 ${whyGradients[i]}`}
+                      >
 
-                  <h3 className="font-display mt-3 text-3xl font-black uppercase tracking-tight text-white sm:text-4xl">
-                    Services
-                  </h3>
+                        <div className="absolute -left-6 -top-10 h-32 w-32 rounded-full bg-white/25 blur-2xl" />
+                        <div className="absolute -bottom-10 right-4 h-28 w-28 rounded-full bg-navy/25 blur-2xl" />
 
-                  <p className="mt-4 text-sm leading-relaxed text-white/85 sm:text-base">
-                    End-to-end compliance and waste-management
-                    support — from EPR obligations to municipal and
-                    industrial waste handling.
-                  </p>
+                      </div>
 
-                  <span className="mt-7 inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/70 px-5 py-3 text-sm font-semibold text-white transition-colors duration-300 group-hover:bg-white group-hover:text-navy">
-                    View All Services
-                    <ArrowRight
-                      size={16}
-                      className="transition-transform group-hover:translate-x-1"
-                    />
-                  </span>
+                      <div className="flex flex-1 flex-col p-6 sm:p-7">
 
-                </div>
+                        <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-teal/10 text-teal-dark">
+                          <Icon size={18} />
+                        </span>
 
-              </Link>
+                        <h3 className="font-display mt-4 text-2xl font-bold text-navy sm:text-3xl">
+                          {v.title}
+                        </h3>
 
-            </Reveal>
+                        <p className="mt-2 text-base leading-relaxed text-steel">
+                          {v.desc}
+                        </p>
 
-            {/* PRODUCTS CARD */}
-            <Reveal delay={100}>
+                      </div>
 
-              <Link
-                to="/products"
-                className="group relative flex h-[420px] w-full flex-col overflow-hidden rounded-2xl shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:h-[460px]"
-              >
+                    </>
+                  ) : (
+                    <div className="flex h-full flex-row items-center justify-between gap-4 p-6 sm:flex-col sm:items-start sm:justify-between sm:p-6">
 
-                <img
-                  src={productsCardPhoto}
-                  alt="Alternative fuel resources and recovered materials"
-                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
+                      <span className="font-display text-4xl font-bold text-navy/10 sm:text-5xl">
+                        {String(i + 1).padStart(2, '0')}.
+                      </span>
 
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy-deep via-navy-deep/70 to-navy-deep/10" />
+                      <div className="text-right sm:text-left">
 
-                <div className="relative z-10 mt-auto flex flex-col p-7 sm:p-9">
+                        <span className="ml-auto flex h-8 w-8 items-center justify-center rounded-lg bg-teal/10 text-teal-dark sm:ml-0">
+                          <Icon size={16} />
+                        </span>
 
-                  <p className="font-mono text-xs font-bold uppercase tracking-widest text-teal-light">
-                    We Trade
-                  </p>
+                        <h3 className="font-display mt-3 text-base font-bold text-navy">
+                          {v.title}
+                        </h3>
 
-                  <h3 className="font-display mt-3 text-3xl font-black uppercase tracking-tight text-white sm:text-4xl">
-                    Products
-                  </h3>
+                      </div>
 
-                  <p className="mt-4 text-sm leading-relaxed text-white/85 sm:text-base">
-                    Sourced, verified and moved — alternative fuel
-                    resources, recovered oils, carbon materials and
-                    reclaimed steel, ready for industrial use.
-                  </p>
+                    </div>
+                  )}
 
-                  <span className="mt-7 inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/70 px-5 py-3 text-sm font-semibold text-white transition-colors duration-300 group-hover:bg-white group-hover:text-navy">
-                    View All Products
-                    <ArrowRight
-                      size={16}
-                      className="transition-transform group-hover:translate-x-1"
-                    />
-                  </span>
-
-                </div>
-
-              </Link>
-
-            </Reveal>
+                </button>
+              )
+            })}
 
           </div>
 
@@ -992,7 +989,8 @@ export default function Home() {
       </section>
 
       {/* =====================================================
-          FAQ
+          SECTION 6: FAQ (Frequently Asked)
+          Background: LIGHT BLUE
       ====================================================== */}
 
       <section className="bg-blue-light py-14 sm:py-20">
@@ -1005,7 +1003,7 @@ export default function Home() {
               Good to know
             </SectionLabel>
 
-            <h2 className="font-display mt-4 text-2xl font-bold text-navy sm:text-3xl">
+            <h2 className="font-display mt-4 text-3xl font-bold text-navy sm:text-4xl">
               Frequently asked
             </h2>
 
@@ -1021,7 +1019,7 @@ export default function Home() {
                 className="group p-5 open:bg-white sm:p-6"
               >
 
-                <summary className="font-display flex cursor-pointer list-none items-center justify-between gap-4 text-sm font-bold text-navy sm:text-base">
+                <summary className="font-display flex cursor-pointer list-none items-center justify-between gap-4 text-base font-bold text-navy sm:text-lg">
 
                   <span className="min-w-0">
                     {f.q}
@@ -1033,7 +1031,7 @@ export default function Home() {
 
                 </summary>
 
-                <p className="mt-3 text-sm leading-relaxed text-steel">
+                <p className="mt-3 text-base leading-relaxed text-steel">
                   {f.a}
                 </p>
 
