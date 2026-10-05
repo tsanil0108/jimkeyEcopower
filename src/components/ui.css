@@ -1,0 +1,3 @@
+.ui-scope{}
+.grain-bg{background-image:radial-gradient(rgba(27,134,158,.08) 1px,transparent 1px);background-size:18px 18px;}
+.dotted-rule{background-image:linear-gradient(to right,var(--color-line) 45%,transparent 0%);background-position:bottom;background-size:8px 1px;background-repeat:repeat-x;}

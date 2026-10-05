@@ -1,0 +1,4 @@
+.circular-seal-scope { transform-origin:center; }
+@keyframes seal-spin{to{transform:rotate(360deg)}}
+.circular-seal-scope .seal-ring{animation:seal-spin 42s linear infinite;transform-origin:center;}
+.circular-seal-scope:hover .seal-ring{animation-play-state:paused;}

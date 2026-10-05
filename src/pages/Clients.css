@@ -1,0 +1,6 @@
+.clients-page { background:var(--color-paper); }
+.clients-page .client-logo-card { border:1px solid var(--color-line); background:#fff; border-radius:14px; box-shadow:0 6px 18px rgba(16,42,67,.05); }
+@keyframes clients-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes clients-marquee-reverse{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+.clients-page .marquee-track{animation:clients-marquee 32s linear infinite;}
+.clients-page .marquee-track-reverse{animation:clients-marquee-reverse 38s linear infinite;}

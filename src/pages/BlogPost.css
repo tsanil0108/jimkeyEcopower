@@ -1,0 +1,5 @@
+.blog-post-page { background:var(--color-paper); }
+.blog-post-page .article-hero { background:var(--color-navy); color:#fff; }
+.blog-post-page .article-content { color:var(--color-steel); }
+.blog-post-page .article-content h1,.blog-post-page .article-content h2,.blog-post-page .article-content h3 { color:var(--color-navy); font-family:var(--font-display); }
+.blog-post-page .article-content a { color:var(--color-teal-dark); font-weight:600; }

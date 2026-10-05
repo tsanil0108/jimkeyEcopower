@@ -1,0 +1,4 @@
+.admin-page { min-height:calc(100vh - 80px); background:#f3f7f9; }
+.admin-page .admin-card { border:1px solid var(--color-line); background:#fff; border-radius:18px; box-shadow:0 8px 28px rgba(16,42,67,.06); }
+.admin-page table { width:100%; border-collapse:collapse; }
+.admin-page th { color:var(--color-navy); font-weight:700; }
