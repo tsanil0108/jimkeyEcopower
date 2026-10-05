@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 .floating-contact-scope {
   position: fixed;
@@ -20,3 +21,7 @@
     bottom: 16px;
   }
 }
+=======
+.floating-contact-scope { position:fixed; right:18px; bottom:18px; z-index:60; }
+.floating-contact-scope a { box-shadow:0 14px 34px rgba(16,42,67,.18); }
+>>>>>>> 4aebd9073412c13c2625fb1cc85a74a9a49138a3

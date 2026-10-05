@@ -372,3 +372,25 @@ export const workingSteps = [
   { n: 4, title: 'Manage', desc: 'Monitoring the entire supply chain during transaction' },
   { n: 5, title: 'Delivery', desc: 'Delivery and reporting of high quality AFR' },
 ]
+<<<<<<< HEAD
+=======
+
+export const visionMission = [
+  {
+    title: 'The Vision and Mission',
+    desc: 'Global leader in the trading of alternative fuel resources, championing the principles of circular economy and sustainability',
+  },
+  {
+    title: 'Driving Sustainable Change',
+    desc: 'Jimkey seeks to significantly reduce reliance on fossil fuels and contribute to a cleaner planet',
+  },
+  {
+    title: 'Promotion of Renewable and Green Energy',
+    desc: 'Jimkey aims to facilitate the integration of these sustainable energy sources into the mainstream, fostering a cleaner and healthier planet',
+  },
+  {
+    title: 'Community Empowerment',
+    desc: 'Jimkey strives to educate, inspire, and empower individuals to take an active role in shaping a greener future',
+  },
+]
+>>>>>>> 4aebd9073412c13c2625fb1cc85a74a9a49138a3

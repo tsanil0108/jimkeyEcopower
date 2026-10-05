@@ -17,6 +17,7 @@ import {
   Trash2,
   Building2,
   ImageOff,
+<<<<<<< HEAD
 } from 'lucide-react'
 
 import pyrolysisOilImage from '../assets/products/pyrolysis-oil.jpg'
@@ -26,6 +27,11 @@ import burntSteelImage from '../assets/products/burnt-steel-wire.jpg'
 import industryWasteImage from '../assets/products/Industry Waste Management.png'
 import tallowOilImage from '../assets/products/tallow-oil.jpg'
 
+=======
+  Mouse,
+} from 'lucide-react'
+
+>>>>>>> 4aebd9073412c13c2625fb1cc85a74a9a49138a3
 
 /* =====================================================
    JOURNEY DATA
@@ -36,10 +42,17 @@ const steps = [
     id: 1,
     num: '01',
     icon: Flame,
+<<<<<<< HEAD
     name: 'Recovered Materials',
     short: 'AFR',
     title: 'Premium Industrial-Grade Recovered Materials.',
     image: tallowOilImage,
+=======
+    name: 'Alternative Fuel Resource',
+    short: 'AFR',
+    title: 'Alternative fuels & recovered feedstock',
+    image: '/journey/afr.jpg',
+>>>>>>> 4aebd9073412c13c2625fb1cc85a74a9a49138a3
   },
 
   {
@@ -48,48 +61,81 @@ const steps = [
     icon: Cable,
     name: 'Steel Wire',
     short: 'Steel Wire',
+<<<<<<< HEAD
     title: 'High-Calorific Pyrolysis Oil & Refuse-Derived Fuel (RDF).',
     image: pyrolysisOilImage,
+=======
+    title: 'Recovered steel from tyre processing',
+    image: '/journey/steel-wire.jpg',
+>>>>>>> 4aebd9073412c13c2625fb1cc85a74a9a49138a3
   },
 
   {
     id: 3,
     num: '03',
     icon: SprayCan,
+<<<<<<< HEAD
     name: 'Tyre Carbon Black',
     short: 'Carbon Black',
     title: 'Top-Tier Tyre Carbon Black for Manufacturing.',
     image: carbonBlackImage,
+=======
+    name: 'Cleaning Chemicals',
+    short: 'Chemicals',
+    title: 'Cleaning formulations for commercial use',
+    image: '/journey/chemicals.jpg',
+>>>>>>> 4aebd9073412c13c2625fb1cc85a74a9a49138a3
   },
 
   {
     id: 4,
     num: '04',
     icon: FileCheck2,
+<<<<<<< HEAD
     name: 'Steel Scrap',
     short: 'Steel Scrap',
     title: 'High-Tensile Unburnt & Burnt Steel Scrap.',
     image: unburntSteelImage,
+=======
+    name: 'Extended Producer Responsibility',
+    short: 'EPR',
+    title: 'EPR support across regulated waste streams',
+    image: '/journey/epr.jpg',
+>>>>>>> 4aebd9073412c13c2625fb1cc85a74a9a49138a3
   },
 
   {
     id: 5,
     num: '05',
     icon: Trash2,
+<<<<<<< HEAD
     name: 'Reclaimed Industrial Copper',
     short: 'Copper',
     title: 'High-Purity Reclaimed Industrial Copper.',
     image: industryWasteImage,
+=======
+    name: 'Municipal Solid Waste',
+    short: 'MSW',
+    title: 'Municipal waste-management solutions',
+    image: '/journey/municipal.jpg',
+>>>>>>> 4aebd9073412c13c2625fb1cc85a74a9a49138a3
   },
 
   {
     id: 6,
     num: '06',
     icon: Building2,
+<<<<<<< HEAD
     name: 'Quality & Pan-India Supply',
     short: 'Quality Supply',
     title: 'Verified Material Quality with Pan-India Supply.',
     image: burntSteelImage,
+=======
+    name: 'Industry Waste Management',
+    short: 'Industrial',
+    title: 'Industrial waste handling & recovery',
+    image: '/journey/industrial.jpg',
+>>>>>>> 4aebd9073412c13c2625fb1cc85a74a9a49138a3
   },
 ]
 
@@ -834,7 +880,27 @@ export default function CategoryJourney() {
             </div>
 
 
+<<<<<<< HEAD
 
+=======
+            <div className="cjv2-left-counter">
+
+              <strong>
+                {current.num}
+              </strong>
+
+              <span>
+                /
+                {String(
+                  steps.length
+                ).padStart(
+                  2,
+                  '0'
+                )}
+              </span>
+
+            </div>
+>>>>>>> 4aebd9073412c13c2625fb1cc85a74a9a49138a3
 
           </div>
 
@@ -899,6 +965,45 @@ export default function CategoryJourney() {
             </Link>
 
 
+<<<<<<< HEAD
+=======
+            {/* DOT SELECTOR */}
+
+            <div className="cjv2-dots">
+
+              {steps.map(
+                (
+                  step,
+                  index
+                ) => (
+
+                  <button
+                    key={
+                      step.id
+                    }
+                    type="button"
+                    onClick={() =>
+                      goToStep(
+                        index
+                      )
+                    }
+                    className={
+                      index ===
+                      activeIndex
+                        ? 'active'
+                        : ''
+                    }
+                    aria-label={
+                      step.name
+                    }
+                  />
+
+                )
+              )}
+
+            </div>
+
+>>>>>>> 4aebd9073412c13c2625fb1cc85a74a9a49138a3
           </div>
 
 
@@ -970,8 +1075,13 @@ export default function CategoryJourney() {
                     </strong>
 
                     <small>
+<<<<<<< HEAD
                       Check image import
 in src/assets/products
+=======
+                      Add image in
+                      public/journey
+>>>>>>> 4aebd9073412c13c2625fb1cc85a74a9a49138a3
                     </small>
 
                   </div>
@@ -1008,6 +1118,46 @@ in src/assets/products
         </div>
 
 
+<<<<<<< HEAD
+=======
+        {/* =====================================================
+            FOOTER
+        ====================================================== */}
+
+        <div className="cjv2-footer">
+
+          <div className="cjv2-progress">
+
+            <span
+              style={{
+                width:
+                  `${progress * 100}%`,
+              }}
+            />
+
+          </div>
+
+
+          <div className="cjv2-hint">
+
+            <Mouse
+              size={14}
+            />
+
+            <span>
+
+              {progress >=
+              0.999
+                ? 'Scroll once more to view products'
+                : 'Scroll to explore'}
+
+            </span>
+
+          </div>
+
+        </div>
+
+>>>>>>> 4aebd9073412c13c2625fb1cc85a74a9a49138a3
       </div>
 
     </section>
