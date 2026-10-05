@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 
-=======
->>>>>>> 4aebd9073412c13c2625fb1cc85a74a9a49138a3
 import { Link } from 'react-router-dom'
 import {
   MapPin,
@@ -13,21 +10,12 @@ import {
 import logo from '../assets/logo.png'
 
 import {
-<<<<<<< HEAD
-=======
-  categories,
->>>>>>> 4aebd9073412c13c2625fb1cc85a74a9a49138a3
   company,
 } from '../data/content'
 
 import { Reveal } from './ui'
 
-<<<<<<< HEAD
 // Facebook Icon
-=======
-// lucide-react no longer ships brand/logo icons (trademark reasons),
-// so these three are small inline SVGs instead of lucide imports.
->>>>>>> 4aebd9073412c13c2625fb1cc85a74a9a49138a3
 function FacebookIcon(props) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
@@ -36,7 +24,6 @@ function FacebookIcon(props) {
   )
 }
 
-<<<<<<< HEAD
 // Instagram Icon
 function InstagramIcon(props) {
   return (
@@ -56,22 +43,11 @@ function InstagramIcon(props) {
         fill="currentColor"
         stroke="none"
       />
-=======
-function InstagramIcon(props) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" {...props}>
-      <rect x="3.5" y="3.5" width="17" height="17" rx="4.5" />
-      <circle cx="12" cy="12" r="4" />
-      <circle cx="16.9" cy="7.1" r="0.9" fill="currentColor" stroke="none" />
->>>>>>> 4aebd9073412c13c2625fb1cc85a74a9a49138a3
     </svg>
   )
 }
 
-<<<<<<< HEAD
 // YouTube Icon
-=======
->>>>>>> 4aebd9073412c13c2625fb1cc85a74a9a49138a3
 function YoutubeIcon(props) {
   return (
     <svg viewBox="0 0 24 24" {...props}>
@@ -84,18 +60,13 @@ function YoutubeIcon(props) {
   )
 }
 
-<<<<<<< HEAD
 // Replace # with your actual social profile URLs when available.
-=======
-// TODO: replace with the real social page URLs
->>>>>>> 4aebd9073412c13c2625fb1cc85a74a9a49138a3
 const socials = [
   { icon: FacebookIcon, href: '#', label: 'Facebook' },
   { icon: InstagramIcon, href: '#', label: 'Instagram' },
   { icon: YoutubeIcon, href: '#', label: 'YouTube' },
 ]
 
-<<<<<<< HEAD
 // Footer solutions list
 const footerSolutions = [
   'EPR & Compliance Consulting',
@@ -105,28 +76,15 @@ const footerSolutions = [
   'Tyre Steel & Alternative Feedstocks',
 ]
 
-=======
->>>>>>> 4aebd9073412c13c2625fb1cc85a74a9a49138a3
 export default function Footer() {
   return (
     <footer className="relative z-0 overflow-hidden bg-teal text-white">
 
-<<<<<<< HEAD
-=======
-      {/* Top padding just clears the HelpBanner card's overlap; the card's
-          own negative margin already does most of the work. */}
->>>>>>> 4aebd9073412c13c2625fb1cc85a74a9a49138a3
       <div className="relative mx-auto max-w-7xl px-5 pb-10 pt-14 sm:pt-16 lg:px-8 lg:pt-20">
 
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-12">
 
-<<<<<<< HEAD
           {/* BRAND & CONTACT DETAILS */}
-=======
-          {/* =====================
-              BRAND
-          ====================== */}
->>>>>>> 4aebd9073412c13c2625fb1cc85a74a9a49138a3
           <Reveal className="sm:col-span-2 lg:col-span-4">
 
             <img
@@ -135,32 +93,20 @@ export default function Footer() {
               className="h-12 w-auto brightness-0 invert"
             />
 
-<<<<<<< HEAD
             <p className="mt-5 max-w-sm text-sm leading-7 text-white/80">
               Pioneering Integrated Sustainability, Environmental
               Compliance, and Resource Recovery.
             </p>
 
             {/* Existing address, phone and email retained */}
-=======
-            <p className="mt-5 max-w-sm text-sm leading-7 text-white/55">
-              {company.tagline}
-            </p>
-
-            {/* Address / phone / email */}
->>>>>>> 4aebd9073412c13c2625fb1cc85a74a9a49138a3
             <div className="mt-6 space-y-4">
 
               <div className="flex gap-3">
                 <span className="footer-icon">
                   <MapPin size={16} />
                 </span>
-<<<<<<< HEAD
 
                 <p className="text-sm leading-6 text-white/80">
-=======
-                <p className="text-sm leading-6 text-white/55">
->>>>>>> 4aebd9073412c13c2625fb1cc85a74a9a49138a3
                   {company.address}
                 </p>
               </div>
@@ -169,16 +115,10 @@ export default function Footer() {
                 <span className="footer-icon">
                   <Phone size={16} />
                 </span>
-<<<<<<< HEAD
 
                 <a
                   href={`tel:+${company.whatsapp}`}
                   className="footer-link text-sm text-white/90"
-=======
-                <a
-                  href={`tel:+${company.whatsapp}`}
-                  className="footer-link text-sm text-white/80"
->>>>>>> 4aebd9073412c13c2625fb1cc85a74a9a49138a3
                 >
                   {company.phone}
                 </a>
@@ -188,16 +128,10 @@ export default function Footer() {
                 <span className="footer-icon">
                   <Mail size={16} />
                 </span>
-<<<<<<< HEAD
 
                 <a
                   href={`mailto:${company.email}`}
                   className="footer-link text-sm text-white/90"
-=======
-                <a
-                  href={`mailto:${company.email}`}
-                  className="footer-link text-sm text-white/80"
->>>>>>> 4aebd9073412c13c2625fb1cc85a74a9a49138a3
                 >
                   {company.email}
                 </a>
@@ -220,20 +154,13 @@ export default function Footer() {
 
           </Reveal>
 
-<<<<<<< HEAD
           {/* QUICK LINKS */}
-=======
-          {/* =====================
-              QUICK LINKS
-          ====================== */}
->>>>>>> 4aebd9073412c13c2625fb1cc85a74a9a49138a3
           <Reveal delay={80} className="lg:col-span-2">
 
             <h4 className="text-base font-bold text-white">
               Quick Links
             </h4>
 
-<<<<<<< HEAD
             <ul className="mt-5 space-y-3 text-sm text-white/80">
 
               <li>
@@ -264,39 +191,12 @@ export default function Footer() {
                 <Link to="/contact" className="footer-link">
                   Contact Us
                 </Link>
-=======
-            <ul className="mt-5 space-y-3 text-sm text-white/55">
-
-              <li>
-                <Link to="/" className="footer-link">Home</Link>
-              </li>
-
-              <li>
-                <Link to="/about" className="footer-link">About Us</Link>
-              </li>
-
-              <li>
-                <Link to="/products" className="footer-link">Products</Link>
-              </li>
-
-              <li>
-                <Link to="/gallery" className="footer-link">Gallery / Media</Link>
-              </li>
-
-              <li>
-                <Link to="/clients" className="footer-link">Clients</Link>
-              </li>
-
-              <li>
-                <Link to="/contact" className="footer-link">Contact Us</Link>
->>>>>>> 4aebd9073412c13c2625fb1cc85a74a9a49138a3
               </li>
 
             </ul>
 
           </Reveal>
 
-<<<<<<< HEAD
           {/* SOLUTIONS & COMPLIANCE */}
           <Reveal delay={140} className="lg:col-span-3">
 
@@ -313,26 +213,6 @@ export default function Footer() {
                     className="footer-link"
                   >
                     {solution}
-=======
-          {/* =====================
-              MATERIALS
-          ====================== */}
-          <Reveal delay={140} className="lg:col-span-2">
-
-            <h4 className="text-base font-bold text-white">
-              Materials
-            </h4>
-
-            <ul className="mt-5 space-y-3 text-sm text-white/55">
-
-              {categories.map((c) => (
-                <li key={c.id}>
-                  <Link
-                    to={`/products?category=${c.id}`}
-                    className="footer-link"
-                  >
-                    {c.name}
->>>>>>> 4aebd9073412c13c2625fb1cc85a74a9a49138a3
                   </Link>
                 </li>
               ))}
@@ -341,21 +221,13 @@ export default function Footer() {
 
           </Reveal>
 
-<<<<<<< HEAD
           {/* CONTACT & WORKING HOURS */}
           <Reveal delay={200} className="lg:col-span-1">
-=======
-          {/* =====================
-              CONTACT
-          ====================== */}
-          <Reveal delay={200} className="lg:col-span-2">
->>>>>>> 4aebd9073412c13c2625fb1cc85a74a9a49138a3
 
             <h4 className="text-base font-bold text-white">
               Contact Us
             </h4>
 
-<<<<<<< HEAD
             <div className="mt-5 space-y-2 text-sm leading-6 text-white/80">
 
               <p className="font-semibold text-white">
@@ -366,22 +238,11 @@ export default function Footer() {
                 Mon–Sat: 10 AM – 6 PM
               </p>
 
-=======
-            <div className="mt-5 space-y-2 text-sm leading-6 text-white/55">
-              <p className="font-semibold text-white/80">Official Working Hours:</p>
-              <p>Mon–Sat: 10 AM – 6 PM</p>
->>>>>>> 4aebd9073412c13c2625fb1cc85a74a9a49138a3
             </div>
 
           </Reveal>
 
-<<<<<<< HEAD
           {/* SOCIAL MEDIA */}
-=======
-          {/* =====================
-              CONNECT WITH US
-          ====================== */}
->>>>>>> 4aebd9073412c13c2625fb1cc85a74a9a49138a3
           <Reveal delay={260} className="lg:col-span-2">
 
             <h4 className="text-base font-bold text-white">
@@ -389,10 +250,7 @@ export default function Footer() {
             </h4>
 
             <div className="mt-5 flex items-center gap-3">
-<<<<<<< HEAD
 
-=======
->>>>>>> 4aebd9073412c13c2625fb1cc85a74a9a49138a3
               {socials.map(({ icon: Icon, href, label }) => (
                 <a
                   key={label}
@@ -400,19 +258,12 @@ export default function Footer() {
                   aria-label={label}
                   target="_blank"
                   rel="noopener noreferrer"
-<<<<<<< HEAD
                   className="flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white/90 transition-all duration-300 hover:-translate-y-1 hover:scale-110 hover:bg-teal-light hover:text-navy-deep"
-=======
-                  className="flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white/70 transition-all duration-300 hover:-translate-y-1 hover:scale-110 hover:bg-teal-light hover:text-navy-deep"
->>>>>>> 4aebd9073412c13c2625fb1cc85a74a9a49138a3
                 >
                   <Icon size={18} />
                 </a>
               ))}
-<<<<<<< HEAD
 
-=======
->>>>>>> 4aebd9073412c13c2625fb1cc85a74a9a49138a3
             </div>
 
           </Reveal>
@@ -421,7 +272,6 @@ export default function Footer() {
 
       </div>
 
-<<<<<<< HEAD
       {/* BOTTOM BAR */}
       <div className="relative border-t border-white/15">
 
@@ -432,20 +282,6 @@ export default function Footer() {
           </span>
 
           <span className="font-mono text-xs uppercase tracking-widest text-white/70">
-=======
-      {/* =====================
-          BOTTOM BAR
-      ====================== */}
-      <div className="relative border-t border-white/10">
-
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-5 py-5 text-center sm:flex-row sm:text-left lg:px-8">
-
-          <span className="text-xs text-white/40 sm:text-sm">
-            © {new Date().getFullYear()} Jimkey Ecopower. All rights reserved.
-          </span>
-
-          <span className="font-mono text-xs uppercase tracking-widest text-white/35">
->>>>>>> 4aebd9073412c13c2625fb1cc85a74a9a49138a3
             Mumbai, India
           </span>
 
@@ -455,8 +291,4 @@ export default function Footer() {
 
     </footer>
   )
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 4aebd9073412c13c2625fb1cc85a74a9a49138a3
