@@ -11,10 +11,7 @@ export default function HelpBanner() {
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-[#EAF7F0] to-paper pt-10 pb-12 sm:pt-12 sm:pb-14 lg:pb-16">
 
-      {/* =========================
-          SUBTLE ARC BACKDROP (matches reference: soft gradient + a
-          couple of faint orbit lines, no busy dot-grid)
-      ========================== */}
+      {/* SUBTLE ARC BACKDROP */}
       <svg
         className="pointer-events-none absolute right-0 top-0 hidden h-full w-1/2 opacity-40 sm:block"
         viewBox="0 0 500 500"
@@ -27,11 +24,7 @@ export default function HelpBanner() {
 
       <div className="pointer-events-none absolute -right-24 -top-10 h-72 w-72 rounded-full bg-teal-light/20 blur-3xl" />
 
-      {/* =========================
-          JAGGED WAVE DIVIDER
-          An uneven "diving" curve (not a smooth arc) that reveals the
-          dark navy footer color rising up from the bottom, on an angle.
-      ========================== */}
+      {/* JAGGED WAVE DIVIDER */}
       <svg
         className="pointer-events-none absolute inset-x-0 bottom-0 w-full"
         viewBox="0 0 1440 240"
@@ -47,54 +40,48 @@ export default function HelpBanner() {
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
 
-        {/* =========================
-            FLOATING GREEN CARD
-            Scroll-reveal fade+lift on entry, gentle hover-lift, and a
-            negative bottom margin that pulls the Footer up so it
-            visually overlaps/sits behind the lower half of this card.
-        ========================== */}
+        {/* FLOATING GREEN CARD (smaller) */}
         <Reveal
-          className="group relative -mb-12 w-full overflow-hidden rounded-[2rem] bg-[#2AA889] px-5 py-8 text-center shadow-2xl shadow-[#2AA889]/30 transition-transform duration-500 hover:-translate-y-1 sm:-mb-16 sm:px-10 sm:py-10 lg:px-16"
+          className="group relative mx-auto -mb-12 w-full max-w-5xl overflow-hidden rounded-3xl bg-[#2AA889] px-5 py-6 text-center shadow-xl shadow-[#2AA889]/30 transition-transform duration-500 hover:-translate-y-1 sm:-mb-16 sm:px-8 sm:py-7 lg:px-12"
         >
 
-          {/* Decorative glow — drifts subtly for a bit of life */}
           <div className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 animate-[pulse_6s_ease-in-out_infinite] rounded-full bg-white/15 blur-3xl" />
           <div className="pointer-events-none absolute -bottom-16 -left-16 h-56 w-56 animate-[pulse_7s_ease-in-out_infinite] rounded-full bg-black/10 blur-3xl" />
 
           {/* Badge */}
-          <div className="relative inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.16em] text-white">
-            <Sparkles size={14} className="animate-pulse" />
+          <div className="relative inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-white sm:text-[11px]">
+            <Sparkles size={12} className="animate-pulse" />
             We're here to help
           </div>
 
           {/* Heading */}
-          <h2 className="relative mx-auto mt-4 max-w-4xl text-lg font-extrabold leading-[1.2] text-white sm:whitespace-nowrap sm:text-2xl lg:text-3xl">
+          <h2 className="relative mx-auto mt-3 max-w-3xl text-base font-extrabold leading-[1.25] text-white sm:whitespace-nowrap sm:text-xl lg:text-2xl">
             You've got a lot on your plate. Let us take this one off.
           </h2>
 
           {/* Description */}
-          <p className="relative mx-auto mt-4 max-w-xl text-sm leading-6 text-white/85 sm:text-base">
+          <p className="relative mx-auto mt-2.5 max-w-xl text-xs leading-5 text-white/85 sm:text-sm">
             Tell us what you need, and we'll take it from here.
           </p>
 
           {/* Buttons */}
-          <div className="relative mt-6 flex flex-col items-center justify-center gap-3 min-[420px]:flex-row">
+          <div className="relative mt-4 flex flex-col items-center justify-center gap-3 min-[420px]:flex-row">
 
             <a
               href="tel:+919768008679"
-              className="group/btn inline-flex w-full items-center justify-center gap-2 rounded-xl border-2 border-white px-7 py-3 text-sm font-bold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-white hover:text-[#2AA889] min-[420px]:w-auto sm:text-base"
+              className="group/btn inline-flex w-full items-center justify-center gap-2 rounded-xl border-2 border-white px-5 py-2 text-xs font-bold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-white hover:text-[#2AA889] min-[420px]:w-auto sm:text-sm"
             >
-              <Phone size={16} className="transition-transform duration-300 group-hover/btn:rotate-12" />
+              <Phone size={14} className="transition-transform duration-300 group-hover/btn:rotate-12" />
               Call Us
             </a>
 
             <Link
               to="/contact"
-              className="group/btn inline-flex w-full items-center justify-center gap-2 rounded-xl border-2 border-white px-7 py-3 text-sm font-bold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-white hover:text-[#2AA889] min-[420px]:w-auto sm:text-base"
+              className="group/btn inline-flex w-full items-center justify-center gap-2 rounded-xl border-2 border-white px-5 py-2 text-xs font-bold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-white hover:text-[#2AA889] min-[420px]:w-auto sm:text-sm"
             >
               Contact Us
               <ArrowRight
-                size={16}
+                size={14}
                 className="transition-transform duration-300 group-hover/btn:translate-x-1"
               />
             </Link>

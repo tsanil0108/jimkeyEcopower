@@ -48,18 +48,22 @@ const valueIcons = [
 const homePillars = [
   {
     title: 'Verified Compliance & Material Quality',
+    short: 'Compliance & Quality',
     desc: 'Every legal submission is rigorously vetted for compliance, and every consignment of recovered material is selected to meet industrial specifications.',
   },
   {
     title: 'Pan-India Advisory & Sourcing',
+    short: 'Pan-India Sourcing',
     desc: 'Our sourcing and advisory network helps businesses coordinate regulatory requirements and access recovered resources across multiple states and industries.',
   },
   {
     title: 'Seamless Regulatory Liaisoning',
+    short: 'Regulatory Liaisoning',
     desc: 'We simplify government approvals, authorizations, and SPCB/CPCB documentation so your team can focus on core business growth.',
   },
   {
     title: 'Measurable Environmental Impact',
+    short: 'Environmental Impact',
     desc: 'Our practical, audit-ready sustainability strategies support waste reduction, resource recovery, and corporate environmental compliance targets.',
   },
 ]
@@ -804,9 +808,10 @@ export default function Home() {
                     <Icon size={24} />
                   </span>
 
-                  {/* title shown vertically when the card is collapsed */}
-                  <span className="home-why-card-vtitle">
-                    {item.title}
+                  {/* label: full title on mobile, short title on collapsed desktop cards */}
+                  <span className="home-why-card-label">
+                    <span className="home-why-card-label-full">{item.title}</span>
+                    <span className="home-why-card-label-short">{item.short}</span>
                   </span>
 
                   {/* content slides in from the right when expanded */}
