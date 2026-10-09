@@ -1,4 +1,3 @@
-
 import {
   ArrowRight,
   ShieldCheck,
@@ -43,7 +42,7 @@ const valueIcons = [
 ]
 
 /* =====================================================
-   CORE PILLARS
+   CORE PILLARS (WHY JIMKEY) — with expandable details
 ====================================================== */
 
 const homePillars = [
@@ -105,13 +104,6 @@ const homeFaqs = [
     q: 'What industries do you partner with?',
     a: 'We work with manufacturers, industrial plants, recycling enterprises, and commercial businesses seeking environmental compliance support, waste management solutions, or sustainable alternative feedstocks.',
   },
-]
-
-const whyGradients = [
-  'from-teal-dark via-teal to-teal-light',
-  'from-amber-dark via-amber to-teal-light',
-  'from-navy via-teal-dark to-teal',
-  'from-teal via-amber-dark to-amber',
 ]
 
 /* =====================================================
@@ -186,6 +178,8 @@ const clientLogos = Object.values(
 export default function Home() {
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
+
+  // index of the expanded "Why" card (always one open)
   const [activeWhy, setActiveWhy] = useState(0)
 
   useEffect(() => {
@@ -205,14 +199,6 @@ export default function Home() {
     return () => {
       mounted = false
     }
-  }, [])
-
-  useEffect(() => {
-    const id = setInterval(() => {
-      setActiveWhy((prev) => (prev + 1) % homePillars.length)
-    }, 3800)
-
-    return () => clearInterval(id)
   }, [])
 
   return (
@@ -241,9 +227,9 @@ export default function Home() {
             </SectionLabel>
 
             <h1 className="mt-5 w-full max-w-3xl font-display text-[36px] font-bold leading-[1.12] text-white drop-shadow-lg min-[380px]:text-[40px] sm:text-[50px] md:text-[58px] lg:text-[64px] xl:text-[70px]">
-              End-to-End Environmental Compliance &amp; Resource Recovery Solutions
+              End-to-End Environmental Compliance &amp;
               <span className="mt-2 block text-[#f2a574]">
-                Built for Modern Industry.
+                 Resource Recovery Solutions
               </span>
             </h1>
 
@@ -767,24 +753,26 @@ export default function Home() {
       </section>
 
       {/* =====================================================
-          SECTION 5: WHY JIMKEY
+          SECTION 5: WHY JIMKEY — HORIZONTAL EXPANDING CARDS
       ====================================================== */}
 
-      <section className="bg-blue-dark py-14 sm:py-20">
+      <section className="home-why-section">
 
-        <div className="mx-auto max-w-7xl px-5 lg:px-8">
+        <div className="home-why-container">
 
-          <Reveal className="text-center">
+          <Reveal className="home-why-header">
 
             <SectionLabel dark>
               Why Jimkey Ecopower
             </SectionLabel>
 
-            <h2 className="mx-auto mt-4 max-w-3xl font-display text-3xl font-bold text-white sm:text-4xl">
-              Built for Organizations That Value Compliance, Quality, and Reliability
+            <h2>
+              Built for Organizations That Value
+              <br className="home-why-desktop-break" />{' '}
+              Compliance, Quality, and Reliability
             </h2>
 
-            <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/75 sm:text-lg">
+            <p>
               We combine regulatory support, responsible sourcing, and
               practical sustainability strategies to help industries
               navigate complex requirements with greater confidence.
@@ -792,51 +780,48 @@ export default function Home() {
 
           </Reveal>
 
-          <div className="mt-10 grid gap-4 sm:mt-12 sm:h-[420px] sm:grid-cols-4">
+          <div className="home-why-grid">
 
             {homePillars.map((item, i) => {
               const Icon = valueIcons[i]
-              const isActive = i === activeWhy
+              const isOpen = i === activeWhy
 
               return (
                 <button
                   key={item.title}
                   type="button"
                   onClick={() => setActiveWhy(i)}
-                  aria-pressed={isActive}
-                  className={`group relative flex min-w-0 flex-col overflow-hidden rounded-2xl border border-line bg-white text-left shadow-sm transition-all duration-500 ${isActive ? 'sm:col-span-1 sm:shadow-lg' : 'hover:shadow-md'}`}
+                  aria-expanded={isOpen}
+                  aria-label={item.title}
+                  className={`home-why-card home-why-card--${i + 1} ${isOpen ? 'is-open' : ''}`}
                 >
 
-                  <div className={`relative flex h-28 shrink-0 items-center justify-between overflow-hidden bg-gradient-to-br p-5 sm:h-36 ${whyGradients[i]}`}>
+                  <span className="home-why-card-number">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
 
-                    <span className="font-display text-4xl font-bold text-white/75 sm:text-5xl">
-                      {String(i + 1).padStart(2, '0')}
+                  <span className="home-why-card-icon">
+                    <Icon size={24} />
+                  </span>
+
+                  {/* title shown vertically when the card is collapsed */}
+                  <span className="home-why-card-vtitle">
+                    {item.title}
+                  </span>
+
+                  {/* content slides in from the right when expanded */}
+                  <span className="home-why-card-body">
+                    <span className="home-why-card-body-inner">
+                      <span className="home-why-card-content">
+                        <span className="home-why-card-heading">
+                          {item.title}
+                        </span>
+                        <span className="home-why-card-text">
+                          {item.desc}
+                        </span>
+                      </span>
                     </span>
-
-                    <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/20 text-white backdrop-blur-sm">
-                      <Icon size={24} />
-                    </span>
-
-                    <div className="pointer-events-none absolute -bottom-10 -right-5 h-28 w-28 rounded-full bg-white/15 blur-2xl" />
-
-                  </div>
-
-                  <div className="flex flex-1 flex-col p-5 sm:p-6">
-
-                    <h3 className="font-display text-lg font-bold leading-snug text-navy sm:text-xl">
-                      {item.title}
-                    </h3>
-
-                    <p className="mt-3 text-sm leading-6 text-steel sm:text-base sm:leading-relaxed">
-                      {item.desc}
-                    </p>
-
-                    <span className="mt-auto inline-flex items-center gap-2 pt-5 text-sm font-bold text-teal-dark">
-                      {isActive ? 'Selected' : 'Learn More'}
-                      <ArrowRight size={16} />
-                    </span>
-
-                  </div>
+                  </span>
 
                 </button>
               )
