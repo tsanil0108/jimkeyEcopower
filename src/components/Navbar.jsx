@@ -16,8 +16,7 @@ import { api } from '../lib/api'
 
 const links = [
   ['Home', '/'],
-  ['About Us', '/about'],
-  ['Products', '/products'],
+  ['Solutions', '/solutions'],
   ['Gallery/Media', '/gallery'],
   ['Clients', '/clients'],
   ['Blog', '/blog'],
@@ -189,12 +188,7 @@ export default function Navbar() {
             Home
           </NavLink>
 
-          <NavLink
-            to="/about"
-            className={navLink}
-          >
-            About Us
-          </NavLink>
+       
 
           {/* PRODUCTS */}
           <div
@@ -208,14 +202,14 @@ export default function Navbar() {
           >
 
             <NavLink
-              to="/products"
+              to="/solutions"
               className={({ isActive }) =>
                 `${navLink({
                   isActive,
                 })} flex items-center gap-1`
               }
             >
-              Products
+             Solutions
 
               <ChevronDown
                 size={13}

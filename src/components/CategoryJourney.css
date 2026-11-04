@@ -1069,6 +1069,12 @@ button.active {
 }
 
 
+/* Mobile-only category selector stays hidden on desktop. */
+.cjv2-mobile-dots {
+  display: none;
+}
+
+
 /* =====================================================
    TABLET
 ===================================================== */
@@ -1273,11 +1279,40 @@ button.active {
         235px
       );
 
-    transform:
-      none !important;
+    transform-origin: center;
+    will-change: transform, opacity;
+  }
 
-    opacity:
-      1 !important;
+  /* Mobile circular swipe navigation */
+  .cjv2-visual {
+    touch-action: pan-y;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .cjv2-mobile-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 9px;
+    grid-column: 1 / -1;
+    margin: -8px auto 0;
+  }
+
+  .cjv2-mobile-dots button {
+    width: 7px;
+    height: 7px;
+    padding: 0;
+    border: 0;
+    border-radius: 999px;
+    background: rgba(53, 165, 111, 0.24);
+    cursor: pointer;
+    transition: width 0.3s ease, background-color 0.3s ease;
+  }
+
+  .cjv2-mobile-dots button.active {
+    width: 28px;
+    background: #1b869e;
   }
 
 

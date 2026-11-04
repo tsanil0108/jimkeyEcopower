@@ -1,3 +1,4 @@
+
 import { Link } from 'react-router-dom'
 import {
   Phone,
@@ -18,13 +19,28 @@ export default function HelpBanner() {
         preserveAspectRatio="xMaxYMin meet"
         aria-hidden="true"
       >
-        <circle cx="80" cy="500" r="260" fill="none" stroke="#7BE0B5" strokeWidth="1" />
-        <circle cx="80" cy="500" r="200" fill="none" stroke="#7BE0B5" strokeWidth="1" strokeDasharray="4 6" />
+        <circle
+          cx="80"
+          cy="500"
+          r="260"
+          fill="none"
+          stroke="#7BE0B5"
+          strokeWidth="1"
+        />
+        <circle
+          cx="80"
+          cy="500"
+          r="200"
+          fill="none"
+          stroke="#7BE0B5"
+          strokeWidth="1"
+          strokeDasharray="4 6"
+        />
       </svg>
 
       <div className="pointer-events-none absolute -right-24 -top-10 h-72 w-72 rounded-full bg-teal-light/20 blur-3xl" />
 
-      {/* JAGGED WAVE DIVIDER */}
+      {/* WAVE DIVIDER */}
       <svg
         className="pointer-events-none absolute inset-x-0 bottom-0 w-full"
         viewBox="0 0 1440 240"
@@ -40,12 +56,14 @@ export default function HelpBanner() {
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
 
-        {/* FLOATING GREEN CARD (smaller) */}
+        {/* COMPACT GREEN HELP CARD */}
         <Reveal
-          className="group relative mx-auto -mb-12 w-full max-w-5xl overflow-hidden rounded-3xl bg-[#2AA889] px-5 py-6 text-center shadow-xl shadow-[#2AA889]/30 transition-transform duration-500 hover:-translate-y-1 sm:-mb-16 sm:px-8 sm:py-7 lg:px-12"
+          className="group relative mx-auto -mb-12 w-full max-w-4xl overflow-hidden rounded-3xl bg-[#2AA889] px-5 py-6 text-center shadow-xl shadow-[#2AA889]/30 transition-transform duration-500 hover:-translate-y-1 sm:-mb-16 sm:px-8 sm:py-7 lg:px-10"
         >
 
+          {/* Background Effects */}
           <div className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 animate-[pulse_6s_ease-in-out_infinite] rounded-full bg-white/15 blur-3xl" />
+
           <div className="pointer-events-none absolute -bottom-16 -left-16 h-56 w-56 animate-[pulse_7s_ease-in-out_infinite] rounded-full bg-black/10 blur-3xl" />
 
           {/* Badge */}
@@ -55,7 +73,7 @@ export default function HelpBanner() {
           </div>
 
           {/* Heading */}
-          <h2 className="relative mx-auto mt-3 max-w-3xl text-base font-extrabold leading-[1.25] text-white sm:whitespace-nowrap sm:text-xl lg:text-2xl">
+          <h2 className="relative mx-auto mt-3 max-w-3xl text-base font-extrabold leading-[1.25] text-white sm:text-xl lg:text-2xl">
             You've got a lot on your plate. Let us take this one off.
           </h2>
 
@@ -71,7 +89,10 @@ export default function HelpBanner() {
               href="tel:+919768008679"
               className="group/btn inline-flex w-full items-center justify-center gap-2 rounded-xl border-2 border-white px-5 py-2 text-xs font-bold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-white hover:text-[#2AA889] min-[420px]:w-auto sm:text-sm"
             >
-              <Phone size={14} className="transition-transform duration-300 group-hover/btn:rotate-12" />
+              <Phone
+                size={14}
+                className="transition-transform duration-300 group-hover/btn:rotate-12"
+              />
               Call Us
             </a>
 

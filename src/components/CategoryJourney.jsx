@@ -130,6 +130,10 @@ export default function CategoryJourney() {
   const lastDirectionRef =
     useRef(1)
 
+  // Mobile swipe tracking for circular category navigation
+  const touchStartXRef = useRef(null)
+  const touchStartYRef = useRef(null)
+
 
   const [progress, setProgress] =
     useState(0)
@@ -605,7 +609,11 @@ export default function CategoryJourney() {
 
 
   const radius =
-    165
+    typeof window !== 'undefined' && window.innerWidth <= 480
+      ? 38
+      : typeof window !== 'undefined' && window.innerWidth <= 820
+        ? 48
+        : 165
 
 
   const angleRad =
@@ -906,7 +914,41 @@ export default function CategoryJourney() {
               RIGHT CIRCULAR IMAGE MOVEMENT
           ================================================== */}
 
-          <div className="cjv2-visual">
+          <div
+            className="cjv2-visual"
+            onTouchStart={(event) => {
+              const touch = event.touches[0]
+              touchStartXRef.current = touch.clientX
+              touchStartYRef.current = touch.clientY
+            }}
+            onTouchEnd={(event) => {
+              const startX = touchStartXRef.current
+              const startY = touchStartYRef.current
+              const touch = event.changedTouches[0]
+
+              touchStartXRef.current = null
+              touchStartYRef.current = null
+
+              if (startX === null || startY === null || !touch) return
+
+              const deltaX = touch.clientX - startX
+              const deltaY = touch.clientY - startY
+
+              // Only treat a clear horizontal gesture as a category swipe.
+              if (Math.abs(deltaX) < 38) return
+              if (Math.abs(deltaX) < Math.abs(deltaY) * 1.2) return
+
+              if (deltaX < 0) {
+                goToStep(Math.min(steps.length - 1, activeIndex + 1))
+              } else {
+                goToStep(Math.max(0, activeIndex - 1))
+              }
+            }}
+            onTouchCancel={() => {
+              touchStartXRef.current = null
+              touchStartYRef.current = null
+            }}
+          >
 
             <div className="cjv2-orbit" />
 
@@ -1003,6 +1045,20 @@ in src/assets/products
 
             </div>
 
+          </div>
+
+          {/* Mobile category selector */}
+          <div className="cjv2-dots cjv2-mobile-dots" aria-label="Choose a category">
+            {steps.map((step, index) => (
+              <button
+                key={step.id}
+                type="button"
+                className={activeIndex === index ? 'active' : ''}
+                onClick={() => goToStep(index)}
+                aria-label={`Show ${step.name}`}
+                aria-pressed={activeIndex === index}
+              />
+            ))}
           </div>
 
         </div>

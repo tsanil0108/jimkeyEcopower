@@ -12,8 +12,7 @@ import {
 
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-
-import CircularSeal from '../components/CircularSeal'
+//  import CircularSeal from '../components/CircularSeal'
 import './Home.css'
 
 import heroBg from '../assets/products/hero.png'
@@ -232,8 +231,8 @@ export default function Home() {
 
             <h1 className="mt-5 w-full max-w-3xl font-display text-[36px] font-bold leading-[1.12] text-white drop-shadow-lg min-[380px]:text-[40px] sm:text-[50px] md:text-[58px] lg:text-[64px] xl:text-[70px]">
               End-to-End Environmental Compliance &amp;
-              <span className="mt-2 block text-[#f2a574]">
-                 Resource Recovery Solutions
+              <span className="mt-2 block text-[#1b869e]">
+                Resource Recovery Solutions
               </span>
             </h1>
 
@@ -294,7 +293,7 @@ export default function Home() {
 
           </div>
 
-          <div
+          {/* <div
             className="fade-in hidden min-w-0 lg:flex lg:w-full lg:justify-end"
             style={{ animationDelay: '200ms' }}
           >
@@ -304,7 +303,7 @@ export default function Home() {
                 className="float-y h-auto w-full"
               />
             </div>
-          </div>
+          </div> */}
 
         </div>
       </section>
