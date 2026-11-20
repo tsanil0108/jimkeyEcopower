@@ -11,6 +11,7 @@ import FloatingContact from './components/FloatingContact'
 import Home from './pages/Home'
 import Products from './pages/Products'
 import ProductDetail from './pages/ProductDetail'
+import Services from './pages/Services'
 import Gallery from './pages/Gallery'
 import Clients from './pages/Clients'
 import Blog from './pages/Blog'
@@ -20,7 +21,6 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import AdminDashboard from './pages/AdminDashboard'
 import ForgotPassword from './pages/ForgotPassword'
-
 
 // Automatically scroll to top whenever route changes
 function ScrollToTop() {
@@ -37,19 +37,15 @@ function ScrollToTop() {
   return null
 }
 
-
 export default function App() {
   return (
     <div className="app-shell">
 
-      {/* Global Scroll Reset */}
       <ScrollToTop />
 
-      {/* Navbar */}
       <Navbar />
 
       <main className="app-main">
-
         <Routes>
 
           {/* Home */}
@@ -58,10 +54,11 @@ export default function App() {
           {/* Solutions */}
           <Route path="/solutions" element={<Products />} />
 
-          {/* Existing Products URL support */}
-          <Route path="/products" element={<Products />} />
+          {/* Services */}
+          <Route path="/services" element={<Services />} />
 
-          {/* Product Details */}
+          {/* Products */}
+          <Route path="/products" element={<Products />} />
           <Route path="/products/:id" element={<ProductDetail />} />
 
           {/* Gallery & Media */}
@@ -86,14 +83,11 @@ export default function App() {
           <Route path="/admin" element={<AdminDashboard />} />
 
         </Routes>
-
       </main>
 
       {/* Common Sections */}
       <HelpBanner />
-
       <Footer />
-
       <FloatingContact />
 
     </div>

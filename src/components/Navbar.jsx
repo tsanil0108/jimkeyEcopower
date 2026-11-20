@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 
@@ -12,58 +11,20 @@ import {
 
 import logo from '../assets/logo.png'
 import { company } from '../data/content'
-import { api } from '../lib/api'
-
-const links = [
-  ['Home', '/'],
-  ['Solutions', '/solutions'],
-  ['Gallery/Media', '/gallery'],
-  ['Clients', '/clients'],
-  ['Blog', '/blog'],
-  ['Contact Us', '/contact'],
-]
 
 const navLink = ({ isActive }) =>
   `relative whitespace-nowrap text-[13px] font-semibold tracking-wide transition-colors
-   after:absolute after:-bottom-1.5 after:left-0 after:h-[2px]
-   after:w-0 after:bg-teal after:transition-all after:duration-300
-   hover:text-teal-dark hover:after:w-full
+   hover:text-teal-dark
    ${
      isActive
-       ? 'text-teal-dark after:w-full'
+       ? 'text-teal-dark'
        : 'text-navy'
    }`
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
-  const [productsOpen, setProductsOpen] =
-    useState(false)
-
-  const [categories, setCategories] =
-    useState([])
-
-  const [activeCat, setActiveCat] =
-    useState(null)
-
-  const [scrolled, setScrolled] =
-    useState(false)
-
-  useEffect(() => {
-    api
-      .getCategories()
-      .then((data) => {
-        const list = Array.isArray(data)
-          ? data
-          : []
-
-        setCategories(list)
-
-        if (list.length) {
-          setActiveCat(list[0].id)
-        }
-      })
-      .catch(() => {})
-  }, [])
+  const [solutionsOpen, setSolutionsOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
     const onScroll = () => {
@@ -72,46 +33,34 @@ export default function Navbar() {
 
     onScroll()
 
-    window.addEventListener(
-      'scroll',
-      onScroll,
-      { passive: true }
-    )
+    window.addEventListener('scroll', onScroll, {
+      passive: true,
+    })
 
     return () => {
-      window.removeEventListener(
-        'scroll',
-        onScroll
-      )
+      window.removeEventListener('scroll', onScroll)
     }
   }, [])
 
   useEffect(() => {
-    document.body.style.overflow =
-      open ? 'hidden' : ''
+    document.body.style.overflow = open ? 'hidden' : ''
 
     return () => {
       document.body.style.overflow = ''
     }
   }, [open])
 
+  const closeMenu = () => {
+    setOpen(false)
+    setSolutionsOpen(false)
+  }
+
   return (
     <header
       className={`
-        fixed
-        inset-x-0
-        top-0
-        z-[9999]
-        w-full
-
-        border-b
-
-        bg-paper/95
-        backdrop-blur-xl
-
-        transition-shadow
-        duration-300
-
+        fixed inset-x-0 top-0 z-[9999]
+        w-full border-b bg-paper/95 backdrop-blur-xl
+        transition-shadow duration-300
         ${
           scrolled
             ? 'border-line shadow-[0_5px_24px_rgba(20,51,42,0.10)]'
@@ -120,317 +69,178 @@ export default function Navbar() {
       `}
     >
 
-      <div
-        className="
-          mx-auto
-          flex
-          h-[72px]
-          w-full
-          max-w-7xl
-          items-center
-          justify-between
-          gap-3
-          px-4
-
-          sm:h-[76px]
-          sm:px-5
-
-          lg:h-[80px]
-          lg:px-8
-        "
-      >
+      {/* HEADER */}
+      <div className="
+        mx-auto flex h-[72px] w-full max-w-7xl
+        items-center justify-between gap-3 px-4
+        sm:h-[76px] sm:px-5
+        lg:h-[80px] lg:px-8
+      ">
 
         {/* LOGO */}
         <Link
           to="/"
-          onClick={() => setOpen(false)}
+          onClick={closeMenu}
           className="flex min-w-0 shrink-0 items-center"
         >
           <img
             src={logo}
             alt="Jimkey Ecopower"
             className="
-              h-[46px]
-              max-w-[205px]
-              w-auto
-              object-contain
-
+              h-[46px] w-auto max-w-[205px] object-contain
               min-[380px]:max-w-[230px]
-
-              sm:h-[50px]
-              sm:max-w-[260px]
-
-              lg:h-[54px]
-              lg:max-w-none
+              sm:h-[50px] sm:max-w-[260px]
+              lg:h-[54px] lg:max-w-none
             "
           />
         </Link>
 
         {/* DESKTOP NAV */}
-        <nav
-          className="
-            hidden
-            min-w-0
-            items-center
-            gap-4
+        <nav className="
+          hidden min-w-0 items-center gap-4
+          lg:flex xl:gap-6
+        ">
 
-            lg:flex
-
-            xl:gap-6
-          "
-        >
-
-          <NavLink
-            to="/"
-            className={navLink}
-            end
-          >
+          <NavLink to="/" className={navLink} end>
             Home
           </NavLink>
 
-       
-
-          {/* PRODUCTS */}
+          {/* SOLUTIONS DROPDOWN */}
           <div
             className="relative"
-            onMouseEnter={() =>
-              setProductsOpen(true)
-            }
-            onMouseLeave={() =>
-              setProductsOpen(false)
-            }
+            onMouseEnter={() => setSolutionsOpen(true)}
+            onMouseLeave={() => setSolutionsOpen(false)}
           >
 
-            <NavLink
-              to="/solutions"
-              className={({ isActive }) =>
-                `${navLink({
-                  isActive,
-                })} flex items-center gap-1`
+            <button
+              type="button"
+              className="
+                flex items-center gap-1
+                text-[13px] font-semibold tracking-wide
+                text-navy transition-colors
+                hover:text-teal-dark
+              "
+              onClick={() =>
+                setSolutionsOpen((value) => !value)
               }
             >
-             Solutions
+              Solutions
 
               <ChevronDown
-                size={13}
-                className={`transition-transform duration-300 ${
-                  productsOpen
-                    ? 'rotate-180 text-teal'
-                    : ''
+                size={14}
+                className={`transition-transform ${
+                  solutionsOpen ? 'rotate-180' : ''
                 }`}
               />
-            </NavLink>
+            </button>
 
-            {/* MEGA MENU */}
+            {/* DROPDOWN */}
             <div
               className={`
-                absolute
-                left-1/2
-                top-full
-
-                w-[min(600px,88vw)]
-
-                -translate-x-1/2
-                pt-4
-
-                transition-all
-                duration-200
-
+                absolute left-1/2 top-full
+                w-[240px] -translate-x-1/2 pt-4
+                transition-all duration-200
                 ${
-                  productsOpen
+                  solutionsOpen
                     ? 'pointer-events-auto translate-y-0 opacity-100'
                     : 'pointer-events-none -translate-y-2 opacity-0'
                 }
               `}
             >
 
-              <div
-                className="
-                  flex
-                  max-h-[70vh]
-                  overflow-hidden
-                  rounded-2xl
-                  border
-                  border-line
-                  bg-white
-                  shadow-[0_24px_60px_-20px_rgba(20,51,42,0.25)]
-                "
-              >
+              <div className="
+                overflow-hidden rounded-2xl
+                border border-line bg-white
+                shadow-[0_24px_60px_-20px_rgba(20,51,42,0.25)]
+              ">
 
-                <ul
+                <Link
+                  to="/services"
+                  onClick={() => setSolutionsOpen(false)}
                   className="
-                    w-60
-                    shrink-0
-                    overflow-y-auto
-                    border-r
-                    border-line
-                    bg-paper-soft/60
-                    py-3
+                    group flex items-center justify-between
+                    px-5 py-4 text-sm font-semibold
+                    text-navy transition-colors
+                    hover:bg-paper hover:text-teal-dark
                   "
                 >
+                  Services
 
-                  <li className="px-4 pb-2 font-mono text-[10px] uppercase tracking-widest text-steel">
-                    Categories
-                  </li>
+                  <ArrowUpRight
+                    size={15}
+                    className="text-teal opacity-0 group-hover:opacity-100"
+                  />
+                </Link>
 
-                  {categories.map((cat) => (
-                    <li key={cat.id}>
+                <div className="h-px bg-line" />
 
-                      <Link
-                        to={`/products?category=${cat.id}`}
-                        onMouseEnter={() =>
-                          setActiveCat(cat.id)
-                        }
-                        onClick={() =>
-                          setProductsOpen(false)
-                        }
-                        className={`
-                          block
-                          border-l-2
-                          px-4
-                          py-2.5
-                          text-sm
-                          font-semibold
-                          transition-colors
+                <Link
+                  to="/products"
+                  onClick={() => setSolutionsOpen(false)}
+                  className="
+                    group flex items-center justify-between
+                    px-5 py-4 text-sm font-semibold
+                    text-navy transition-colors
+                    hover:bg-paper hover:text-teal-dark
+                  "
+                >
+                  Products
 
-                          ${
-                            activeCat === cat.id
-                              ? 'border-teal bg-white text-teal-dark'
-                              : 'border-transparent text-navy hover:border-teal/40 hover:text-teal-dark'
-                          }
-                        `}
-                      >
-                        {cat.name}
-                      </Link>
-
-                    </li>
-                  ))}
-
-                </ul>
-
-                <ul className="min-w-0 flex-1 overflow-y-auto py-3">
-
-                  <li className="px-5 pb-2 font-mono text-[10px] uppercase tracking-widest text-steel">
-                    Materials
-                  </li>
-
-                  {categories
-                    .find(
-                      (c) =>
-                        c.id === activeCat
-                    )
-                    ?.subcategories?.map(
-                      (sub) => (
-                        <li key={sub.id}>
-
-                          <Link
-                            to={`/products?subcategory=${sub.id}`}
-                            onClick={() =>
-                              setProductsOpen(false)
-                            }
-                            className="
-                              group
-                              flex
-                              min-w-0
-                              items-center
-                              justify-between
-                              gap-3
-                              px-5
-                              py-2.5
-                              text-sm
-                              text-steel
-                              transition-colors
-                              hover:bg-paper
-                              hover:text-navy
-                            "
-                          >
-
-                            <span className="min-w-0 truncate">
-                              {sub.name}
-                            </span>
-
-                            <ArrowUpRight
-                              size={14}
-                              className="shrink-0 text-teal opacity-0 transition-opacity group-hover:opacity-100"
-                            />
-
-                          </Link>
-
-                        </li>
-                      )
-                    )}
-
-                </ul>
+                  <ArrowUpRight
+                    size={15}
+                    className="text-teal opacity-0 group-hover:opacity-100"
+                  />
+                </Link>
 
               </div>
-
             </div>
-
           </div>
 
-          <NavLink
-            to="/gallery"
-            className={navLink}
-          >
+          <NavLink to="/gallery" className={navLink}>
             Gallery/Media
           </NavLink>
 
-          <NavLink
-            to="/clients"
-            className={navLink}
-          >
+          <NavLink to="/clients" className={navLink}>
             Clients
           </NavLink>
 
-          <NavLink
-            to="/blog"
-            className={navLink}
-          >
+          <NavLink to="/blog" className={navLink}>
             Blog
           </NavLink>
 
-          <NavLink
-            to="/contact"
-            className={navLink}
-          >
+          <NavLink to="/contact" className={navLink}>
             Contact Us
           </NavLink>
 
         </nav>
 
         {/* DESKTOP RIGHT */}
-        <div className="navbar-scope hidden shrink-0 items-center gap-3 lg:flex">
+        <div className="hidden shrink-0 items-center gap-3 lg:flex">
 
           <a
             href={`tel:${company.phone}`}
             className="flex items-center gap-2 font-mono text-[11px] font-semibold text-navy"
           >
-
-            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-teal/10 text-teal-dark">
+            <span className="
+              flex h-8 w-8 items-center justify-center
+              rounded-full bg-teal/10 text-teal-dark
+            ">
               <Phone size={14} />
             </span>
 
             <span className="hidden xl:inline">
               {company.phone}
             </span>
-
           </a>
 
           <Link
             to="/contact"
             className="
-              whitespace-nowrap
-              rounded-full
-              bg-teal
-              px-4
-              py-2.5
-              text-[13px]
-              font-semibold
-              text-white
-              transition-all
-              hover:-translate-y-0.5
-              hover:bg-teal-dark
-              hover:shadow-lg
+              whitespace-nowrap rounded-full
+              bg-teal px-4 py-2.5
+              text-[13px] font-semibold text-white
+              transition-all hover:-translate-y-0.5
+              hover:bg-teal-dark hover:shadow-lg
             "
           >
             Get a Quote
@@ -438,33 +248,19 @@ export default function Navbar() {
 
         </div>
 
-        {/* MOBILE MENU BUTTON */}
+        {/* MOBILE BUTTON */}
         <button
           type="button"
-          onClick={() =>
-            setOpen((value) => !value)
-          }
+          onClick={() => setOpen((value) => !value)}
           aria-label="Toggle menu"
           aria-expanded={open}
           className="
-            flex
-            h-10
-            w-10
-            shrink-0
-            items-center
-            justify-center
-            rounded-full
-            text-navy
-            transition-colors
-            hover:bg-navy/5
-            lg:hidden
+            flex h-10 w-10 shrink-0 items-center
+            justify-center rounded-full text-navy
+            hover:bg-navy/5 lg:hidden
           "
         >
-          {open ? (
-            <X size={25} />
-          ) : (
-            <Menu size={25} />
-          )}
+          {open ? <X size={25} /> : <Menu size={25} />}
         </button>
 
       </div>
@@ -472,13 +268,8 @@ export default function Navbar() {
       {/* MOBILE MENU */}
       <div
         className={`
-          border-t
-          border-line
-          bg-paper
-          transition-all
-          duration-300
-          lg:hidden
-
+          border-t border-line bg-paper
+          transition-all duration-300 lg:hidden
           ${
             open
               ? 'max-h-[calc(100svh-72px)] opacity-100'
@@ -487,103 +278,144 @@ export default function Navbar() {
         `}
       >
 
-        <div className="max-h-[calc(100svh-72px)] overflow-y-auto px-4 py-4">
+        <div className="
+          max-h-[calc(100svh-72px)]
+          overflow-y-auto px-4 py-4
+        ">
 
           <div className="flex flex-col gap-1">
 
-            {links.map(
-              ([label, to], i) => (
-                <NavLink
-                  key={to}
-                  to={to}
-                  end={to === '/'}
-                  onClick={() =>
-                    setOpen(false)
+            <NavLink
+              to="/"
+              end
+              onClick={closeMenu}
+              className={({ isActive }) => `
+                rounded-xl px-4 py-3 text-[15px] font-semibold
+                ${
+                  isActive
+                    ? 'bg-teal/10 text-teal-dark'
+                    : 'text-navy hover:bg-white'
+                }
+              `}
+            >
+              Home
+            </NavLink>
+
+            {/* MOBILE SOLUTIONS */}
+            <div>
+
+              <button
+                type="button"
+                onClick={() =>
+                  setSolutionsOpen((value) => !value)
+                }
+                className="
+                  flex w-full items-center justify-between
+                  rounded-xl px-4 py-3
+                  text-[15px] font-semibold text-navy
+                  hover:bg-white
+                "
+              >
+                Solutions
+
+                <ChevronDown
+                  size={17}
+                  className={`transition-transform ${
+                    solutionsOpen ? 'rotate-180' : ''
+                  }`}
+                />
+              </button>
+
+              {solutionsOpen && (
+
+                <div className="
+                  ml-4 mt-1 flex flex-col gap-1
+                  border-l-2 border-teal/20 pl-3
+                ">
+
+                  <Link
+                    to="/services"
+                    onClick={closeMenu}
+                    className="
+                      rounded-lg px-4 py-3
+                      text-sm font-medium text-steel
+                      hover:bg-white hover:text-teal-dark
+                    "
+                  >
+                    Services
+                  </Link>
+
+                  <Link
+                    to="/products"
+                    onClick={closeMenu}
+                    className="
+                      rounded-lg px-4 py-3
+                      text-sm font-medium text-steel
+                      hover:bg-white hover:text-teal-dark
+                    "
+                  >
+                    Products
+                  </Link>
+
+                </div>
+              )}
+
+            </div>
+
+            {[
+              ['Gallery/Media', '/gallery'],
+              ['Clients', '/clients'],
+              ['Blog', '/blog'],
+              ['Contact Us', '/contact'],
+            ].map(([label, to]) => (
+
+              <NavLink
+                key={to}
+                to={to}
+                onClick={closeMenu}
+                className={({ isActive }) => `
+                  rounded-xl px-4 py-3
+                  text-[15px] font-semibold
+                  ${
+                    isActive
+                      ? 'bg-teal/10 text-teal-dark'
+                      : 'text-navy hover:bg-white'
                   }
-                  style={{
-                    transitionDelay:
-                      open
-                        ? `${i * 30}ms`
-                        : '0ms',
-                  }}
-                  className={({
-                    isActive,
-                  }) =>
-                    `
-                      rounded-xl
-                      px-4
-                      py-3
-                      text-[15px]
-                      font-semibold
-                      transition-all
-                      duration-300
+                `}
+              >
+                {label}
+              </NavLink>
 
-                      ${
-                        open
-                          ? 'translate-x-0 opacity-100'
-                          : '-translate-x-2 opacity-0'
-                      }
+            ))}
 
-                      ${
-                        isActive
-                          ? 'bg-teal/10 text-teal-dark'
-                          : 'text-navy hover:bg-white'
-                      }
-                    `
-                  }
-                >
-                  {label}
-                </NavLink>
-              )
-            )}
-
+            {/* PHONE */}
             <a
               href={`tel:${company.phone}`}
               className="
-                mt-3
-                flex
-                items-center
-                justify-center
-                gap-2
-                rounded-full
-                bg-navy
-                px-5
-                py-3
-                text-sm
-                font-semibold
-                text-white
+                mt-3 flex items-center justify-center
+                gap-2 rounded-full bg-navy
+                px-5 py-3 text-sm font-semibold text-white
               "
             >
               <Phone size={15} />
               {company.phone}
             </a>
 
+            {/* QUOTE */}
             <Link
               to="/contact"
-              onClick={() =>
-                setOpen(false)
-              }
+              onClick={closeMenu}
               className="
-                mt-2
-                flex
-                items-center
-                justify-center
-                rounded-full
-                bg-teal
-                px-5
-                py-3
-                text-sm
-                font-semibold
-                text-white
+                mt-2 flex items-center justify-center
+                rounded-full bg-teal px-5 py-3
+                text-sm font-semibold text-white
               "
             >
               Get a Quote
             </Link>
 
           </div>
-
         </div>
-
       </div>
 
     </header>

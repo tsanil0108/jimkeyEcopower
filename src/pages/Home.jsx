@@ -388,13 +388,7 @@ export default function Home() {
               throughout your supply chain.
             </p>
 
-            <Link
-              to="/about"
-              className="group/btn mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-white px-5 py-3 text-base font-semibold text-navy transition-all duration-300 hover:-translate-y-0.5 hover:bg-teal-light hover:shadow-lg sm:px-6"
-            >
-              Discover Jimkey
-              <ArrowRight size={18} />
-            </Link>
+
 
           </Reveal>
 
