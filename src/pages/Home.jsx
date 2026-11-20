@@ -501,7 +501,7 @@ export default function Home() {
             <Reveal delay={0}>
 
               <Link
-                to="/products?category=4"
+                to="/services"
                 className="group relative flex min-h-[440px] w-full flex-col overflow-hidden rounded-2xl shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:min-h-[460px]"
               >
 
@@ -895,7 +895,7 @@ export default function Home() {
 
             <Link
               to="/contact"
-              className="mt-5 inline-flex items-center justify-center gap-2 rounded-full bg-navy px-6 py-3 font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-teal-dark"
+              className="mt-5 inline-flex items-center justify-center gap-2 rounded-full bg-navy px-6 py-3 font-semibold text-white transition-colors hover:-translate-y-0.5 hover:bg-teal-dark"
             >
               Talk to Our Team
               <ArrowRight size={18} />

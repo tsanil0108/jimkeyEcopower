@@ -9,6 +9,7 @@ import {
 import {
   useSearchParams,
   Link,
+  Navigate,
 } from 'react-router-dom'
 
 import {
@@ -31,6 +32,8 @@ import CategoryJourney
   from '../components/CategoryJourney'
 
 import { api } from '../lib/api'
+
+import { splitCatalog } from '../lib/catalog'
 
 import {
   getCategoryIcon,
@@ -78,6 +81,13 @@ export default function Products() {
 
 
   const [
+    serviceCategories,
+    setServiceCategories,
+  ] =
+    useState([])
+
+
+  const [
     loading,
     setLoading,
   ] =
@@ -119,17 +129,30 @@ export default function Products() {
           }
 
 
+          // Services live on /services, so keep them out of Products
+          const split =
+            splitCatalog(
+              Array.isArray(cats)
+                ? cats
+                : [],
+              Array.isArray(prods)
+                ? prods
+                : []
+            )
+
+
           setCategories(
-            Array.isArray(cats)
-              ? cats
-              : []
+            split.productCategories
           )
 
 
           setProducts(
-            Array.isArray(prods)
-              ? prods
-              : []
+            split.productItems
+          )
+
+
+          setServiceCategories(
+            split.serviceCategories
           )
         }
       )
@@ -303,6 +326,70 @@ export default function Products() {
     setQuery('')
 
     setParams({})
+  }
+
+
+  /* =====================================================
+     OLD LINKS (e.g. /products?category=4) -> SERVICES PAGE
+  ====================================================== */
+
+  if (!loading) {
+
+    const isProductCategory =
+      categories.some(
+        (category) =>
+          String(category.id) ===
+          categoryParam
+      )
+
+    const isProductSub =
+      categories.some(
+        (category) =>
+          category.subcategories?.some(
+            (sub) =>
+              String(sub.id) ===
+              subParam
+          )
+      )
+
+    const serviceCategory =
+      categoryParam &&
+      !isProductCategory &&
+      serviceCategories.find(
+        (category) =>
+          String(category.id) ===
+          categoryParam
+      )
+
+    const serviceSub =
+      subParam &&
+      !isProductSub &&
+      serviceCategories.some(
+        (category) =>
+          category.subcategories?.some(
+            (sub) =>
+              String(sub.id) ===
+              subParam
+          )
+      )
+
+    if (serviceCategory) {
+      return (
+        <Navigate
+          to={`/services?category=${categoryParam}`}
+          replace
+        />
+      )
+    }
+
+    if (serviceSub) {
+      return (
+        <Navigate
+          to={`/services?subcategory=${subParam}`}
+          replace
+        />
+      )
+    }
   }
 
 

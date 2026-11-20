@@ -17,6 +17,8 @@ import {
   Trash2,
   Building2,
   ImageOff,
+  ChevronLeft,
+  ChevronRight,
 } from 'lucide-react'
 
 import pyrolysisOilImage from '../assets/products/pyrolysis-oil.jpg'
@@ -31,7 +33,7 @@ import tallowOilImage from '../assets/products/tallow-oil.jpg'
    JOURNEY DATA
 ===================================================== */
 
-const steps = [
+const defaultSteps = [
   {
     id: 1,
     num: '01',
@@ -110,7 +112,11 @@ const EASE = 0.105
 const RELEASE_THRESHOLD = 75
 
 
-export default function CategoryJourney() {
+export default function CategoryJourney({
+  steps = defaultSteps,
+  headingLead = 'Materials that',
+  description = 'Scroll through our key product categories.',
+}) {
 
   const sectionRef =
     useRef(null)
@@ -276,7 +282,7 @@ export default function CategoryJourney() {
 
     }
 
-  }, [])
+  }, [steps.length])
 
 
   /* =====================================================
@@ -557,6 +563,51 @@ export default function CategoryJourney() {
 
 
   /* =====================================================
+     TOUCH SWIPE (mobile / tablet)
+     Swipe left/right anywhere on the journey to change step.
+     Vertical movement stays native page scroll.
+  ====================================================== */
+
+  function handleTouchStart(event) {
+    const touch = event.touches[0]
+
+    if (!touch) return
+
+    touchStartXRef.current = touch.clientX
+    touchStartYRef.current = touch.clientY
+  }
+
+  function handleTouchEnd(event) {
+    const startX = touchStartXRef.current
+    const startY = touchStartYRef.current
+    const touch = event.changedTouches[0]
+
+    touchStartXRef.current = null
+    touchStartYRef.current = null
+
+    if (startX === null || startY === null || !touch) return
+
+    const deltaX = touch.clientX - startX
+    const deltaY = touch.clientY - startY
+
+    // Only treat a clear horizontal gesture as a category swipe.
+    if (Math.abs(deltaX) < 38) return
+    if (Math.abs(deltaX) < Math.abs(deltaY) * 1.2) return
+
+    if (deltaX < 0) {
+      goToStep(Math.min(steps.length - 1, activeIndex + 1))
+    } else {
+      goToStep(Math.max(0, activeIndex - 1))
+    }
+  }
+
+  function handleTouchCancel() {
+    touchStartXRef.current = null
+    touchStartYRef.current = null
+  }
+
+
+  /* =====================================================
      CONTINUOUS ARC MATH
   ====================================================== */
 
@@ -775,7 +826,7 @@ export default function CategoryJourney() {
 
         <h2>
 
-          Materials & services that{' '}
+          {headingLead}{' '}
 
           <strong>
             keep resources moving
@@ -786,9 +837,7 @@ export default function CategoryJourney() {
 
         <p>
 
-          Scroll through our key
-          product and service
-          categories.
+          {description}
 
         </p>
 
@@ -801,7 +850,12 @@ export default function CategoryJourney() {
 
       <div className="cjv2-panel">
 
-        <div className="cjv2-grid">
+        <div
+          className="cjv2-grid"
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+          onTouchCancel={handleTouchCancel}
+        >
 
 
           {/* =================================================
@@ -866,6 +920,17 @@ export default function CategoryJourney() {
             }}
           >
 
+            <div className="cjv2-mobile-counter">
+
+              <strong>{current.num}</strong>
+
+              <span>
+                / {String(steps.length).padStart(2, '0')}
+              </span>
+
+            </div>
+
+
             <div className="cjv2-category">
 
               <span className="cjv2-icon">
@@ -893,7 +958,8 @@ export default function CategoryJourney() {
 
 
             <Link
-              to={`/products?category=${current.id}`}
+              // categories 4-6 are services now (see /services), so only 1-3 deep-link
+              to={current.to || (current.id <= 3 ? `/products?category=${current.id}` : '/products')}
               className="cjv2-link"
             >
 
@@ -914,41 +980,7 @@ export default function CategoryJourney() {
               RIGHT CIRCULAR IMAGE MOVEMENT
           ================================================== */}
 
-          <div
-            className="cjv2-visual"
-            onTouchStart={(event) => {
-              const touch = event.touches[0]
-              touchStartXRef.current = touch.clientX
-              touchStartYRef.current = touch.clientY
-            }}
-            onTouchEnd={(event) => {
-              const startX = touchStartXRef.current
-              const startY = touchStartYRef.current
-              const touch = event.changedTouches[0]
-
-              touchStartXRef.current = null
-              touchStartYRef.current = null
-
-              if (startX === null || startY === null || !touch) return
-
-              const deltaX = touch.clientX - startX
-              const deltaY = touch.clientY - startY
-
-              // Only treat a clear horizontal gesture as a category swipe.
-              if (Math.abs(deltaX) < 38) return
-              if (Math.abs(deltaX) < Math.abs(deltaY) * 1.2) return
-
-              if (deltaX < 0) {
-                goToStep(Math.min(steps.length - 1, activeIndex + 1))
-              } else {
-                goToStep(Math.max(0, activeIndex - 1))
-              }
-            }}
-            onTouchCancel={() => {
-              touchStartXRef.current = null
-              touchStartYRef.current = null
-            }}
-          >
+          <div className="cjv2-visual">
 
             <div className="cjv2-orbit" />
 
@@ -1047,18 +1079,47 @@ in src/assets/products
 
           </div>
 
-          {/* Mobile category selector */}
-          <div className="cjv2-dots cjv2-mobile-dots" aria-label="Choose a category">
-            {steps.map((step, index) => (
-              <button
-                key={step.id}
-                type="button"
-                className={activeIndex === index ? 'active' : ''}
-                onClick={() => goToStep(index)}
-                aria-label={`Show ${step.name}`}
-                aria-pressed={activeIndex === index}
-              />
-            ))}
+          {/* Mobile / touch category selector */}
+          <div
+            className="cjv2-mobile-nav"
+            aria-label="Choose a category"
+          >
+
+            <button
+              type="button"
+              className="cjv2-arrow"
+              onClick={() => goToStep(Math.max(0, activeIndex - 1))}
+              disabled={activeIndex === 0}
+              aria-label="Previous category"
+            >
+              <ChevronLeft size={18} />
+            </button>
+
+            <div className="cjv2-dots cjv2-mobile-dots">
+              {steps.map((step, index) => (
+                <button
+                  key={step.id}
+                  type="button"
+                  className={activeIndex === index ? 'active' : ''}
+                  onClick={() => goToStep(index)}
+                  aria-label={`Show ${step.name}`}
+                  aria-pressed={activeIndex === index}
+                />
+              ))}
+            </div>
+
+            <button
+              type="button"
+              className="cjv2-arrow"
+              onClick={() =>
+                goToStep(Math.min(steps.length - 1, activeIndex + 1))
+              }
+              disabled={activeIndex === steps.length - 1}
+              aria-label="Next category"
+            >
+              <ChevronRight size={18} />
+            </button>
+
           </div>
 
         </div>
